@@ -1,6 +1,6 @@
 # 01 · Estado del Proyecto y Checklist Final
 
-## Completado en Código y Archivo Autocontenido (`Sol_de_Casa_tablero.html`)
+## Completado en Código y Entregables (`entregables/`)
 
 - [x] **Sin backend requerido:** todo el modelo determinista y el importador/exportador `.xlsx` corren 100% en el navegador.
 - [x] **Nivel 2 — Tablero en vivo (`TableroPage.jsx`):**
