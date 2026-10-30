@@ -1,0 +1,13 @@
+const usd = new Intl.NumberFormat('es-CR', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
+const num = new Intl.NumberFormat('es-CR', { maximumFractionDigits: 2 })
+const int = new Intl.NumberFormat('es-CR', { maximumFractionDigits: 0 })
+
+export const fmtUSD = (v) => (v == null || Number.isNaN(v) ? '—' : usd.format(v))
+export const fmtUSDInt = (v) => (v == null || Number.isNaN(v) ? '—' : `US$${int.format(Math.round(v))}`)
+export const fmtNum = (v) => (v == null || Number.isNaN(v) ? '—' : num.format(v))
+export const fmtPct = (v) => (v == null || Number.isNaN(v) ? '—' : `${num.format(v * 100)}%`)
+export const fmtMult = (v) => (v == null || Number.isNaN(v) ? '—' : `${num.format(v)}x`)
+export const fmtLeads = (v) => (v == null || Number.isNaN(v) ? '—' : `${num.format(v)} leads`)
+export const fmtVisitas = (v) => (v == null || Number.isNaN(v) ? '—' : `${num.format(v)} visitas`)
+export const fmtVentas = (v) => (v == null || Number.isNaN(v) ? '—' : `${num.format(v)} ventas`)
+export const fmtVisitasVenta = (v) => (v == null || Number.isNaN(v) ? '—' : `${num.format(v)} visitas/venta`)
