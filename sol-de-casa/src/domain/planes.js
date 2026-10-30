@@ -1,0 +1,67 @@
+// Planes de partida del simulador (editables). Incluyen inversiones fijas y caminos en 2 fases
+// (mantener presupuesto prudente mientras se capacitan los técnicos y escalar en el mes 3).
+export const PLANES_INICIALES = [
+  {
+    id: 'p1',
+    nombre: 'Actual ($4k/$4k fijo)',
+    meta: 4000,
+    google: 4000,
+    escalaDesde: 0,
+    metaFase2: 4000,
+    googleFase2: 4000,
+    filtroDesde: 0,
+    tecnico1: 0,
+    tecnico2: 0,
+  },
+  {
+    id: 'p2',
+    nombre: 'Agencia ($8k Meta / $0 Google)',
+    meta: 8000,
+    google: 0,
+    escalaDesde: 0,
+    metaFase2: 8000,
+    googleFase2: 0,
+    filtroDesde: 0,
+    tecnico1: 0,
+    tecnico2: 0,
+  },
+  {
+    id: 'p3',
+    nombre: 'Propio A: filtro + 1 técnico',
+    meta: 4000,
+    google: 6000,
+    escalaDesde: 0,
+    metaFase2: 4000,
+    googleFase2: 6000,
+    filtroDesde: 1,
+    tecnico1: 1,
+    tecnico2: 0,
+  },
+  {
+    id: 'p4',
+    nombre: 'Propio B: camino escala segura',
+    meta: 4000,
+    google: 4000,
+    escalaDesde: 3,
+    metaFase2: 7000,
+    googleFase2: 6000,
+    filtroDesde: 1,
+    tecnico1: 1,
+    tecnico2: 2,
+  },
+  {
+    id: 'p5',
+    nombre: 'Propio C: camino máx. caja',
+    meta: 4000,
+    google: 6000,
+    escalaDesde: 3,
+    metaFase2: 7000,
+    googleFase2: 6000,
+    filtroDesde: 1,
+    tecnico1: 1,
+    tecnico2: 2,
+  },
+]
+
+// Convierte un plan de la tabla (técnico1/técnico2) al formato del simulador
+export const aPlan = (p) => ({ ...p, tecnicos: [p.tecnico1, p.tecnico2].filter((m) => m > 0) })
