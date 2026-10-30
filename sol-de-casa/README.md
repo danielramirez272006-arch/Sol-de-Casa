@@ -7,9 +7,10 @@ Tablero interactivo, comparador de escenarios, simulador de caja a 24 meses y co
 ```bash
 npm install
 npm run dev               # servidor de desarrollo
-npm test                  # ejecuta la suite en tests/ contra las cifras del Excel
+npm test                  # ejecuta los 37 tests en tests/ contra las cifras del Excel
 npm run build             # genera dist/index.html autocontenido
 npm run build:entregable  # compila y copia dist/index.html a ../entregables/Sol_de_Casa_tablero.html
+npm run preview           # sirve el paquete de producción compilado
 ```
 
 ## Arquitectura de carpetas
