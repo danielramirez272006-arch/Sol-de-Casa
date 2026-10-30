@@ -2,11 +2,10 @@ import { useMemo, useState } from 'react'
 import {
   CartesianGrid, Legend, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from 'recharts'
-import { PLANES_INICIALES, aPlan } from '@/domain/planes.js'
 import Card from '@/shared/ui/Card.jsx'
 import NumberField from '@/shared/ui/NumberField.jsx'
 import { useModelo } from '@/app/ModeloContext.jsx'
-import { MESES, detalleMes1, resumirPlan, simular } from '@/domain/simulador.js'
+import { PLANES_INICIALES, aPlan, MESES, detalleMes1, resumirPlan, simular } from '@/domain'
 import { fmtLeads, fmtNum, fmtUSD, fmtVentas, fmtVisitas } from '@/shared/lib/format.js'
 
 const COLORES = ['#2563eb', '#dc2626', '#16a34a', '#7c3aed', '#d97706']

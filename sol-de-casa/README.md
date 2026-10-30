@@ -1,25 +1,39 @@
-# Sol de Casa
+# Sol de Casa · Aplicación Web (Niveles 1, 2 y 3)
 
-Comparador de escenarios (React + Vite). Sin backend: todo el cálculo corre en el navegador.
+Tablero interactivo, comparador de escenarios, simulador de caja a 24 meses y conector `.xlsx` construido con **React 18 + Vite + Recharts + Vitest**. Sin backend: todo el cálculo corre localmente en el navegador.
 
-```
+## Comandos principales
+
+```bash
 npm install
-npm run dev     # desarrollo
-npm test        # valida el modelo contra cifras del Excel
-npm run build   # genera dist/index.html autocontenido (abre con doble clic)
+npm run dev               # servidor de desarrollo
+npm test                  # ejecuta la suite en tests/ contra las cifras del Excel
+npm run build             # genera dist/index.html autocontenido
+npm run build:entregable  # compila y copia dist/index.html a ../entregables/Sol_de_Casa_tablero.html
 ```
 
-## Estructura
+## Arquitectura de carpetas
+
+```text
+sol-de-casa/
+├── src/
+│   ├── app/               # App, ModeloContext (estado global) y registro de pestañas
+│   ├── domain/            # Lógica de negocio pura (0 dependencias de React)
+│   │   ├── index.js       # Punto de entrada único (@/domain)
+│   │   ├── modelo/        # supuestos, escenarios, planes, técnicos y análisis de trampa
+│   │   ├── calculos/      # leads -> embudo -> finanzas
+│   │   ├── simulador/     # flujo de caja operativo de 24 meses (Nivel 3)
+│   │   └── excel/         # lectura, auditoría celda a celda y exportación .xlsx
+│   ├── features/          # Vistas modulares (1 carpeta por pestaña)
+│   │   ├── tablero/       # Nivel 2 en vivo + embudo visual
+│   │   ├── resultados/    # Matriz de 5 escenarios y KPIs
+│   │   ├── supuestos/     # Edición de parámetros y escenarios
+│   │   ├── recomendacion/ # Nota ejecutiva de 1 página + errores de IA
+│   │   ├── graficos/      # Curvas, trampa y embudos comparados
+│   │   ├── simulador/     # Simulador 24m + pitch de 2 min
+│   │   └── excel/         # Drag & Drop .xlsx + auditoría contra Resultados
+│   └── shared/            # layout/, ui/, lib/format.js y styles/index.css
+└── tests/                 # Pruebas unitarias, de integración Excel y renderizado SSR
 ```
-src/
-  app/                 App, ModeloContext (estado global), paginas.js (registro de pestañas)
-  domain/              lógica pura, sin React
-    supuestos.js         hoja "Supuestos"
-    escenarios.js        los 5 escenarios
-    calculos/            leads -> embudo -> finanzas (+ tests)
-    simulador.js         24 meses de caja (nivel 3), planes.js, tecnicos.js, trampa.js
-  features/            una carpeta por pestaña
-    resultados/ supuestos/ graficos/ recomendacion/ simulador/
-  shared/              ui/ · layout/ · lib/format.js · styles/
-```
-Alias `@` = `src/`. Dependencias: `features -> app(contexto) -> domain`; `domain` no importa nada de la UI.
+
+Alias `@` → `src/`. Flujo unidireccional: `features → app (contexto) → domain`.

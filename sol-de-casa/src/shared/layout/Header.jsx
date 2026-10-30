@@ -1,8 +1,6 @@
 import writeExcelFile from 'write-excel-file/universal'
 import { useModelo } from '@/app/ModeloContext.jsx'
-import { construirLibro } from '@/domain/excel.js'
-import { aPlan } from '@/domain/planes.js'
-import { simular } from '@/domain/simulador.js'
+import { construirLibro, aPlan, simular } from '@/domain'
 import { INDICADORES } from '@/features/resultados/indicadores.js'
 
 export default function Header({ onReiniciar }) {

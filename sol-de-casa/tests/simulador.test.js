@@ -1,7 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { detalleMes1, simular, resumirPlan } from './simulador.js'
-import { SUPUESTOS_BASE } from './supuestos.js'
-import { PLANES_INICIALES, aPlan } from './planes.js'
+import { detalleMes1, simular, resumirPlan, SUPUESTOS_BASE, PLANES_INICIALES, aPlan } from '@/domain'
 
 const actual = { meta: 4000, google: 4000, filtroDesde: 0, tecnicos: [] }
 

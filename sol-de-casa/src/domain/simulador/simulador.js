@@ -1,5 +1,5 @@
-import { calcularLeads } from './calculos/leads.js'
-import { calcularEmbudo } from './calculos/embudo.js'
+import { calcularLeads } from '../calculos/leads.js'
+import { calcularEmbudo } from '../calculos/embudo.js'
 
 export const MESES = 24
 

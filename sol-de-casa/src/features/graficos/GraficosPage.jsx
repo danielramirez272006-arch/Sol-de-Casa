@@ -4,7 +4,7 @@ import {
 import { useState } from 'react'
 import Card from '@/shared/ui/Card.jsx'
 import { useModelo } from '@/app/ModeloContext.jsx'
-import { calcularTrampa } from '@/domain/trampa.js'
+import { calcularTrampa } from '@/domain'
 import { fmtNum, fmtPct, fmtUSD, fmtVisitas } from '@/shared/lib/format.js'
 
 const META = '#2563eb'

@@ -1,7 +1,7 @@
 import Card from '@/shared/ui/Card.jsx'
 import { fmtNum, fmtPct, fmtUSD, fmtVentas, fmtVisitas } from '@/shared/lib/format.js'
 import { useModelo } from '@/app/ModeloContext.jsx'
-import { calcularTrampa } from '@/domain/trampa.js'
+import { calcularTrampa } from '@/domain'
 
 export default function RecomendacionPage() {
   const { resultados, efectivos: supuestos } = useModelo()

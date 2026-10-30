@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:entregable": "vite build && node -e \"fs.copyFileSync('dist/index.html','../entregables/Sol_de_Casa_tablero.html')\"",
     "preview": "vite preview",
     "test": "vitest run"
   },

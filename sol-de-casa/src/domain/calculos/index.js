@@ -1,7 +1,7 @@
 import { calcularLeads } from './leads.js'
 import { calcularEmbudo } from './embudo.js'
 import { calcularFinanzas } from './finanzas.js'
-import { conTecnicos } from '../tecnicos.js'
+import { conTecnicos } from '../modelo/tecnicos.js'
 
 // Punto de entrada del modelo: escenario + supuestos -> indicadores planos.
 export function calcular(escenario, supuestosBase) {

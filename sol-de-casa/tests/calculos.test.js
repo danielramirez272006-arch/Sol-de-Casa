@@ -1,7 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { calcular } from './index.js'
-import { ESCENARIOS_BASE } from '../escenarios.js'
-import { SUPUESTOS_BASE } from '../supuestos.js'
+import { calcular, ESCENARIOS_BASE, SUPUESTOS_BASE } from '@/domain'
 
 const actual = ESCENARIOS_BASE.find((e) => e.id === 'actual')
 

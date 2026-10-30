@@ -2,14 +2,11 @@ import { describe, expect, it } from 'vitest'
 import fs from 'node:fs'
 import { readSheet } from 'read-excel-file/universal'
 import writeExcelFile from 'write-excel-file/universal'
-import { compararConExcel, construirLibro, parsearSupuestos } from './excel.js'
-import { calcular } from './calculos/index.js'
-import { SUPUESTOS_BASE } from './supuestos.js'
-import { ESCENARIOS_BASE } from './escenarios.js'
-import { PLANES_INICIALES, aPlan } from './planes.js'
-import { simular } from './simulador.js'
+import {
+  compararConExcel, construirLibro, parsearSupuestos, calcular, SUPUESTOS_BASE, ESCENARIOS_BASE, PLANES_INICIALES, aPlan, simular,
+} from '@/domain'
 
-const libro = new Blob([fs.readFileSync(new URL('../../../docs/Sol_de_Casa_Nivel_1.xlsx', import.meta.url))])
+const libro = new Blob([fs.readFileSync(new URL('../../docs/Sol_de_Casa_Nivel_1.xlsx', import.meta.url))])
 const INDICADORES = [['Ventas totales esperadas', 'ventas'], ['CAC real Meta', 'cacRealMeta']]
 
 describe('Excel del caso', () => {

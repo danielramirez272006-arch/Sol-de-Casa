@@ -3,12 +3,9 @@ import { readSheet } from 'read-excel-file/universal'
 import writeExcelFile from 'write-excel-file/universal'
 import Card from '@/shared/ui/Card.jsx'
 import { useModelo } from '@/app/ModeloContext.jsx'
-import { calcular } from '@/domain/calculos'
-import { compararConExcel, construirLibro, parsearSupuestos } from '@/domain/excel.js'
-import { aPlan } from '@/domain/planes.js'
-import { simular } from '@/domain/simulador.js'
-import { ESCENARIOS_BASE } from '@/domain/escenarios.js'
-import { SUPUESTOS_BASE } from '@/domain/supuestos.js'
+import {
+  calcular, compararConExcel, construirLibro, parsearSupuestos, aPlan, simular, ESCENARIOS_BASE, SUPUESTOS_BASE,
+} from '@/domain'
 import { fmtNum, fmtPct } from '@/shared/lib/format.js'
 import { INDICADORES } from '@/features/resultados/indicadores.js'
 

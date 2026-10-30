@@ -7,8 +7,7 @@ import SliderField from '@/shared/ui/SliderField.jsx'
 import Semaforo from '@/shared/ui/Semaforo.jsx'
 import EmbudoVisual from './EmbudoVisual.jsx'
 import { useModelo } from '@/app/ModeloContext.jsx'
-import { calcular } from '@/domain/calculos'
-import { calcularTrampa } from '@/domain/trampa.js'
+import { calcular, calcularTrampa } from '@/domain'
 import {
   fmtLeads, fmtMult, fmtNum, fmtPct, fmtUSD, fmtVentas, fmtVisitas, fmtVisitasVenta,
 } from '@/shared/lib/format.js'

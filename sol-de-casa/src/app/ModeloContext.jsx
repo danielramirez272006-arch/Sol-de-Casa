@@ -1,9 +1,5 @@
 import { createContext, useContext, useMemo, useState } from 'react'
-import { SUPUESTOS_BASE } from '@/domain/supuestos.js'
-import { ESCENARIOS_BASE } from '@/domain/escenarios.js'
-import { calcular } from '@/domain/calculos'
-import { conTecnicos } from '@/domain/tecnicos.js'
-import { PLANES_INICIALES } from '@/domain/planes.js'
+import { SUPUESTOS_BASE, ESCENARIOS_BASE, calcular, conTecnicos, PLANES_INICIALES } from '@/domain'
 
 const ModeloContext = createContext(null)
 
