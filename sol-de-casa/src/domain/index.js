@@ -5,10 +5,9 @@ export { conTecnicos } from './modelo/tecnicos.js'
 export { calcularTrampa } from './modelo/trampa.js'
 
 export { calcular } from './calculos/index.js'
-export { calcularLeads, interpolar } from './calculos/leads.js'
+export { calcularLeads, leadsPorInversion } from './calculos/leads.js'
 export { calcularEmbudo, analizarCaidas } from './calculos/embudo.js'
 export { calcularFinanzas } from './calculos/finanzas.js'
 
 export { MESES, simular, resumirPlan, detalleMes1 } from './simulador/simulador.js'
 export { PARAMETROS, parsearSupuestos, compararConExcel, construirLibro } from './excel/excel.js'
-

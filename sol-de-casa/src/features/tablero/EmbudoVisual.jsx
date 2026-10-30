@@ -3,11 +3,11 @@ import { fmtNum, fmtPct, fmtUSD, fmtVisitasVenta } from '@/shared/lib/format.js'
 function CanalFunnel({ nombre, color, leads, contactados, agendadas, hechas, ventas, caida }) {
   const base = Math.max(leads, 1)
   const etapas = [
-    ['1. Leads', leads, 1],
-    ['2. Contactados', contactados, leads ? contactados / leads : 0],
-    ['3. Agendan visita', agendadas, contactados ? agendadas / contactados : 0],
-    ['4. Visitas hechas', hechas, agendadas ? hechas / agendadas : 0],
-    ['5. Ventas cerradas', ventas, hechas ? ventas / hechas : 0],
+    ['1. Leads', 'Leads', leads, 1],
+    ['2. Contactados', 'Contactados', contactados, leads ? contactados / leads : 0],
+    ['3. Agendan visita', 'Agendadas', agendadas, contactados ? agendadas / contactados : 0],
+    ['4. Visitas hechas', 'Hechas', hechas, agendadas ? hechas / agendadas : 0],
+    ['5. Ventas cerradas', 'Ventas', ventas, hechas ? ventas / hechas : 0],
   ]
 
   return (
@@ -20,9 +20,9 @@ function CanalFunnel({ nombre, color, leads, contactados, agendadas, hechas, ven
           </span>
         )}
       </div>
-      {etapas.map(([label, val, pasoPct], idx) => {
+      {etapas.map(([label, claveDestino, val, pasoPct], idx) => {
         const ancho = Math.max(4, Math.min(100, (val / base) * 100))
-        const esMayorVol = idx > 0 && caida?.mayorVolumen?.etapa.endsWith(label.slice(3).split(' ')[0])
+        const esMayorVol = idx > 0 && caida?.mayorVolumen?.destino === claveDestino
         return (
           <div key={label} className={`funnel-row ${esMayorVol ? 'funnel-row-drop' : ''}`}>
             <div className="funnel-meta">

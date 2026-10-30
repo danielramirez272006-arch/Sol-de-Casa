@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import * as dominio from '@/domain'
 import { calcular, ESCENARIOS_BASE, SUPUESTOS_BASE } from '@/domain'
 
 const actual = ESCENARIOS_BASE.find((e) => e.id === 'actual')
@@ -52,5 +53,22 @@ describe('propuesta', () => {
   it('utilidad mensual ≈ 10.842,07 después de costos fijos', () => {
     const r = calcular(ESCENARIOS_BASE.find((e) => e.id === 'propuesta'), SUPUESTOS_BASE)
     expect(r.neto).toBeCloseTo(10842.07, 2)
+  })
+})
+
+describe('casos borde y exportaciones del dominio', () => {
+  it('todas las exportaciones de @/domain están definidas', () => {
+    for (const [k, v] of Object.entries(dominio)) {
+      expect(v, k).toBeDefined()
+    }
+  })
+  it('inversión $0 en ambos canales no produce NaN ni Infinity', () => {
+    const r = calcular({ ...actual, meta: 0, google: 0 }, SUPUESTOS_BASE)
+    for (const [k, v] of Object.entries(r)) {
+      if (typeof v === 'number') expect(Number.isFinite(v), k).toBe(true)
+    }
+    expect(r.ltvCacMeta).toBeNull()
+    expect(r.ltvCacGoogle).toBeNull()
+    expect(r.ltvCacCombinado).toBeNull()
   })
 })

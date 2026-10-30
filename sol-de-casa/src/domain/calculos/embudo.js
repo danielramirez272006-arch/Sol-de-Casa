@@ -1,5 +1,5 @@
 // Identifica el paso donde cae más gente (en volumen y en %) para un canal.
-function analizarCaidas(pasos) {
+export function analizarCaidas(pasos) {
   let mayorVolumen = null
   let mayorPorcentaje = null
   for (let i = 1; i < pasos.length; i++) {

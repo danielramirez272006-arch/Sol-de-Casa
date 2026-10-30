@@ -22,7 +22,7 @@
 ## 2. Riesgos de negocio y sensibilidad (Nivel 1 y Nivel 3)
 
 - **Riesgo de descalce de caja por crecer muy rápido:** cada instalación nueva drena **−$520** de caja en el mes de firma antes de marketing. En el simulador de 24 meses, contratar o escalar anuncios en el mes 1 sin colchón puede acercar la caja al piso de $5.000 en el **mes 3**.
-- **Dependencia del Supuesto 7 (filtro):** en el simulador de 24 meses, los planes agresivos ($7.000 Meta + $6.000 Google con 2 técnicos) llegan a **~$636k–$649k** al mes 24, pero **si el filtro no mejora las tasas**, la caja mínima cae por debajo del piso ($3.141 y $4.941). Por eso se recomienda validar el filtro en el mes 1 antes de escalar Meta y preferir el **Plan Propio C** (técnicos en meses 2 y 4, caja mínima $7.646) sobre el B (caja mínima $5.846).
+- **Dependencia del Supuesto 7 (filtro):** en el simulador de 24 meses, los caminos en 2 fases (**Propio B: Escala segura** con `$677.257` al mes 24 y caja mínima de `$10.618`, y **Propio C: Máx. caja** con `$681.010` y caja mínima de `$6.184`) cuidan la caja en los meses 1–2 mientras se capacitan los 2 técnicos y escalan a `$7.000 Meta + $6.000 Google` en el mes 3. Sin embargo, **si el filtro no mejora las tasas de Meta**, escalar en el mes 3 rompería el piso de `$5.000`; por eso se valida el filtro en los meses 1–2 y se recomienda **Propio B** como plan base por su doble colchón sobre el piso (`$10.618` vs. `$5.000`).
 - **Techo de demanda en Google:** arriba de $8.000/mes Google se estanca en 160 leads; el crecimiento futuro exige mejorar Meta, sumar técnicos (máx. 2 extra en el modelo) o abrir nuevos canales/referidos.
 
 ---

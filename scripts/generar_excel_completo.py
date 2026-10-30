@@ -220,11 +220,11 @@ for c1, c2, h in comp_headers:
     top.alignment = Alignment(horizontal="center", vertical="center")
 
 planes_ref = [
-    ("1. Actual ($4k/$4k fijo)", "$4k / $4k", "Fijo", "Sin filtro · 0 téc.", 15736.30, 118595.48, 535.6),
-    ("2. Agencia ($8k Meta / $0 Google)", "$8k / $0", "Fijo", "Sin filtro · 0 téc.", -60898.27, -60898.27, 419.0),
-    ("3. Propio A · Base ($3k/$5k)", "$3k / $5k", "Fijo", "Filtro M1 · Téc. M1", 11889.20, 319956.85, 738.1),
-    ("4. Propio B · Escala segura (REC.)", "$4k / $4k", "$7k / $6k", "Filtro M1 · Téc. M1, M2", 10618.42, 677256.88, 1118.6),
-    ("5. Propio C · Máxima caja", "$4k / $6k", "$7k / $6k", "Filtro M1 · Téc. M1, M2", 6184.45, 681010.22, 1124.3),
+    ("1. Actual ($4k/$4k fijo)", "$4k / $4k", "Fijo", "Sin filtro · 0 téc.", 15736.30, 117273.39, 535.6),
+    ("2. Agencia ($8k Meta / $0 Google)", "$8k / $0", "Fijo", "Sin filtro · 0 téc.", -60897.82, -60897.82, 419.1),
+    ("3. Propio A · Filtro + 1 técnico", "$4k / $6k", "Fijo", "Filtro M1 · Téc. M1", 7984.08, 485241.18, 882.2),
+    ("4. Propio B · Escala segura (REC.)", "$4k / $4k", "$7k / $6k", "Filtro M1 · Téc. M1, M2", 10617.75, 677256.55, 1118.5),
+    ("5. Propio C · Máxima caja", "$4k / $6k", "$7k / $6k", "Filtro M1 · Téc. M1, M2", 6184.08, 681010.33, 1123.8),
 ]
 for idx, (nom, f1, f2, op, cmin, cm24, inst) in enumerate(planes_ref, start=43):
     bg = green_fill if idx == 46 else (red_fill if idx == 44 else None)
@@ -250,7 +250,7 @@ audit_rows = [
     ("(=) Total entradas de caja en el Mes 1", "=F52+F53"),
     ("(-) Equipos (55%) + Comisión (3%) pagados al contado por ventas del Mes 1", "=Supuestos!$B$4*(Supuestos!$B$5+Supuestos!$B$7)*Resultados!B23"),
     ("(-) Mano de obra de instalación (17%) de las 22 ventas del mes anterior", "=Supuestos!$B$4*Supuestos!$B$6*Supuestos!$B$31"),
-    ("(-) Costo operativo de las 97,53 visitas técnicas realizadas ($60 c/u)", "=Supuestos!$B$8*(Resultados!B18+Resultados!B19)"),
+    ("(-) Costo operativo de las 97,49 visitas técnicas realizadas ($60 c/u)", "=Supuestos!$B$8*(Resultados!B18+Resultados!B19)"),
     ("(-) Anuncios del mes ($8.000) + Costos fijos mensuales ($18.000)", "=Resultados!B28+Supuestos!$B$28"),
     ("(=) Total salidas de caja en el Mes 1", "=SUM(F55:F58)"),
     ("(=) Caja final del Mes 1 verificada", "=F51+F54-F59"),
