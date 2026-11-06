@@ -4,8 +4,8 @@ from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.chart import LineChart, Reference
 from openpyxl.formatting.rule import CellIsRule
 
-ROOT = Path(__file__).resolve().parent.parent
-SRC = ROOT / "docs" / "Sol_de_Casa_Nivel_1.xlsx"
+ROOT = Path(__file__).resolve().parent.parent.parent  # raíz del repositorio
+SRC = ROOT / "docs" / "insumos" / "Sol_de_Casa_Nivel_1.xlsx"
 DST = ROOT / "entregables" / "Sol_de_Casa_Completo.xlsx"
 DST.parent.mkdir(parents=True, exist_ok=True)
 
