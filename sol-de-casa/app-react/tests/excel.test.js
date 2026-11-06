@@ -6,7 +6,7 @@ import {
   compararConExcel, construirLibro, parsearSupuestos, calcular, SUPUESTOS_BASE, ESCENARIOS_BASE, PLANES_INICIALES, aPlan, simular,
 } from '@/domain'
 
-const libro = new Blob([fs.readFileSync(new URL('../../docs/Sol_de_Casa_Nivel_1.xlsx', import.meta.url))])
+const libro = new Blob([fs.readFileSync(new URL('../../../docs/insumos/Sol_de_Casa_Nivel_1.xlsx', import.meta.url))])
 const INDICADORES = [['Ventas totales esperadas', 'ventas'], ['CAC real Meta', 'cacRealMeta']]
 
 describe('Excel del caso', () => {
