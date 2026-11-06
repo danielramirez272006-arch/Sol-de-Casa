@@ -42,9 +42,10 @@ Como cada técnico nuevo tarda **1 mes en capacitarse** (`$1.800/mes` pagados de
 
 | Nivel del reto | Qué incluye nuestra solución | Archivos clave |
 |---|---|---|
-| **Nivel 1** *(Base · 100 pts)* | Calculadora completa de 5 escenarios, respuestas a las 7 preguntas de Andrés, revisión manual a mano, nota ejecutiva de 1 página imprimible y sección obligatoria *«En qué se equivocó la IA»*. | [`entregables/Sol_de_Casa_Completo.xlsx`](./entregables/Sol_de_Casa_Completo.xlsx) · [`md/02_respuestas_7_preguntas_y_cuentas.md`](./md/02_respuestas_7_preguntas_y_cuentas.md) · [`md/03_recomendacion_1_pagina.md`](./md/03_recomendacion_1_pagina.md) · [`md/04_supuestos_riesgos_y_errores_ia.md`](./md/04_supuestos_riesgos_y_errores_ia.md) |
-| **Nivel 2** *(Tablero · +10 pts)* | Tablero interactivo en vivo con sliders y entradas editables, semáforos `LTV:CAC`, radiografía visual del embudo, anatomía del CAC real y conexión bidireccional Drag & Drop con `.xlsx` (`< 1%` auditado celda por celda). | [`entregables/Sol_de_Casa_tablero.html`](./entregables/Sol_de_Casa_tablero.html) · [`TableroPage.jsx`](./sol-de-casa/src/features/tablero/TableroPage.jsx) · [`ExcelPage.jsx`](./sol-de-casa/src/features/excel/ExcelPage.jsx) |
-| **Nivel 3** *(24M + Pitch · +20 pts)* | Simulador operativo de 24 meses (tanto en la app web como en la hoja `Simulador_24m` de Excel con fórmulas vivas), auditoría paso a paso del Mes 1 (`$15.736,30`), validación de piso `$5.000` y regla del Mes 19, edición mensual manual y guion de pitch de 2 min al banco. | [`SimuladorPage.jsx`](./sol-de-casa/src/features/simulador/SimuladorPage.jsx) · [`entregables/Sol_de_Casa_Completo.xlsx`](./entregables/Sol_de_Casa_Completo.xlsx) · [`md/05_guion_presentacion_y_pitch.md`](./md/05_guion_presentacion_y_pitch.md) |
+| **Nivel 1** *(Base · 100 pts)* | Calculadora completa de 5 escenarios, respuestas a las 7 preguntas de Andrés, revisión manual a mano, nota ejecutiva de 1 página imprimible y sección obligatoria *«En qué se equivocó la IA»*. | [`entregables/Sol_de_Casa_Completo.xlsx`](./entregables/Sol_de_Casa_Completo.xlsx) · [`docs/analisis/02_respuestas_7_preguntas_y_cuentas.md`](./docs/analisis/02_respuestas_7_preguntas_y_cuentas.md) · [`docs/analisis/03_recomendacion_1_pagina.md`](./docs/analisis/03_recomendacion_1_pagina.md) · [`docs/analisis/04_supuestos_riesgos_y_errores_ia.md`](./docs/analisis/04_supuestos_riesgos_y_errores_ia.md) |
+| **Nivel 2** *(Tablero · +10 pts)* | Sitio editorial e interactivo con controles táctiles, diagramas solares, semáforos `LTV:CAC`, radiografía del embudo y conexión bidireccional Drag & Drop con `.xlsx` (`< 1%` auditado celda por celda). | [`entregables/Sol_de_Casa_tablero.html`](./entregables/Sol_de_Casa_tablero.html) · [`sol-de-casa/web/index.html`](./sol-de-casa/web/index.html) · [`sol-de-casa/web/src/js/ui/app.js`](./sol-de-casa/web/src/js/ui/app.js) |
+| **Nivel 3** *(24M + Pitch · +20 pts)* | Simulador operativo de 24 meses (web y hoja `Simulador_24m` de Excel con fórmulas vivas), auditoría del Mes 1, piso `$5.000`, regla del Mes 19 y pitch de 2 min al banco. | [`sol-de-casa/web/src/js/domain/modelo.js`](./sol-de-casa/web/src/js/domain/modelo.js) · [`entregables/Sol_de_Casa_Completo.xlsx`](./entregables/Sol_de_Casa_Completo.xlsx) · [`docs/analisis/05_guion_presentacion_y_pitch.md`](./docs/analisis/05_guion_presentacion_y_pitch.md) |
+| **Parte 2** *(Referidos)* | Recorrido móvil de 5 vistas (Mi ahorro → Compartir → Vecino → Mis referidos → Panel de Andrés), tabla de recompensas con tope de `$300`/venta y ficha de growth de 1 página. | [`sol-de-casa/web/src/js/domain/referidos.js`](./sol-de-casa/web/src/js/domain/referidos.js) · [`sol-de-casa/web/src/js/ui/referidos-ui.js`](./sol-de-casa/web/src/js/ui/referidos-ui.js) · [`docs/analisis/06_ficha_growth_y_referidos.md`](./docs/analisis/06_ficha_growth_y_referidos.md) |
 
 ---
 
@@ -53,32 +54,28 @@ Como cada técnico nuevo tarda **1 mes en capacitarse** (`$1.800/mes` pagados de
 ```text
 Sol de Casa/
 ├── README.md                              # Documentación general y resumen ejecutivo
-├── entregables/                           # Archivos finales listos para abrir o entregar sin instalar nada
-│   ├── Sol_de_Casa_tablero.html           # App web autocontenida en 1 solo archivo (abre con doble clic)
-│   └── Sol_de_Casa_Completo.xlsx          # Libro Excel completo (5 hojas: Niveles 1, 2 y Simulador_24m)
-├── docs/                                  # Insumos originales del caso
-│   ├── Caso_C_-_Sol_de_Casa.pdf           # Enunciado oficial (12 páginas)
-│   └── Sol_de_Casa_Nivel_1.xlsx           # Libro Excel base original
-├── md/                                    # Documentación ejecutiva, cuentas a mano, IA y guiones
-│   ├── README.md                          # Índice de lectura rápida
-│   ├── 01_estado_y_pendientes.md          # Checklist de cumplimiento por nivel
-│   ├── 02_respuestas_7_preguntas_y_cuentas.md
-│   ├── 03_recomendacion_1_pagina.md
-│   ├── 04_supuestos_riesgos_y_errores_ia.md
-│   └── 05_guion_presentacion_y_pitch.md
-├── scripts/                               # Automatización reproducible
-│   └── generar_excel_completo.py          # Genera entregables/Sol_de_Casa_Completo.xlsx con openpyxl
-└── sol-de-casa/                           # Código fuente React 18 + Vite + Recharts + Vitest
-    ├── src/
-    │   ├── app/                           # Estado global (ModeloContext) y registro de pestañas
-    │   ├── domain/                        # Lógica financiera pura desacoplada de React (@/domain)
-    │   │   ├── modelo/                    # supuestos, escenarios, planes, técnicos y trampa
-    │   │   ├── calculos/                  # leads (interpolación), embudo (prioridad Google) y finanzas
-    │   │   ├── simulador/                 # flujo de caja operativo de 24 meses
-    │   │   └── excel/                     # importación, auditoría (< 1%) y exportación .xlsx
-    │   ├── features/                      # 7 módulos de interfaz (1 carpeta por pestaña)
-    │   └── shared/                        # layout/, ui/, lib/format.js y styles/index.css
-    └── tests/                             # 37 pruebas automatizadas (cálculos, simulador, Excel y SSR)
+├── entregables/                           # SOLO artefactos finales listos para entregar
+│   ├── Sol_de_Casa_tablero.html           # Sitio autocontenido en 1 archivo (abre con doble clic)
+│   └── Sol_de_Casa_Completo.xlsx          # Libro Excel completo (Niveles 1, 2 y Simulador_24m)
+├── docs/                                  # Documentación
+│   ├── README.md                          # Índice
+│   ├── insumos/                           # Enunciado PDF y Excel base del caso
+│   └── analisis/                          # Memorandos, cuentas, errores de IA, pitch y ficha de growth
+└── sol-de-casa/                           # Todo el código del proyecto
+    ├── web/                               # Sitio (Tailwind CDN + Vanilla JS)
+    │   ├── index.html                     # Punto de entrada de desarrollo
+    │   ├── assets/images/                 # Fotografías solares editoriales
+    │   └── src/
+    │       ├── css/editorial.css          # Sistema visual
+    │       └── js/
+    │           ├── domain/                # modelo.js (financiero) y referidos.js (Parte 2)
+    │           └── ui/                    # graficos.js, animaciones.js, app.js y referidos-ui.js
+    ├── scripts/                           # Automatización reproducible
+    │   ├── empaquetar_web.mjs             # Compila web/ en ../entregables/Sol_de_Casa_tablero.html
+    │   └── generar_excel_completo.py      # Genera ../entregables/Sol_de_Casa_Completo.xlsx
+    └── app-react/                         # Implementación React 18 + Vite y suite Vitest (41 tests)
+        ├── src/                           # domain/, features/, shared/ y app/
+        └── tests/                         # Cálculos, simulador, Excel, SSR y referidos
 ```
 
 ---
@@ -86,23 +83,19 @@ Sol de Casa/
 ## 🚀 Cómo Abrir y Ejecutar el Proyecto
 
 ### Opción 1 · Uso inmediato (sin instalar nada)
-1. Haz doble clic en **`entregables/Sol_de_Casa_tablero.html`** para abrir el tablero interactivo completo en cualquier navegador.
-2. Abre **`entregables/Sol_de_Casa_Completo.xlsx`** en Excel o súbelo a Google Sheets para usar las hojas `Supuestos`, `Resultados`, `Recomendacion`, `Graficos` y `Simulador_24m` con fórmulas vivas.
-3. En la pestaña **Excel (.xlsx)** del tablero puedes arrastrar el archivo `.xlsx` para sincronizar supuestos y auditar las celdas automáticamente.
+1. Abre **`entregables/Sol_de_Casa_tablero.html`** con doble clic (o sírvelo con `python -m http.server 5173 --directory entregables`).
+2. Abre **`entregables/Sol_de_Casa_Completo.xlsx`** en Excel o Google Sheets.
+3. En la sección **Sincronización con Excel** del sitio puedes arrastrar el `.xlsx` para auditar celdas.
 
-### Opción 2 · Entorno de desarrollo (Node.js 18+)
+### Opción 2 · Desarrollo y pruebas (Node.js 18+)
 
 ```bash
-cd sol-de-casa
-npm install
-npm test                  # ejecuta los 37 tests (economía unitaria, 24 meses, Excel <1% y render SSR)
-npm run dev               # levanta Vite en modo desarrollo (http://127.0.0.1:5173/)
-npm run build:entregable  # compila y actualiza ../entregables/Sol_de_Casa_tablero.html
-npm run preview           # sirve el paquete compilado de producción a máxima velocidad
+node sol-de-casa/scripts/empaquetar_web.mjs   # web/ -> entregables/Sol_de_Casa_tablero.html
+npm --prefix sol-de-casa/app-react test       # 41 pruebas automatizadas
 ```
 
-### Opción 3 · Regenerar el libro Excel completo (Python 3 + `openpyxl`)
+### Opción 3 · Regenerar el libro Excel (Python 3 + `openpyxl`)
 
 ```bash
-python scripts/generar_excel_completo.py
+python sol-de-casa/scripts/generar_excel_completo.py
 ```
