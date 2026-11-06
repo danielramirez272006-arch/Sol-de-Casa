@@ -1,0 +1,601 @@
+:root {
+  --bg-mineral: #EEF2F1;
+  --bg-panel: #E3EAE8;
+  --ink: #10201F;
+  --ink-muted: #425856;
+  --ink-soft: #647A78;
+  --petrol: #2F6F73;
+  --petrol-deep: #215255;
+  --sand: #D9C7A6;
+  --sand-soft: rgba(217, 199, 166, 0.32);
+  --amber: #D98A2B;
+  --amber-soft: rgba(217, 138, 43, 0.16);
+  --danger: #A63D33;
+  --danger-soft: rgba(166, 61, 51, 0.11);
+  --line-hair: rgba(16, 32, 31, 0.11);
+  --line-strong: rgba(16, 32, 31, 0.22);
+  --glass-light: rgba(238, 242, 241, 0.76);
+  --glass-smoked: rgba(227, 234, 232, 0.72);
+  --glass-dark: rgba(16, 32, 31, 0.86);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-power4: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+::selection {
+  background-color: #2F6F73;
+  color: #FFFFFF;
+}
+
+::-moz-selection {
+  background-color: #2F6F73;
+  color: #FFFFFF;
+}
+
+html {
+  background-color: var(--bg-mineral);
+  color: var(--ink);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: clamp(16px, 1.08vw, 18px);
+  line-height: 1.6;
+  background-color: var(--bg-mineral);
+  color: var(--ink);
+  overflow-x: hidden;
+  background-image:
+    radial-gradient(circle at 84% 7%, rgba(217, 199, 166, 0.36) 0%, rgba(217, 199, 166, 0) 42%),
+    radial-gradient(circle at 12% 32%, rgba(47, 111, 115, 0.08) 0%, rgba(47, 111, 115, 0) 46%);
+}
+
+/* Tipografía estricta: DM Serif Display, DM Sans e Inter */
+.font-editorial {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-weight: 400;
+}
+
+.font-editorial em {
+  font-style: italic;
+  color: var(--petrol);
+}
+
+.hero-headline {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(56px, 8.5vw, 150px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.section-headline {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(34px, 4.2vw, 62px);
+  line-height: 1.02;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+}
+
+.ui-label {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+}
+
+.ui-micro {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 1.3;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.ui-btn {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 12.5px;
+  line-height: 1.2;
+  letter-spacing: 0.015em;
+  border-radius: 16px;
+  transition:
+    transform 0.45s var(--ease-expo),
+    box-shadow 0.45s var(--ease-expo),
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.ui-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px -10px rgba(16, 32, 31, 0.22);
+}
+
+.ui-btn:active {
+  transform: translateY(-1px);
+}
+
+/* Cuadrícula técnica tenue estilo Tessel */
+.tech-grid-bg {
+  background-size: 64px 64px;
+  background-image:
+    linear-gradient(to right, rgba(16, 32, 31, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 32, 31, 0.045) 1px, transparent 1px);
+}
+
+/* Tarjetas de cristal ligeramente ahumado estilo Pulsehaus (esquinas 16px, bordes finos) */
+.card-glass {
+  background: var(--glass-smoked);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--line-hair);
+  border-radius: 16px;
+  box-shadow:
+    0 10px 32px -14px rgba(16, 32, 31, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  transition:
+    transform 0.5s var(--ease-expo),
+    box-shadow 0.5s var(--ease-expo),
+    border-color 0.35s ease;
+}
+
+.card-glass-hover:hover {
+  transform: translateY(-3px);
+  border-color: rgba(47, 111, 115, 0.34);
+  box-shadow:
+    0 18px 38px -14px rgba(16, 32, 31, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
+.card-smoked-dark {
+  background: var(--glass-dark);
+  color: #EEF2F1;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(238, 242, 241, 0.14);
+  border-radius: 16px;
+  box-shadow: 0 22px 48px -18px rgba(16, 32, 31, 0.38);
+}
+
+.panel-compact {
+  background-color: var(--bg-panel);
+  border: 1px solid var(--line-hair);
+  border-radius: 16px;
+}
+
+/* Barra fina de progreso superior */
+#scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2.5px;
+  z-index: 80;
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  background: linear-gradient(90deg, #2F6F73 0%, #3E888D 78%, #D98A2B 100%);
+  pointer-events: none;
+}
+
+/* Máscara de entrada por líneas del titular */
+.hero-line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.06em;
+}
+
+.hero-line-inner {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.22em;
+  transform-origin: left bottom;
+  will-change: transform, opacity;
+}
+
+/* Fotografía integrada dentro del titular */
+.hero-inline-photo {
+  display: inline-block;
+  height: clamp(44px, 6.2vw, 102px);
+  width: clamp(108px, 14vw, 232px);
+  border-radius: 16px;
+  overflow: hidden;
+  vertical-align: middle;
+  border: 1px solid rgba(16, 32, 31, 0.18);
+  box-shadow: 0 12px 28px -10px rgba(16, 32, 31, 0.25);
+  position: relative;
+  transform: translateY(-0.06em);
+  will-change: width, clip-path, opacity;
+}
+
+.hero-inline-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Sliders táctiles y entradas editables */
+input[type='range'].solar-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 5px;
+  background: rgba(16, 32, 31, 0.14);
+  border-radius: 999px;
+  outline: none;
+  cursor: pointer;
+}
+
+input[type='range'].solar-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #2F6F73;
+  border: 2px solid #EEF2F1;
+  box-shadow: 0 2px 8px rgba(16, 32, 31, 0.28);
+  transition: transform 0.25s var(--ease-expo), background-color 0.25s ease;
+}
+
+input[type='range'].solar-range::-webkit-slider-thumb:hover {
+  transform: scale(1.16);
+  background: #D98A2B;
+}
+
+input[type='range'].solar-range::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #2F6F73;
+  border: 2px solid #EEF2F1;
+  box-shadow: 0 2px 8px rgba(16, 32, 31, 0.28);
+}
+
+.solar-num-input {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 12.5px;
+  background: rgba(217, 199, 166, 0.28);
+  border: 1px solid rgba(16, 32, 31, 0.16);
+  border-radius: 10px;
+  padding: 5px 9px;
+  color: var(--ink);
+  text-align: right;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.solar-num-input:focus {
+  outline: none;
+  border-color: var(--petrol);
+  background: #FFFFFF;
+}
+
+/* Semáforos minerales */
+.badge-semaforo {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 11.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+
+.badge-verde {
+  background: rgba(47, 111, 115, 0.14);
+  color: #1D4F52;
+  border-color: rgba(47, 111, 115, 0.28);
+}
+
+.badge-amarillo {
+  background: rgba(217, 138, 43, 0.16);
+  color: #8A5210;
+  border-color: rgba(217, 138, 43, 0.32);
+}
+
+.badge-rojo {
+  background: rgba(166, 61, 51, 0.13);
+  color: #8C2B22;
+  border-color: rgba(166, 61, 51, 0.28);
+}
+
+.badge-gris {
+  background: rgba(16, 32, 31, 0.07);
+  color: var(--ink-muted);
+}
+
+/* Tablas técnicas limpias */
+.solar-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 14.5px;
+}
+
+.solar-table th {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  background: rgba(227, 234, 232, 0.85);
+  padding: 11px 12px;
+  border-bottom: 1px solid var(--line-strong);
+  text-align: right;
+}
+
+.solar-table th:first-child,
+.solar-table td:first-child {
+  text-align: left;
+}
+
+.solar-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line-hair);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.solar-table tbody tr:hover {
+  background: rgba(217, 199, 166, 0.16);
+}
+
+.solar-table tr.row-selected {
+  background: rgba(47, 111, 115, 0.11);
+}
+
+.solar-table tr.row-alert {
+  background: rgba(166, 61, 51, 0.09);
+}
+
+/* Capas del diagrama solar explotado */
+.solar-layer {
+  transition: transform 0.12s linear;
+  will-change: transform;
+}
+
+/* Tooltip flotante de gráficas SVG */
+#chart-tooltip {
+  position: fixed;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -112%);
+  transition: opacity 0.18s ease;
+}
+
+/* Pausa de animaciones y prefers-reduced-motion */
+html.motion-paused *,
+html.motion-paused *::before,
+html.motion-paused *::after {
+  animation-duration: 0.001ms !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+html.motion-paused .ui-btn:hover,
+html.motion-paused .card-glass-hover:hover {
+  transform: none !important;
+}
+
+/* Adaptación móvil (<768px): 1 columna, reducción de efectos y controles cómodos al tacto */
+@media (max-width: 767px) {
+  body {
+    font-size: 16px;
+  }
+
+  .card-glass,
+  .card-smoked-dark {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: #E7EEEC;
+  }
+
+  .card-smoked-dark {
+    background: #132524;
+  }
+
+  .ui-btn {
+    min-height: 44px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  input[type='range'].solar-range {
+    height: 8px;
+  }
+
+  input[type='range'].solar-range::-webkit-slider-thumb {
+    width: 24px;
+    height: 24px;
+  }
+
+  .solar-num-input {
+    min-height: 40px;
+    font-size: 14px;
+  }
+
+  .hero-inline-photo {
+    height: 46px;
+    width: 96px;
+    border-radius: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .ui-btn:hover,
+  .card-glass-hover:hover {
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   PARTE 2 · RECORRIDO MOBILE-FIRST DE REFERIDOS Y FICHA DE GROWTH
+========================================================================== */
+
+.step-tab-btn {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  min-height: 46px;
+  border-radius: 16px;
+  border: 1px solid var(--line-hair);
+  background: rgba(227, 234, 232, 0.72);
+  color: var(--ink-muted);
+  transition:
+    transform 0.35s var(--ease-expo),
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.35s var(--ease-expo);
+}
+
+.step-tab-btn:hover {
+  transform: translateY(-2px);
+  color: var(--ink);
+  border-color: rgba(47, 111, 115, 0.35);
+}
+
+.step-tab-btn[aria-selected='true'] {
+  background: var(--ink);
+  color: #EEF2F1;
+  border-color: var(--ink);
+  box-shadow: 0 10px 24px -10px rgba(16, 32, 31, 0.35);
+}
+
+/* Contenedor mobile-first: fluido al 100% en celular; marco ergonómico en escritorio */
+.mobile-viewport-card {
+  width: 100%;
+  max-width: 460px;
+  margin-left: auto;
+  margin-right: auto;
+  background: #EEF2F1;
+  border: 1px solid rgba(16, 32, 31, 0.16);
+  border-radius: 24px;
+  box-shadow:
+    0 24px 54px -20px rgba(16, 32, 31, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  .mobile-viewport-card {
+    max-width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 10px 28px -16px rgba(16, 32, 31, 0.14);
+  }
+}
+
+/* Tarjeta lista para compartir en WhatsApp */
+.wa-share-card {
+  background:
+    radial-gradient(circle at 88% 14%, rgba(217, 138, 43, 0.28) 0%, rgba(217, 138, 43, 0) 48%),
+    linear-gradient(155deg, #132827 0%, #1F4D50 62%, #2F6F73 100%);
+  color: #EEF2F1;
+  border-radius: 16px;
+  border: 1px solid rgba(217, 199, 166, 0.28);
+  box-shadow: 0 18px 40px -16px rgba(16, 32, 31, 0.42);
+}
+
+/* Campos táctiles pensados primero para celular (>= 46px) */
+.mobile-field {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  min-height: 46px;
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid rgba(16, 32, 31, 0.18);
+  background: #FFFFFF;
+  padding: 10px 14px;
+  color: var(--ink);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mobile-field:focus {
+  outline: none;
+  border-color: var(--petrol);
+  box-shadow: 0 0 0 3px rgba(47, 111, 115, 0.14);
+}
+
+/* Barra animada de progreso de referidos */
+.ref-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.75s var(--ease-expo);
+  will-change: width;
+}
+
+html.motion-paused .ref-progress-fill {
+  transition: none !important;
+}
+
+/* Etiquetas epistemológicas para la Ficha de Growth (Dato del caso vs Supuesto vs Meta) */
+.epistemic-tag {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 1.2;
+  padding: 2px 8px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  vertical-align: middle;
+}
+
+.tag-dato {
+  background: rgba(47, 111, 115, 0.14);
+  color: #1D4F52;
+  border: 1px solid rgba(47, 111, 115, 0.28);
+}
+
+.tag-supuesto {
+  background: rgba(217, 199, 166, 0.45);
+  color: #5C4624;
+  border: 1px solid rgba(140, 109, 63, 0.32);
+}
+
+.tag-meta {
+  background: rgba(217, 138, 43, 0.18);
+  color: #8A5210;
+  border: 1px solid rgba(217, 138, 43, 0.36);
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #FFFFFF !important;
+    font-size: 11.5px;
+  }
+  body:not([data-print-target='growth']) section:not(#recomendacion),
+  body:not([data-print-target='growth']) main > div {
+    display: none !important;
+  }
+  body[data-print-target='growth'] section:not(#growth),
+  body[data-print-target='growth'] main > div {
+    display: none !important;
+  }
+  #recomendacion,
+  #growth {
+    padding: 0 !important;
+  }
+}
+

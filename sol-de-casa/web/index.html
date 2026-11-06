@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sol de Casa · Energía Solar Residencial &amp; Estrategia de Capital</title>
+  <meta name="description" content="Tablero editorial, arquitectura solar y simulador financiero de 24 meses para Sol de Casa. Precisión técnica, luz cálida y claridad visual." />
+
+  <!-- Carga estricta y exclusiva de las 3 familias tipográficas solicitadas: DM Serif Display, DM Sans e Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&amp;family=DM+Serif+Display:ital@0;1&amp;family=Inter:wght@500&amp;display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS por CDN con configuración exacta de paleta y radios de 16px -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            mineral: '#EEF2F1',
+            panel: '#E3EAE8',
+            ink: '#10201F',
+            petrol: '#2F6F73',
+            sand: '#D9C7A6',
+            amber: '#D98A2B'
+          },
+          fontFamily: {
+            serif: ['"DM Serif Display"', 'Georgia', 'serif'],
+            sans: ['"DM Sans"', 'sans-serif'],
+            ui: ['"Inter"', 'sans-serif']
+          },
+          borderRadius: {
+            '2xl': '16px'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Hoja de estilos editorial y sistema de diseño (Saltmarsh + Tessel + Pulsehaus) -->
+  <link rel="stylesheet" href="./src/css/editorial.css" />
+
+  <!-- SheetJS para importación y exportación nativa de archivos Excel (.xlsx) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+  <!-- Arquitectura JavaScript Vanilla: Dominio -> Gráficas SVG -> Animaciones -> Aplicación -> Referidos (Parte 2) -->
+  <script defer src="./src/js/domain/modelo.js"></script>
+  <script defer src="./src/js/domain/referidos.js"></script>
+  <script defer src="./src/js/ui/graficos.js"></script>
+  <script defer src="./src/js/ui/animaciones.js"></script>
+  <script defer src="./src/js/ui/app.js"></script>
+  <script defer src="./src/js/ui/referidos-ui.js"></script>
+</head>
+<body class="tech-grid-bg antialiased selection:bg-[#2F6F73] selection:text-white">
+
+  <!-- Barra fina superior de progreso de lectura -->
+  <div id="scroll-progress-bar" aria-hidden="true"></div>
+
+  <!-- Tooltip flotante compartido por todas las gráficas SVG -->
+  <div id="chart-tooltip" class="card-smoked-dark px-3.5 py-2 text-xs shadow-xl" role="tooltip"></div>
+
+  <!-- Navegación superior de cristal ahumado (Inter 500, 11–13px) -->
+  <header class="sticky top-0 z-50 border-b border-[#10201F]/10 bg-[#EEF2F1]/82 backdrop-blur-md no-print">
+    <div class="max-w-[1380px] mx-auto px-4 sm:px-8 py-3 flex flex-wrap items-center justify-between gap-3">
+      <a href="#portada" class="flex items-center gap-3 group">
+        <span class="w-8 h-8 rounded-2xl bg-[#2F6F73] text-[#EEF2F1] flex items-center justify-center shadow-sm transition-transform duration-300 group-hover:-translate-y-0.5">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.2" stroke="#D9C7A6" />
+            <path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M18.7 5.3l-1.8 1.8M7.1 16.9l-1.8 1.8" stroke="#EEF2F1" stroke-linecap="round" />
+          </svg>
+        </span>
+        <div>
+          <span class="block font-editorial text-lg leading-none text-[#10201F]">Sol de <em>Casa</em></span>
+          <span class="block ui-micro text-[#647A78] mt-0.5">Ingeniería Solar &amp; Capital</span>
+        </div>
+      </a>
+
+      <nav aria-label="Secciones principales" class="hidden xl:flex items-center gap-5">
+        <a href="#tablero" class="ui-label text-[#425856] hover:text-[#10201F] transition-colors">01 · Tablero</a>
+        <a href="#arquitectura" class="ui-label text-[#425856] hover:text-[#10201F] transition-colors">02 · Arquitectura</a>
+        <a href="#escenarios" class="ui-label text-[#425856] hover:text-[#10201F] transition-colors">03 · Escenarios</a>
+        <a href="#simulador" class="ui-label text-[#425856] hover:text-[#10201F] transition-colors">04 · Simulador 24M</a>
+        <a href="#recomendacion" class="ui-label text-[#425856] hover:text-[#10201F] transition-colors">05 · Comité</a>
+        <a href="#referidos" class="ui-label text-[#2F6F73] font-semibold hover:text-[#10201F] transition-colors">06 · Referidos (App)</a>
+        <a href="#growth" class="ui-label text-[#8A5210] font-semibold hover:text-[#10201F] transition-colors">07 · Ficha Growth</a>
+        <a href="#excel" class="ui-label text-[#425856] hover:text-[#10201F] transition-colors">08 · Excel</a>
+      </nav>
+
+      <div class="flex flex-wrap items-center gap-2">
+        <button id="btn-pause-motion" type="button" aria-pressed="false" class="ui-btn inline-flex items-center gap-2 px-3.5 py-2 bg-[#E3EAE8] border border-[#10201F]/15 text-[#10201F]">
+          <span class="inline-block w-2 h-2 rounded-full bg-[#2F6F73]"></span>
+          <span>Pausar animaciones</span>
+        </button>
+        <button type="button" data-reset-all class="ui-btn px-3.5 py-2 bg-transparent border border-[#10201F]/15 text-[#425856] hover:text-[#10201F]">
+          Restaurar caso
+        </button>
+        <button type="button" data-export-xlsx class="ui-btn px-4 py-2 bg-[#2F6F73] text-white border border-[#2F6F73]">
+          Exportar .xlsx
+        </button>
+      </div>
+    </div>
+
+    <!-- Barra rápida táctil pensada para celular (<1280px) -->
+    <div class="xl:hidden border-t border-[#10201F]/8 bg-[#E3EAE8]/75 px-4 py-2 overflow-x-auto">
+      <div class="flex items-center gap-2 min-w-max">
+        <a href="#referidos" class="ui-label px-3 py-1.5 rounded-full bg-[#2F6F73] text-white">Parte 2 · App Referidos</a>
+        <a href="#growth" class="ui-label px-3 py-1.5 rounded-full bg-[#D9C7A6]/60 text-[#10201F]">Ficha Growth (1 pág.)</a>
+        <a href="#tablero" class="ui-label px-3 py-1.5 rounded-full bg-[#EEF2F1] text-[#425856]">Tablero</a>
+        <a href="#simulador" class="ui-label px-3 py-1.5 rounded-full bg-[#EEF2F1] text-[#425856]">Caja 24M</a>
+        <a href="#recomendacion" class="ui-label px-3 py-1.5 rounded-full bg-[#EEF2F1] text-[#425856]">Comité</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         PORTADA EDITORIAL AMPLIA (Saltmarsh + Pulsehaus + Tessel)
+         Retícula 12 columnas · Titular clamp(56px, 8.5vw, 150px) · Foto expandible
+    =========================================================================== -->
+    <section id="portada" class="pt-10 md:pt-16 pb-12 md:pb-20">
+      <div class="max-w-[1380px] mx-auto px-4 sm:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-end mb-8 md:mb-12">
+          <div class="md:col-span-8">
+            <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-2xl bg-[#E3EAE8] border border-[#10201F]/10 mb-6 hero-enter-sub">
+              <span class="w-2 h-2 rounded-full bg-[#D98A2B]"></span>
+              <span class="ui-micro text-[#10201F]">Auditoría Comercial y Operativa · Septiembre – Horizonte 24 Meses</span>
+            </div>
+
+            <!-- Titular protagonista fluido con entrada por líneas, rotación leve y fotografía integrada -->
+            <h1 class="hero-headline">
+              <span class="hero-line-mask">
+                <span class="hero-line-inner">Luz de</span>
+              </span>
+              <span class="hero-line-mask">
+                <span class="hero-line-inner">
+                  <span>mañana,</span>
+                  <span id="hero-inline-photo" class="hero-inline-photo" aria-hidden="true">
+                    <img src="./assets/images/inline-solar-detail.jpg" alt="Detalle arquitectónico de cristal fotovoltaico iluminado al amanecer" />
+                  </span>
+                </span>
+              </span>
+              <span class="hero-line-mask">
+                <span class="hero-line-inner">energía <em>rentable.</em></span>
+              </span>
+            </h1>
+          </div>
+
+          <div class="md:col-span-4 space-y-6 hero-enter-sub">
+            <p class="text-[#425856]">
+              Sol de Casa transforma cubiertas residenciales en infraestructura limpia de alto retorno. Aquí desmontamos la ilusión del lead barato y trazamos una ruta técnica verificable de inversión, cuadrillas y flujo de caja.
+            </p>
+            <div class="flex flex-wrap items-center gap-3">
+              <a href="#tablero" class="ui-btn inline-flex items-center gap-2 px-5 py-3 bg-[#10201F] text-[#EEF2F1]">
+                <span>Explorar tablero en vivo</span>
+                <span aria-hidden="true">↓</span>
+              </a>
+              <a href="#referidos" class="ui-btn inline-flex items-center gap-2 px-5 py-3 bg-[#2F6F73] text-white">
+                <span>Parte 2 · Ciclo de Referidos</span>
+                <span aria-hidden="true">→</span>
+              </a>
+              <a href="#simulador" class="ui-btn inline-flex items-center gap-2 px-4 py-3 bg-[#E3EAE8] border border-[#10201F]/15 text-[#10201F]">
+                <span>Caja 24M</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fotografía arquitectónica integrada en 12 columnas con parallax suave y tarjetas de cristal ahumado -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 hero-enter-sub">
+          <div class="md:col-span-12 relative rounded-2xl overflow-hidden border border-[#10201F]/15 shadow-xl bg-[#10201F]">
+            <div class="relative h-[340px] sm:h-[460px] lg:h-[560px] overflow-hidden">
+              <img
+                src="./assets/images/hero-solar-roof.jpg"
+                alt="Vivienda contemporánea de piedra caliza con techo de paneles solares monocristalinos bajo luz cálida de mañana"
+                data-parallax="18"
+                class="w-full h-full object-cover object-center"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#10201F]/80 via-[#10201F]/18 to-transparent pointer-events-none"></div>
+
+              <!-- Etiqueta arquitectónica superior -->
+              <div class="absolute top-4 left-4 sm:top-6 sm:left-6 px-3.5 py-2 rounded-2xl bg-[#10201F]/70 backdrop-blur-md border border-[#EEF2F1]/15 text-[#EEF2F1] flex items-center gap-3">
+                <span class="ui-micro text-[#D9C7A6]">Sistema 6,0 kWp</span>
+                <span class="w-px h-3 bg-[#EEF2F1]/25"></span>
+                <span class="ui-label text-[#EEF2F1]/90">18 módulos monocristalinos · Orientación óptima</span>
+              </div>
+
+              <!-- Banda de precisión financiera superpuesta en cristal oscuro ahumado -->
+              <div class="hidden md:grid grid-cols-4 gap-4 absolute bottom-6 left-6 right-6">
+                <div class="card-smoked-dark p-4">
+                  <span class="ui-micro text-[#D9C7A6]">CAC real Google</span>
+                  <strong id="hero-cac-google" class="block font-editorial text-3xl text-white mt-1">$535,54</strong>
+                  <span class="text-xs text-[#EEF2F1]/75">3,33 visitas por instalación</span>
+                </div>
+                <div class="card-smoked-dark p-4">
+                  <span class="ui-micro text-[#D98A2B]">CAC real Meta (sin filtro)</span>
+                  <strong id="hero-cac-meta" class="block font-editorial text-3xl text-white mt-1">$718,13</strong>
+                  <span class="text-xs text-[#EEF2F1]/75">+34,1% más caro pese al CPL de $8</span>
+                </div>
+                <div class="card-smoked-dark p-4">
+                  <span class="ui-micro text-[#D9C7A6]">Utilidad mensual propuesta</span>
+                  <strong id="hero-neto-prop" class="block font-editorial text-3xl text-white mt-1">$10.842,07</strong>
+                  <span class="text-xs text-[#EEF2F1]/75">$4k Meta filtrado + $4k Google + batería</span>
+                </div>
+                <div class="card-smoked-dark p-4">
+                  <span class="ui-micro text-[#D9C7A6]">Caja acumulada Mes 24</span>
+                  <strong id="hero-caja-24m" class="block font-editorial text-3xl text-white mt-1">$677.257</strong>
+                  <span class="text-xs text-[#EEF2F1]/75">Escalamiento sincronizado con cuadrillas</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Resumen compacto visible en pantallas móviles (<768px) sin saturar la imagen -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:hidden">
+            <div class="card-glass p-4">
+              <span class="ui-micro text-[#2F6F73]">CAC real Google vs. Meta</span>
+              <strong class="block font-editorial text-2xl text-[#10201F] mt-1">$535,54 vs. $718,13</strong>
+              <span class="text-xs text-[#425856]">El lead de $8 exige 5,56 visitas por venta.</span>
+            </div>
+            <div class="card-glass p-4">
+              <span class="ui-micro text-[#8A5210]">Horizonte 24 meses</span>
+              <strong class="block font-editorial text-2xl text-[#10201F] mt-1">$677.257 en caja</strong>
+              <span class="text-xs text-[#425856]">Cumpliendo piso de $5.000 y regla Mes 19.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Conducto orgánico SVG 01: se dibuja progresivamente al avanzar el scroll -->
+    <div class="max-w-[1380px] mx-auto px-4 sm:px-8 py-2 overflow-hidden" aria-hidden="true">
+      <svg viewBox="0 0 1200 84" class="w-full h-14 md:h-20 overflow-visible" fill="none">
+        <path d="M 24 14 C 310 14, 340 68, 610 42 C 860 18, 930 68, 1176 52" stroke="rgba(16,32,31,0.09)" stroke-width="1" stroke-dasharray="4 5" />
+        <path data-energy-path data-energy-dot="energy-dot-1" d="M 24 14 C 310 14, 340 68, 610 42 C 860 18, 930 68, 1176 52" stroke="#2F6F73" stroke-width="2" stroke-linecap="round" />
+        <circle id="energy-dot-1" cx="24" cy="14" r="4.5" fill="#D98A2B" style="opacity: 0" />
+      </svg>
+    </div>
+
+    <!-- ==========================================================================
+         SECCIÓN 01 · TABLERO EN VIVO: LA TRAMPA DEL LEAD BARATO
+         Controles táctiles + Tarjetas escalonadas + Radiografía + 3 Gráficas SVG
+    =========================================================================== -->
+    <section id="tablero" class="py-12 md:py-20">
+      <div class="max-w-[1380px] mx-auto px-4 sm:px-8 space-y-8">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-end reveal-up">
+          <div class="md:col-span-7">
+            <span class="ui-micro text-[#2F6F73]">01 · Diagnóstico Comercial Interactivo</span>
+            <h2 class="section-headline mt-2">La trampa del lead <em>barato</em></h2>
+          </div>
+          <div class="md:col-span-5">
+            <p class="text-[#425856]">
+              Un lead de $8 en Meta parece cinco veces más eficiente que uno de $40 en Google, hasta que contabilizas las visitas técnicas en domicilio ($60 c/u) y el cuello de botella de 100 visitas al mes.
+            </p>
+          </div>
+        </div>
+
+        <!-- Barra de preajustes rápidos y conmutadores operativos -->
+        <div class="panel-compact p-4 sm:p-5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 reveal-up">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="ui-micro text-[#647A78] mr-1">Preajustes del caso:</span>
+            <button type="button" data-preset="actual" class="ui-btn px-3.5 py-2 bg-[#EEF2F1] border border-[#10201F]/15 text-[#10201F]">
+              Actual ($4k + $4k)
+            </button>
+            <button type="button" data-preset="agHist" class="ui-btn px-3.5 py-2 bg-[#EEF2F1] border border-[#10201F]/15 text-[#10201F]">
+              Agencia · curva real ($8k Meta)
+            </button>
+            <button type="button" data-preset="agPromesa" class="ui-btn px-3.5 py-2 bg-[#EEF2F1] border border-[#10201F]/15 text-[#10201F]">
+              Agencia · promesa ($8,00 CPL)
+            </button>
+            <button type="button" data-preset="propuesta" class="ui-btn px-4 py-2 bg-[#2F6F73] text-white border border-[#2F6F73]">
+              Propuesta óptima (Filtro + Batería)
+            </button>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-4 pt-2 lg:pt-0 border-t lg:border-t-0 border-[#10201F]/10">
+            <label class="inline-flex items-center gap-2 cursor-pointer ui-label text-[#10201F]">
+              <input id="chk-tablero-filtro" type="checkbox" class="w-4 h-4 accent-[#2F6F73]" />
+              <span>Filtro Meta + llamada &lt;5 min</span>
+            </label>
+            <label class="inline-flex items-center gap-2 cursor-pointer ui-label text-[#10201F]">
+              <input id="chk-tablero-bateria" type="checkbox" class="w-4 h-4 accent-[#2F6F73]" />
+              <span>Batería adicional (15% adop.)</span>
+            </label>
+            <label class="inline-flex items-center gap-2 cursor-pointer ui-label text-[#10201F]">
+              <input id="chk-tablero-cpl" type="checkbox" class="w-4 h-4 accent-[#D98A2B]" />
+              <span>CPL fijo prometido ($8,00)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Cuatro paneles compactos de calibración táctil (17 parámetros en vivo) -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-5" data-stagger-group>
+          <div data-stagger-item class="md:col-span-6 xl:col-span-3 card-glass p-5 space-y-4">
+            <div class="flex items-center justify-between border-b border-[#10201F]/10 pb-2.5">
+              <span class="ui-label font-semibold text-[#10201F]">01 · Presupuesto y cupo</span>
+              <span class="ui-micro text-[#2F6F73]">Capacidad</span>
+            </div>
+            <div id="ctrl-presupuesto" class="space-y-3.5"></div>
+          </div>
+
+          <div data-stagger-item class="md:col-span-6 xl:col-span-3 card-glass p-5 space-y-4">
+            <div class="flex items-center justify-between border-b border-[#10201F]/10 pb-2.5">
+              <span class="ui-label font-semibold text-[#10201F]">02 · Economía unitaria</span>
+              <span class="ui-micro text-[#2F6F73]">Márgenes</span>
+            </div>
+            <div id="ctrl-economia" class="space-y-3.5"></div>
+          </div>
+
+          <div data-stagger-item class="md:col-span-6 xl:col-span-3 card-glass p-5 space-y-4">
+            <div class="flex items-center justify-between border-b border-[#10201F]/10 pb-2.5">
+              <span id="ctrl-meta-heading" class="ui-label font-semibold text-[#10201F]">03 · Embudo Meta (actual)</span>
+              <span class="ui-micro text-[#2F6F73]">Redes</span>
+            </div>
+            <div id="ctrl-meta" class="space-y-3.5"></div>
+          </div>
+
+          <div data-stagger-item class="md:col-span-6 xl:col-span-3 card-glass p-5 space-y-4">
+            <div class="flex items-center justify-between border-b border-[#10201F]/10 pb-2.5">
+              <span class="ui-label font-semibold text-[#10201F]">04 · Embudo Google</span>
+              <span class="ui-micro text-[#8A5210]">Búsqueda</span>
+            </div>
+            <div id="ctrl-google" class="space-y-3.5"></div>
+          </div>
+        </div>
+
+        <!-- Alertas dinámicas de capacidad y piso de caja -->
+        <div id="tablero-alerts" class="space-y-3"></div>
+
+        <!-- Banner editorial de contraste CPL vs CAC real -->
+        <div id="tablero-trampa-banner" class="rounded-2xl bg-[#D9C7A6]/38 border border-[#D9C7A6] px-5 py-4 text-[#10201F] reveal-up"></div>
+
+        <!-- Tarjetas de KPIs en vivo con entrada escalonada -->
+        <div id="tablero-kpis" data-stagger-group class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+
+        <!-- Radiografía visual paso a paso del embudo + Anatomía del CAC y Payback -->
+        <div id="embudo-visual-container" class="reveal-up"></div>
+
+        <!-- Tres gráficas SVG cuyas líneas se dibujan y cuyos puntos emergen al terminar -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+          <div class="md:col-span-6 card-glass p-6 space-y-3 reveal-up">
+            <div>
+              <span class="ui-micro text-[#2F6F73]">Comparativa de costos</span>
+              <h3 class="font-editorial text-2xl text-[#10201F] mt-0.5">Del CPL aparente al CAC <em>efectivo</em></h3>
+            </div>
+            <div id="chart-cpl-cac" data-chart-box data-chart-kind="bar"></div>
+          </div>
+
+          <div class="md:col-span-6 card-glass p-6 space-y-3 reveal-up">
+            <div>
+              <span class="ui-micro text-[#8A5210]">Restricción física de cuadrilla</span>
+              <h3 class="font-editorial text-2xl text-[#10201F] mt-0.5">Volumen del embudo frente al <em>cupo</em></h3>
+            </div>
+            <div id="chart-embudo-barras" data-chart-box data-chart-kind="bar"></div>
+          </div>
+
+          <div class="md:col-span-12 card-glass p-6 space-y-3 reveal-up">
+            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+              <div>
+                <span class="ui-micro text-[#2F6F73]">Rendimientos decrecientes</span>
+                <h3 class="font-editorial text-2xl text-[#10201F] mt-0.5">Curva histórica de captación por <em>inversión</em></h3>
+              </div>
+              <span class="text-sm text-[#425856]">Interpolación lineal por tramos · Google satura su mercado local en 160 leads ($8.000/mes)</span>
+            </div>
+            <div id="chart-curva-historica" data-chart-box data-chart-kind="line"></div>
+          </div>
+        </div>
+
+        <!-- Desglose numérico completo en vivo -->
+        <div class="card-glass p-6 space-y-4 reveal-up">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <span class="ui-micro text-[#647A78]">Precisión tabular</span>
+              <h3 class="font-editorial text-2xl text-[#10201F]">Estado operativo por <em>canal</em></h3>
+            </div>
+            <span class="ui-micro text-[#2F6F73]">Sincronizado con los controles superiores</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="solar-table">
+              <thead>
+                <tr>
+                  <th>Métrica operativa / financiera</th>
+                  <th>Canal Meta</th>
+                  <th>Canal Google</th>
+                  <th>Total Combinado</th>
+                </tr>
+              </thead>
+              <tbody id="tablero-tabla-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Conducto orgánico SVG 02 -->
+    <div class="max-w-[1380px] mx-auto px-4 sm:px-8 py-2 overflow-hidden" aria-hidden="true">
+      <svg viewBox="0 0 1200 84" class="w-full h-14 md:h-20 overflow-visible" fill="none">
+        <path d="M 1176 16 C 880 16, 820 70, 560 38 C 330 10, 240 64, 24 54" stroke="rgba(16,32,31,0.09)" stroke-width="1" stroke-dasharray="4 5" />
+        <path data-energy-path data-energy-dot="energy-dot-2" d="M 1176 16 C 880 16, 820 70, 560 38 C 330 10, 240 64, 24 54" stroke="#D98A2B" stroke-width="2" stroke-linecap="round" />
+        <circle id="energy-dot-2" cx="1176" cy="16" r="4.5" fill="#2F6F73" style="opacity: 0" />
+      </svg>
+    </div>
+
+    <!-- ==========================================================================
+         SECCIÓN 02 · ARQUITECTURA SOLAR Y CAPAS DE VALOR (Referencia Tessel)
+         Izquierda: Diagrama solar isométrico de 4 capas que se separan al hacer scroll
+         Derecha: Transición de boceto técnico CAD a fotografía arquitectónica terminada
+    =========================================================================== -->
+    <section id="arquitectura" class="py-12 md:py-20">
+      <div class="max-w-[1380px] mx-auto px-4 sm:px-8 space-y-10">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-end reveal-up">
+          <div class="md:col-span-7">
+            <span class="ui-micro text-[#2F6F73]">02 · Ingeniería Residencial &amp; Economía Unitaria</span>
+            <h2 class="section-headline mt-2">Capas de <em>precisión</em> solar</h2>
+          </div>
+          <div class="md:col-span-5">
+            <p class="text-[#425856]">
+              Cada contrato residencial de <strong id="layer-precio" class="text-[#10201F]">$6.500,00</strong> articula cuatro estratos técnicos y financieros: desde el vidrio fotovoltaico que se liquida al contado hasta el respaldo en batería que eleva el margen neto.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+          <!-- Diagrama solar arquitectónico con separación progresiva de capas durante el scroll -->
+          <div class="md:col-span-6 card-glass p-6 sm:p-8 flex flex-col justify-between reveal-up">
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <div>
+                <span class="ui-micro text-[#2F6F73]">Despiece isométrico interactivo</span>
+                <h3 class="font-editorial text-2xl text-[#10201F] mt-0.5">Estratigrafía del sistema <em>fotovoltaico</em></h3>
+              </div>
+              <span class="badge-semaforo badge-verde">Scroll activo</span>
+            </div>
+
+            <div id="exploded-solar-stage" class="relative py-10 sm:py-14 flex items-center justify-center overflow-hidden rounded-2xl bg-[#EEF2F1]/75 border border-[#10201F]/10">
+              <svg viewBox="0 0 540 430" class="w-full max-w-[490px] h-auto overflow-visible" role="img" aria-label="Diagrama arquitectónico de cuatro capas de un techo solar residencial">
+                <!-- Guías verticales de eje técnico -->
+                <line x1="270" y1="45" x2="270" y2="385" stroke="rgba(47,111,115,0.22)" stroke-width="1" stroke-dasharray="3 5" />
+                <line x1="120" y1="120" x2="120" y2="320" stroke="rgba(16,32,31,0.10)" stroke-width="1" stroke-dasharray="2 4" />
+                <line x1="420" y1="120" x2="420" y2="320" stroke="rgba(16,32,31,0.10)" stroke-width="1" stroke-dasharray="2 4" />
+
+                <!-- Capa 4 (inferior): Estructura de cubierta y contribución neta -->
+                <g class="solar-layer" data-layer-offset="52">
+                  <polygon points="270,256 436,314 270,372 104,314" fill="#D9C7A6" fill-opacity="0.48" stroke="#10201F" stroke-width="1.2" />
+                  <polygon points="104,314 270,372 270,386 104,328" fill="#C4B08B" stroke="#10201F" stroke-width="1" />
+                  <polygon points="436,314 270,372 270,386 436,328" fill="#B59F78" stroke="#10201F" stroke-width="1" />
+                  <line x1="187" y1="285" x2="353" y2="343" stroke="rgba(16,32,31,0.28)" stroke-width="1" />
+                  <line x1="353" y1="285" x2="187" y2="343" stroke="rgba(16,32,31,0.28)" stroke-width="1" />
+                  <text x="26" y="346" fill="#10201F" font-family="Inter, sans-serif" font-size="11" font-weight="500">04 · Cubierta portante</text>
+                </g>
+
+                <!-- Capa 3 (media-baja): Almacenamiento en batería LFP -->
+                <g class="solar-layer" data-layer-offset="17">
+                  <polygon points="270,204 416,256 270,308 124,256" fill="#E3EAE8" stroke="#2F6F73" stroke-width="1.3" />
+                  <!-- Módulo compacto de batería e inversor híbrido -->
+                  <polygon points="270,224 338,248 270,272 202,248" fill="#2F6F73" fill-opacity="0.22" stroke="#2F6F73" stroke-width="1.4" />
+                  <circle cx="270" cy="248" r="5" fill="#D98A2B" />
+                  <path d="M 270 248 L 368 248" stroke="#D98A2B" stroke-width="1.4" stroke-dasharray="3 3" />
+                  <text x="374" y="252" fill="#8A5210" font-family="Inter, sans-serif" font-size="11" font-weight="500">03 · Respaldo LFP</text>
+                </g>
+
+                <!-- Capa 2 (media-alta): Rieles de aluminio anodizado, microinversores y cuadrilla -->
+                <g class="solar-layer" data-layer-offset="-17">
+                  <polygon points="270,148 428,204 270,260 112,204" fill="rgba(238,242,241,0.86)" stroke="#10201F" stroke-width="1.1" stroke-dasharray="5 3" />
+                  <line x1="152" y1="190" x2="310" y2="246" stroke="#2F6F73" stroke-width="2" />
+                  <line x1="192" y1="176" x2="350" y2="232" stroke="#2F6F73" stroke-width="2" />
+                  <line x1="230" y1="162" x2="388" y2="218" stroke="#2F6F73" stroke-width="2" />
+                  <rect x="256" y="196" width="28" height="14" rx="3" fill="#10201F" />
+                  <text x="24" y="182" fill="#425856" font-family="Inter, sans-serif" font-size="11" font-weight="500">02 · Rieles y cuadrilla</text>
+                </g>
+
+                <!-- Capa 1 (superior): Matriz monocristalina antirreflejante de alta eficiencia -->
+                <g class="solar-layer" data-layer-offset="-52">
+                  <polygon points="270,88 438,148 270,208 102,148" fill="#163235" stroke="#2F6F73" stroke-width="1.6" />
+                  <!-- Retícula fotovoltaica interna -->
+                  <line x1="158" y1="128" x2="326" y2="188" stroke="rgba(217,199,166,0.42)" stroke-width="1" />
+                  <line x1="214" y1="108" x2="382" y2="168" stroke="rgba(217,199,166,0.42)" stroke-width="1" />
+                  <line x1="326" y1="108" x2="158" y2="168" stroke="rgba(217,199,166,0.42)" stroke-width="1" />
+                  <line x1="382" y1="128" x2="214" y2="188" stroke="rgba(217,199,166,0.42)" stroke-width="1" />
+                  <!-- Destello cálido matinal -->
+                  <circle cx="270" cy="116" r="4" fill="#D98A2B" />
+                  <text x="358" y="102" fill="#2F6F73" font-family="Inter, sans-serif" font-size="11" font-weight="500">01 · Captación solar</text>
+                </g>
+              </svg>
+            </div>
+
+            <!-- Leyenda económica sincronizada con los supuestos en vivo -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5">
+              <div class="panel-compact p-3.5">
+                <span class="ui-micro text-[#647A78]">01 · Módulos e inversor</span>
+                <strong id="layer-equipos" class="block text-sm text-[#10201F] mt-0.5">−$3.300,00 (55% contado)</strong>
+              </div>
+              <div class="panel-compact p-3.5">
+                <span class="ui-micro text-[#647A78]">02 · Montaje y asesora</span>
+                <strong id="layer-instalacion" class="block text-sm text-[#10201F] mt-0.5">−$1.020,00 cuadrilla · −$180,00 comisión</strong>
+              </div>
+              <div class="panel-compact p-3.5">
+                <span class="ui-micro text-[#8A5210]">03 · Batería opcional</span>
+                <strong id="layer-bateria" class="block text-sm text-[#10201F] mt-0.5">+$770,00 netos/batería (15% adop.)</strong>
+              </div>
+              <div class="panel-compact p-3.5 bg-[#2F6F73]/12 border-[#2F6F73]/30">
+                <span class="ui-micro text-[#2F6F73]">04 · Contribución unitaria</span>
+                <strong id="layer-contribucion" class="block text-sm text-[#10201F] mt-0.5">$1.500,00 base · $1.615,50 c/bat.</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Transición estilo Tessel: de boceto arquitectónico CAD a obra solar terminada -->
+          <div class="md:col-span-6 card-glass p-6 sm:p-8 flex flex-col justify-between reveal-up">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+              <div>
+                <span class="ui-micro text-[#8A5210]">Del plano técnico a la obra ejecutada</span>
+                <h3 class="font-editorial text-2xl text-[#10201F] mt-0.5">Transición de boceto a <em>residencia</em></h3>
+              </div>
+              <span class="ui-micro text-[#647A78]">Scroll o deslizador manual</span>
+            </div>
+
+            <div id="sketch-transition-stage" class="relative h-[340px] sm:h-[400px] rounded-2xl overflow-hidden border border-[#10201F]/15 bg-[#E3EAE8] select-none">
+              <!-- Estrato base: plano arquitectónico técnico en líneas finas petróleo -->
+              <div class="absolute inset-0 flex items-center justify-center p-4 bg-[#EEF2F1] tech-grid-bg">
+                <svg viewBox="0 0 640 420" class="w-full h-full" fill="none" aria-label="Plano arquitectónico técnico del sistema solar">
+                  <rect x="18" y="18" width="604" height="384" rx="10" stroke="rgba(47,111,115,0.28)" stroke-width="1" />
+                  <!-- Cotas arquitectónicas -->
+                  <line x1="90" y1="66" x2="546" y2="66" stroke="#2F6F73" stroke-width="0.9" stroke-dasharray="4 4" />
+                  <text x="318" y="56" text-anchor="middle" fill="#2F6F73" font-family="Inter, sans-serif" font-size="10" font-weight="500">11,40 m · CUBIERTA SURESTE (INCLINACIÓN 22°)</text>
+                  <!-- Geometría de vivienda y faldón solar -->
+                  <polygon points="118,214 326,108 538,186 330,288" stroke="#10201F" stroke-width="1.5" fill="rgba(47,111,115,0.06)" />
+                  <line x1="168" y1="189" x2="376" y2="266" stroke="#2F6F73" stroke-width="1" />
+                  <line x1="220" y1="162" x2="428" y2="240" stroke="#2F6F73" stroke-width="1" />
+                  <line x1="274" y1="135" x2="482" y2="213" stroke="#2F6F73" stroke-width="1" />
+                  <line x1="218" y1="251" x2="426" y2="145" stroke="#2F6F73" stroke-width="1" />
+                  <line x1="276" y1="269" x2="484" y2="166" stroke="#2F6F73" stroke-width="1" />
+                  <!-- Muros, alero y unidad de almacenamiento mural -->
+                  <polyline points="118,214 118,334 330,378 538,298 538,186" stroke="#10201F" stroke-width="1.4" />
+                  <line x1="330" y1="288" x2="330" y2="378" stroke="#10201F" stroke-width="1.3" />
+                  <rect x="382" y="286" width="38" height="52" rx="4" stroke="#D98A2B" stroke-width="1.8" fill="rgba(217,138,43,0.12)" />
+                  <path d="M 401 236 L 401 286" stroke="#D98A2B" stroke-width="1.4" stroke-dasharray="3 3" />
+                  <text x="432" y="314" fill="#8A5210" font-family="Inter, sans-serif" font-size="10" font-weight="500">BATERÍA 10 kWh</text>
+                  <text x="42" y="384" fill="#647A78" font-family="Inter, sans-serif" font-size="10" font-weight="500">PLANO CAD · ESC 1:75 · SOL DE CASA</text>
+                </svg>
+              </div>
+
+              <!-- Estrato superior: fotografía terminada revelada por clip-path -->
+              <div id="sketch-finished-layer" class="absolute inset-0" style="clip-path: inset(0 45% 0 0)">
+                <img
+                  src="./assets/images/tessel-solar-house.jpg"
+                  alt="Composición arquitectónica terminada de vivienda solar con batería residencial mural"
+                  class="w-full h-full object-cover object-center"
+                />
+                <div class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-[#10201F]/75 text-[#EEF2F1] ui-micro">
+                  Obra terminada · Mes 2
+                </div>
+              </div>
+
+              <!-- Etiqueta del lado boceto -->
+              <div class="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-[#EEF2F1]/90 border border-[#10201F]/15 text-[#10201F] ui-micro">
+                Boceto técnico · Visita Mes 1
+              </div>
+
+              <!-- Línea divisoria vertical -->
+              <div id="sketch-divider-line" class="absolute top-0 bottom-0 w-0.5 bg-[#D98A2B] shadow-[0_0_12px_rgba(217,138,43,0.7)] pointer-events-none" style="left: 55%">
+                <span class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-[#10201F] border-2 border-[#D9C7A6] text-[#EEF2F1] flex items-center justify-center text-[10px]">
+                  ↔
+                </span>
+              </div>
+            </div>
+
+            <div class="mt-5 space-y-3">
+              <div class="flex items-center justify-between">
+                <label for="sketch-compare-range" class="ui-label text-[#10201F]">Inspeccionar transición boceto ↔ obra terminada</label>
+                <span class="ui-micro text-[#2F6F73]">Desfase de caja: 30 días</span>
+              </div>
+              <input id="sketch-compare-range" type="range" min="0" max="100" value="55" class="solar-range" />
+              <p class="text-sm text-[#425856]">
+                En el Mes 1 se diseña el plano en sitio ($60/visita), el cliente abona el 50% ($3.250) y se paga el 100% de los paneles ($3.575) más 3% de comisión ($195). En el Mes 2 concluye el montaje y entra el 50% restante.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECCIÓN 03 · MATRIZ DE ESCENARIOS Y SUPUESTOS EDITABLES
+    =========================================================================== -->
+    <section id="escenarios" class="py-12 md:py-20">
+      <div class="max-w-[1380px] mx-auto px-4 sm:px-8 space-y-8">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-end reveal-up">
+          <div class="md:col-span-7">
+            <span class="ui-micro text-[#2F6F73]">03 · Evaluación Comparativa</span>
+            <h2 class="section-headline mt-2">Cinco rutas bajo <em>escrutinio</em></h2>
+          </div>
+          <div class="md:col-span-5">
+            <p class="text-[#425856]">
+              Compara la operación actual frente a la propuesta de la agencia ($8.000 solo en Meta) y nuestra recomendación equilibrada con filtro comercial y batería. Todas las celdas admiten edición directa.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+          <!-- Tabla editable de definición de escenarios -->
+          <div class="md:col-span-7 card-glass p-6 space-y-4 reveal-up">
+            <div class="flex items-center justify-between">
+              <h3 class="font-editorial text-2xl text-[#10201F]">Configuración de cada <em>escenario</em></h3>
+              <span class="ui-micro text-[#647A78]">Celdas editables</span>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="solar-table">
+                <thead>
+                  <tr>
+                    <th>Escenario</th>
+                    <th>Meta (USD)</th>
+                    <th>Google (USD)</th>
+                    <th class="text-center">Filtro</th>
+                    <th class="text-center">Batería</th>
+                    <th class="text-center">CPL $8</th>
+                  </tr>
+                </thead>
+                <tbody id="escenarios-edit-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Gráfica de choque contra el tope de visitas -->
+          <div class="md:col-span-5 card-glass p-6 space-y-3 reveal-up">
+            <div>
+              <span class="ui-micro text-[#8A5210]">Saturación de agenda</span>
+              <h3 class="font-editorial text-2xl text-[#10201F] mt-0.5">Visitas pedidas vs. <em>perdidas</em></h3>
+            </div>
+            <div id="chart-escenarios-capacidad" data-chart-box data-chart-kind="bar"></div>
+          </div>
+        </div>
+
+        <!-- Panel desplegable con los 12 supuestos financieros y operativos complementarios -->
+        <details class="card-glass p-6 group reveal-up">
+          <summary class="cursor-pointer list-none flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <span class="ui-micro text-[#2F6F73]">Libro de supuestos completo</span>
+              <h3 class="font-editorial text-2xl text-[#10201F]">Parámetros estructurales de caja, costos fijos y <em>batería</em></h3>
+            </div>
+            <span class="ui-btn px-4 py-2 bg-[#E3EAE8] border border-[#10201F]/15 text-[#10201F]">
+              Desplegar / editar parámetros
+            </span>
+          </summary>
+          <div id="supuestos-extra-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 mt-6 pt-5 border-t border-[#10201F]/10"></div>
+        </details>
+
+        <!-- Matriz completa de 29 indicadores × 5 escenarios -->
+        <div class="card-glass p-6 space-y-4 reveal-up">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <span class="ui-micro text-[#647A78]">Hoja Resultados en vivo</span>
+              <h3 class="font-editorial text-2xl text-[#10201F]">Matriz integral de <em>indicadores</em></h3>
+            </div>
+            <button type="button" data-export-xlsx class="ui-btn px-4 py-2 bg-[#E3EAE8] border border-[#10201F]/15 text-[#10201F]">
+              Descargar matriz en .xlsx
+            </button>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="solar-table">
+              <thead>
+                <tr id="resultados-matrix-head"></tr>
+              </thead>
+              <tbody id="resultados-matrix-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Conducto orgánico SVG 03 -->
+    <div class="max-w-[1380px] mx-auto px-4 sm:px-8 py-2 overflow-hidden" aria-hidden="true">
+      <svg viewBox="0 0 1200 84" class="w-full h-14 md:h-20 overflow-visible" fill="none">
+        <path d="M 24 58 C 280 12, 460 72, 680 34 C 890 4, 1020 56, 1176 26" stroke="rgba(16,32,31,0.09)" stroke-width="1" stroke-dasharray="4 5" />
+        <path data-energy-path data-energy-dot="energy-dot-3" d="M 24 58 C 280 12, 460 72, 680 34 C 890 4, 1020 56, 1176 26" stroke="#2F6F73" stroke-width="2" stroke-linecap="round" />
+        <circle id="energy-dot-3" cx="24" cy="58" r="4.5" fill="#D98A2B" style="opacity: 0" />
+      </svg>
+    </div>
+
+    <!-- ==========================================================================
+         SECCIÓN 04 · SIMULADOR DE CAJA A 24 MESES Y PITCH BANCARIO (Nivel 3)
+    =========================================================================== -->
+    <section id="simulador" class="py-12 md:py-20">
+      <div class="max-w-[1380px] mx-auto px-4 sm:px-8 space-y-8">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-end reveal-up">
+          <div class="md:col-span-7">
+            <span class="ui-micro text-[#2F6F73]">04 · Planificación Financiera a 24 Meses</span>
+            <h2 class="section-headline mt-2">Escalar sin romper la <em>caja</em></h2>
+          </div>
+          <div class="md:col-span-5">
+            <p class="text-[#425856]">
+              Modelamos el desfase real de cobros (50% firma / 50% instalación), el mes de entrenamiento de cada técnico nuevo ($1.800/mes), el piso de seguridad de Sofía ($5.000) y el candado de inversión desde el Mes 19.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tarjetas de resumen del plan activo -->
+        <div id="simulador-kpis" data-stagger-group class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4"></div>
+
+        <!-- Tabla comparativa y editable de los 5 planes de 24 meses -->
+        <div class="card-glass p-6 space-y-4 reveal-up">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <span class="ui-micro text-[#2F6F73]"> Haz clic en el nombre de cualquier plan para inspeccionar su curva y flujo mensual</span>
+              <h3 class="font-editorial text-2xl text-[#10201F] mt-0.5">Comparador interactivo de <em>planes</em></h3>
+            </div>
+            <span class="ui-micro text-[#647A78]">Fase 1 → Escalamiento Fase 2</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="solar-table">
+              <thead>
+                <tr>
+                  <th>Plan estratégico</th>
+                  <th>Meta F1</th>
+                  <th>Google F1</th>
+                  <th>Escala M#</th>
+                  <th>Meta F2</th>
+                  <th>Google F2</th>
+                  <th>Filtro M#</th>
+                  <th>Téc. 1 M#</th>
+                  <th>Téc. 2 M#</th>
+                  <th>Caja mín.</th>
+                  <th>Caja Mes 24</th>
+                  <th>Instalac.</th>
+                  <th>Reglas</th>
+                </tr>
+              </thead>
+              <tbody id="simulador-planes-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Gráficas SVG de evolución de caja 24M y sincronización visitas/capacidad -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+          <div class="md:col-span-7 card-glass p-6 space-y-3 reveal-up">
+            <div>
+              <span class="ui-micro text-[#2F6F73]">Trayectoria patrimonial</span>
+              <h3 class="font-editorial text-2xl text-[#10201F] mt-0.5">Evolución de <em>liquidez</em> (Mes 1 a Mes 24)</h3>
+            </div>
+            <div id="chart-simulador-caja" data-chart-box data-chart-kind="line"></div>
+          </div>
+
+          <div class="md:col-span-5 card-glass p-6 space-y-3 reveal-up">
+            <div>
+              <span class="ui-micro text-[#8A5210]">Capacidad instalada vs. demanda</span>
+              <h3 class="font-editorial text-2xl text-[#10201F] mt-0.5">Sincronía de <em>cuadrillas</em></h3>
+            </div>
+            <div id="chart-simulador-visitas" data-chart-box data-chart-kind="line"></div>
+          </div>
+        </div>
+
+        <!-- Pitch ejecutivo de 2 minutos al banco + Verificación manual del Mes 1 -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+          <div class="md:col-span-5 card-smoked-dark p-6 sm:p-7 flex flex-col justify-between space-y-5 reveal-up">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between gap-2">
+                <span class="ui-micro text-[#D9C7A6]">Guion para comité de crédito</span>
+                <button id="btn-copy-pitch" type="button" class="ui-btn px-3.5 py-1.5 bg-[#EEF2F1]/12 border border-[#EEF2F1]/20 text-[#EEF2F1]">
+                  Copiar síntesis
+                </button>
+              </div>
+              <h3 class="font-editorial text-3xl text-white">Defensa de 2 minutos ante el <em class="text-[#D9C7A6]">banco</em></h3>
+              <ul id="simulador-pitch-content" class="space-y-3 text-sm text-[#EEF2F1]/90"></ul>
+            </div>
+            <p class="ui-micro text-[#D9C7A6]/80 pt-2 border-t border-[#EEF2F1]/10">
+              Respaldado por flujo mensual auditado y 0 meses bajo el piso de $5.000
+            </p>
+          </div>
+
+          <div class="md:col-span-7 card-glass p-6 space-y-4 reveal-up">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <span class="ui-micro text-[#2F6F73]">Transparencia aritmética</span>
+                <h3 class="font-editorial text-2xl text-[#10201F] mt-0.5">Comprobación manual del <em>Mes</em> 1</h3>
+              </div>
+              <span class="badge-semaforo badge-verde">● Cuadre exacto con Excel</span>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="solar-table">
+                <thead>
+                  <tr>
+                    <th>Concepto de flujo</th>
+                    <th>Resultado</th>
+                    <th class="text-left">Fórmula verificable</th>
+                  </tr>
+                </thead>
+                <tbody id="mes1-audit-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Flujo detallado mes a mes (24 filas) con opción de edición manual -->
+        <details class="card-glass p-6 reveal-up">
+          <summary class="cursor-pointer list-none flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <span class="ui-micro text-[#647A78]">Tabla maestra de tesorería (24 periodos)</span>
+              <h3 class="font-editorial text-2xl text-[#10201F]">Flujo de caja mensual y presupuesto <em>personalizado</em></h3>
+            </div>
+            <span class="ui-btn px-4 py-2 bg-[#E3EAE8] border border-[#10201F]/15 text-[#10201F]">
+              Abrir / cerrar 24 meses
+            </span>
+          </summary>
+
+          <div class="mt-6 pt-5 border-t border-[#10201F]/10 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <label class="inline-flex items-center gap-2 cursor-pointer ui-label text-[#10201F]">
+                <input id="chk-editar-mes-a-mes" type="checkbox" class="w-4 h-4 accent-[#2F6F73]" />
+                <span>Habilitar edición manual de Meta y Google mes por mes</span>
+              </label>
+              <button id="btn-clear-mes-custom" type="button" class="hidden ui-btn px-3.5 py-1.5 bg-[#D98A2B]/20 border border-[#D98A2B]/40 text-[#8A5210]">
+                Volver a la regla automática del plan
+              </button>
+            </div>
+            <div class="overflow-x-auto max-h-[520px]">
+              <table class="solar-table">
+                <thead class="sticky top-0 z-10">
+                  <tr>
+                    <th>Periodo</th>
+                    <th>Meta</th>
+                    <th>Google</th>
+                    <th>Leads</th>
+                    <th>Pedidas</th>
+                    <th>Cupo</th>
+                    <th>Hechas</th>
+                    <th>Ventas</th>
+                    <th>Entradas</th>
+                    <th>Salidas</th>
+                    <th>Caja final</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody id="simulador-24m-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECCIÓN 05 · RECOMENDACIÓN EJECUTIVA DE 1 PÁGINA Y ERRORES DE IA
+         Imprimible a 1 sola hoja limpia (@media print)
+    =========================================================================== -->
+    <section id="recomendacion" class="py-12 md:py-20">
+      <div class="max-w-[1380px] mx-auto px-4 sm:px-8 space-y-8">
+        <div class="card-glass p-6 sm:p-10 space-y-8 reveal-up">
+          <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#10201F]/12 pb-6">
+            <div>
+              <span class="ui-micro text-[#2F6F73]">05 · Memorando para Andrés y Sofía</span>
+              <h2 class="section-headline mt-2">Decisión ejecutiva <em>fundamentada</em></h2>
+            </div>
+            <button id="btn-print-rec" type="button" class="no-print ui-btn self-start sm:self-auto px-5 py-2.5 bg-[#10201F] text-[#EEF2F1]">
+              Imprimir memorando (1 pág.)
+            </button>
+          </div>
+
+          <!-- Decisión central y comparación directa -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+            <div class="md:col-span-7 space-y-4">
+              <div class="rounded-2xl bg-[#2F6F73]/12 border border-[#2F6F73]/30 p-5 space-y-2">
+                <span class="ui-micro text-[#2F6F73]">Dictamen al comité</span>
+                <p class="text-[#10201F] font-medium">
+                  Rechazar la propuesta de la agencia Leadly de concentrar $8.000 en Meta sin filtro. Mantener la mezcla $4.000 Meta + $4.000 Google activando de inmediato el formulario con filtro + llamada en menos de 5 minutos y la oferta de batería residencial.
+                </p>
+              </div>
+              <p class="text-[#425856]">
+                Hoy cada cliente en Meta cuesta <strong id="rec-cac-meta" class="text-[#10201F]">$718,13</strong> frente a <strong id="rec-cac-google" class="text-[#2F6F73]">$535,54</strong> en Google porque Meta exige 5,56 visitas técnicas por cierre contra 3,33 de Google. Pasar todo el presupuesto a Meta baja las ventas a 17,46 instalaciones (o pierde 15,50 visitas bajo el CPL prometido) y hunde el resultado neto de <strong id="rec-neto-actual" class="text-[#10201F]">$4.414,66</strong> a <strong id="rec-neto-agencia" class="text-[#A63D33]">−$3.442,85</strong>/mes.
+              </p>
+              <p class="text-[#425856]">
+                En cambio, depurar los leads curiosos en Meta más que duplica la utilidad neta hasta <strong id="rec-neto-filtro" class="text-[#10201F]">$8.915,87</strong>/mes, y sumar la batería en el 15% de los cierres la impulsa hasta <strong id="rec-neto-propuesta" class="text-[#2F6F73]">$10.842,07</strong>/mes, protegiendo la caja del Mes 1 (<strong id="rec-caja-propuesta" class="text-[#10201F]">$14.096,92</strong> vs. <strong id="rec-caja-actual">$15.736,30</strong> actual, casi el triple del piso mínimo de $5.000).
+              </p>
+            </div>
+
+            <!-- Auditoría crítica a herramientas de IA -->
+            <div class="md:col-span-5 panel-compact p-5 space-y-3.5">
+              <span class="ui-micro text-[#8A5210]">Pensamiento crítico y verificación manual</span>
+              <h3 class="font-editorial text-2xl text-[#10201F]">Tres omisiones típicas de la <em>IA</em> corregidas</h3>
+              <ol class="space-y-2.5 text-sm text-[#425856] list-decimal list-inside">
+                <li>
+                  <strong class="text-[#10201F]">Confundir CPL con CAC real:</strong> un modelo superficial optimiza por costo por lead ($8) e ignora los $60 por visita técnica fallida (+$333,33 por venta en Meta).
+                </li>
+                <li>
+                  <strong class="text-[#10201F]">Extrapolar linealmente Google:</strong> asumir que $8.000 en Google duplican los 100 leads de $4.000 ignora la saturación real del mercado local en 160 leads.
+                </li>
+                <li>
+                  <strong class="text-[#10201F]">Confundir utilidad contable con caja:</strong> cada venta nueva drena −$520 en el mes de firma (50% anticipo $3.250 vs. 55% equipos $3.575 + 3% comisión $195); crecer sin escalonar quiebra el piso de $5.000.
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Separación explícita entre datos del caso (1-7) y supuestos propios (8-11) -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-6 pt-4 border-t border-[#10201F]/10 text-sm">
+            <div class="md:col-span-7 space-y-2">
+              <span class="ui-micro text-[#2F6F73]">Datos explícitos del caso (1 al 7)</span>
+              <p class="text-[#425856]">
+                1) Precio $6.500 (55% equipos contado, 17% instalación al mes siguiente, 3% comisión, $1.625 contribución base). 2) Curva histórica no lineal con techo de 160 leads en Google. 3) Cupo de 100 visitas (2 técnicos) y $60/visita. 4) Costos fijos $18.000, caja inicial $12.000 y piso de $5.000. 5) Cobro 50%/50% y 22 ventas del mes previo por instalar. 6) Filtro Meta (−20% leads, 80% contacto, 40% agenda, 75% asistencia, 22% cierre). 7) Batería $3.000 (20% margen, 3% comisión, 15% adopción).
+              </p>
+            </div>
+            <div class="md:col-span-5 space-y-2">
+              <span class="ui-micro text-[#8A5210]">Supuestos operativos propios del equipo (8 al 11)</span>
+              <p class="text-[#425856]">
+                8) <strong>Prioridad Google en agenda:</strong> cuando la demanda supera el cupo, se atiende primero Google ($427,50/visita esperada vs. $232,50 en Meta). 9) <strong>Fracciones operativas continuas</strong> sin redondeo intermedio artificial. 10) <strong>Entrenamiento de técnicos:</strong> sueldo de $1.800 desde el mes de ingreso y +50 visitas habilitadas desde el mes siguiente. 11) <strong>Batería liquidada en la contabilidad comercial</strong> sin distorsionar el flujo base de paneles.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Conducto orgánico SVG 04 hacia la Parte 2 (Motor de Referidos) -->
+    <div class="max-w-[1380px] mx-auto px-4 sm:px-8 py-2 overflow-hidden no-print" aria-hidden="true">
+      <svg viewBox="0 0 1200 84" class="w-full h-14 md:h-20 overflow-visible" fill="none">
+        <path d="M 1176 20 C 910 68, 720 8, 520 44 C 310 78, 170 22, 24 46" stroke="rgba(16,32,31,0.09)" stroke-width="1" stroke-dasharray="4 5" />
+        <path data-energy-path data-energy-dot="energy-dot-4" d="M 1176 20 C 910 68, 720 8, 520 44 C 310 78, 170 22, 24 46" stroke="#D98A2B" stroke-width="2" stroke-linecap="round" />
+        <circle id="energy-dot-4" cx="1176" cy="20" r="4.5" fill="#2F6F73" style="opacity: 0" />
+      </svg>
+    </div>
+
+    <!-- ==========================================================================
+         SECCIÓN 06 · PARTE 2: RECORRIDO MOBILE-FIRST DE REFERIDOS (5 VISTAS CONECTADAS)
+         1. Mi ahorro -> 2. Compartir -> 3. Página del vecino -> 4. Mis referidos -> 5. Panel de Andrés
+    =========================================================================== -->
+    <section id="referidos" class="py-12 md:py-20 no-print">
+      <div class="max-w-[1380px] mx-auto px-4 sm:px-8 space-y-8">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-end reveal-up">
+          <div class="md:col-span-7">
+            <span class="ui-micro text-[#2F6F73]">06 · Parte 2 · Producto &amp; Crecimiento Orgánico</span>
+            <h2 class="section-headline mt-2">Del ahorro familiar al techo del <em>vecino</em></h2>
+          </div>
+          <div class="md:col-span-5 space-y-2">
+            <p class="text-[#425856]">
+              Recorrido interactivo diseñado primero para celular. Cada acción viaja en vivo desde la familia que ahorra $77 al mes hasta la calculadora de su vecino, las recompensas y el panel operativo de Andrés.
+            </p>
+          </div>
+        </div>
+
+        <!-- Barra de las 5 vistas conectadas (pensada primero para pulgar en celular) -->
+        <div class="space-y-3 reveal-up">
+          <div role="tablist" aria-label=" Cinco vistas conectadas del recorrido de referidos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
+            <button type="button" role="tab" data-ref-step="1" aria-selected="true" class="step-tab-btn px-4 py-2.5 text-left flex items-center justify-between">
+              <span>1. Mi ahorro</span>
+              <span class="ui-micro opacity-75">$77/mes</span>
+            </button>
+            <button type="button" role="tab" data-ref-step="2" aria-selected="false" class="step-tab-btn px-4 py-2.5 text-left flex items-center justify-between">
+              <span>2. Compartir</span>
+              <span class="ui-micro opacity-75">WhatsApp</span>
+            </button>
+            <button type="button" role="tab" data-ref-step="3" aria-selected="false" class="step-tab-btn px-4 py-2.5 text-left flex items-center justify-between">
+              <span>3. Página del vecino</span>
+              <span class="ui-micro opacity-75">Calculadora</span>
+            </button>
+            <button type="button" role="tab" data-ref-step="4" aria-selected="false" class="step-tab-btn px-4 py-2.5 text-left flex items-center justify-between">
+              <span>4. Mis referidos</span>
+              <span class="ui-micro opacity-75">Premios</span>
+            </button>
+            <button type="button" role="tab" data-ref-step="5" aria-selected="false" class="step-tab-btn px-4 py-2.5 text-left flex items-center justify-between sm:col-span-2 lg:col-span-1">
+              <span>5. Panel de Andrés</span>
+              <span class="ui-micro opacity-75">Cupo y ventas</span>
+            </button>
+          </div>
+
+          <!-- Cinta de estado en vivo entre las 5 vistas -->
+          <div class="panel-compact px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs text-[#425856]">
+            <div id="ref-live-trace" class="flex flex-wrap items-center gap-2"></div>
+            <button id="btn-reset-referidos" type="button" class="ui-micro text-[#2F6F73] hover:underline">
+              Reiniciar demo de referidos
+            </button>
+          </div>
+        </div>
+
+        <!-- Retícula 12 columnas: Pantalla móvil interactiva + Tabla oficial de recompensas ($300 máx.) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <!-- Escenario Mobile-First interactivo -->
+          <div class="lg:col-span-6">
+            <div id="ref-journey-stage" class="mobile-viewport-card transition-all duration-300"></div>
+          </div>
+
+          <!-- Diseño económico de la tabla de recompensas y guía de demostración -->
+          <div class="lg:col-span-6 space-y-6 reveal-up">
+            <div class="card-glass p-6 space-y-4">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                  <span class="ui-micro text-[#2F6F73]">Ingeniería económica del programa</span>
+                  <h3 class="font-editorial text-2xl text-[#10201F] mt-0.5">Presupuesto y tabla de <em>recompensas</em></h3>
+                </div>
+                <span class="badge-semaforo badge-verde">● Tope ≤ $300 cumplido</span>
+              </div>
+
+              <p class="text-sm text-[#425856]">
+                Antes de fijar cualquier premio descontamos el costo real de las visitas necesarias para lograr una firma. Con un cierre del <strong>45%</strong> en visitas de referidos, cada venta requiere <strong>2,22 visitas</strong> (1 ÷ 0,45) a <strong>$60</strong> cada una ($133,33). Sobre el máximo permitido de <strong>$300,00</strong> quedan exactamente <strong>$166,67 disponibles</strong> para incentivos.
+              </p>
+
+              <div class="overflow-x-auto">
+                <table class="solar-table">
+                  <thead>
+                    <tr>
+                      <th>Hito del referido</th>
+                      <th>Condición verificable</th>
+                      <th>Familia que refiere</th>
+                      <th>Vecino invitado</th>
+                      <th>Costo / venta</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="font-medium text-[#10201F]">1. Solicitud en calculadora</td>
+                      <td class="text-left text-xs text-[#425856]">Enlace personal registrado</td>
+                      <td>$0 (registro activo)</td>
+                      <td>Cálculo solar gratuito</td>
+                      <td>$0,00</td>
+                    </tr>
+                    <tr>
+                      <td class="font-medium text-[#10201F]">2. Visita técnica en sitio</td>
+                      <td class="text-left text-xs text-[#425856]">Techo viable · 2,22 vis./venta (45%)</td>
+                      <td>$0 (evita visitas falsas)</td>
+                      <td>Diagnóstico sin costo</td>
+                      <td><strong>$133,33</strong></td>
+                    </tr>
+                    <tr class="bg-[#2F6F73]/10 font-medium">
+                      <td class="text-[#10201F]">3. Firma de contrato</td>
+                      <td class="text-left text-xs text-[#1D4F52]">Contrato $6.500 + 50% anticipo</td>
+                      <td class="text-[#2F6F73]"><strong>+$100,00 bono</strong></td>
+                      <td class="text-[#2F6F73]"><strong>−$60,00 descuento</strong></td>
+                      <td><strong>$160,00</strong></td>
+                    </tr>
+                    <tr>
+                      <td class="font-medium text-[#10201F]"><strong>CAC Total Referido</strong></td>
+                      <td class="text-left text-xs text-[#425856]">Holgura de $6,67 bajo el tope ($300)</td>
+                      <td>$100,00</td>
+                      <td>$60,00</td>
+                      <td><strong class="text-[#1D4F52]">$293,33</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="rounded-2xl bg-[#D9C7A6]/35 border border-[#D9C7A6] p-4 text-xs text-[#10201F] space-y-1">
+                <strong>¿Por qué no premiar en efectivo por visita agendada?</strong> Pagar aunque sea $25 por visita realizada sumaría 2,22 × $25 = $55,56 por venta e incentivaría solicitudes sin intención real, saturando las 100 visitas de la cuadrilla. Premiar al firmar alinea calidad, cuida el cupo técnico y logra un LTV:CAC de <strong>5,54x</strong> ($1.625 ÷ $293,33).
+              </div>
+            </div>
+
+            <!-- Guía rápida de demostración en vivo de extremo a extremo -->
+            <div class="panel-compact p-5 space-y-2.5">
+              <span class="ui-micro text-[#8A5210]">Guion de demostración en 40 segundos</span>
+              <ol class="text-sm text-[#425856] space-y-1.5 list-decimal list-inside">
+                <li>En <strong>1. Mi ahorro</strong> revisa los $77/mes ahorrados (70% sobre $110) y pulsa <em>Compartir mi ahorro</em>.</li>
+                <li>En <strong>2. Compartir</strong> copia el enlace personal de la Familia Gómez y abre la vista del vecino.</li>
+                <li>En <strong>3. Página del vecino</strong> ajusta el recibo de luz, revisa los años de retorno sobre $6.500 y envía una solicitud (usa <em>Autocompletar demo</em> si estás presentando en vivo).</li>
+                <li>Comprueba cómo el vecino aparece al instante en <strong>4. Mis referidos</strong> y actualiza la demanda frente a capacidad en <strong>5. Panel de Andrés</strong>.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECCIÓN 07 · ENTREGA ADICIONAL: FICHA DE GROWTH DE UNA PÁGINA
+         Distingue explícitamente: Dato del caso vs. Supuesto vs. Meta
+    =========================================================================== -->
+    <section id="growth" class="py-12 md:py-20">
+      <div class="max-w-[1380px] mx-auto px-4 sm:px-8">
+        <div class="card-glass p-6 sm:p-10 space-y-7 reveal-up">
+          <!-- Cabecera de la Ficha de Growth con leyenda epistemológica e impresión a 1 página -->
+          <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b border-[#10201F]/12 pb-5">
+            <div>
+              <span class="ui-micro text-[#8A5210]">07 · Entrega Adicional · Estrategia de Crecimiento de 1 Página</span>
+              <h2 class="section-headline mt-2">Ficha de <em>Growth</em> · Sol de Casa</h2>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="epistemic-tag tag-dato">● Dato del caso</span>
+              <span class="epistemic-tag tag-supuesto">◆ Supuesto</span>
+              <span class="epistemic-tag tag-meta">★ Meta</span>
+              <button id="btn-print-growth" type="button" class="no-print ui-btn ml-1 px-4 py-2 bg-[#10201F] text-[#EEF2F1]">
+                Imprimir ficha (1 pág.)
+              </button>
+            </div>
+          </div>
+
+          <!-- Bloque superior: 1. Ciclo de Referidos + 2. Mayor Pérdida + 3. Meta y Métrica Semanal -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
+            <!-- Ciclo cerrado de referidos -->
+            <div class="md:col-span-5 panel-compact p-5 space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="ui-micro text-[#2F6F73]">1 · Ciclo viral barrial</span>
+                <span class="epistemic-tag tag-supuesto">◆ Diseño del ciclo</span>
+              </div>
+              <h3 class="font-editorial text-2xl text-[#10201F]">El motor de confianza <em>vecinal</em></h3>
+              <ol class="text-sm text-[#425856] space-y-2 list-decimal list-inside">
+                <li><strong class="text-[#10201F]">Disparador mensual real:</strong> 48h después del corte eléctrico, la familia ve su ahorro ($77/mes en recibo de $110, -70% <span class="epistemic-tag tag-dato">Dato</span>).</li>
+                <li><strong class="text-[#10201F]">Moneda social en WhatsApp:</strong> comparte tarjeta con ahorro real + código personal (−$60 para el vecino).</li>
+                <li><strong class="text-[#10201F]"> Conversión sin fricción:</strong> el vecino calcula retorno sobre $6.500 <span class="epistemic-tag tag-dato">Dato</span> y pide evaluación sin promesas falsas de agenda.</li>
+                <li><strong class="text-[#10201F]">Cierre de alta intención:</strong> la visita referida cierra al 45% <span class="epistemic-tag tag-dato">Dato</span> (2,5x el cierre actual de Meta 18%), sumando un nuevo techo solar visible en la misma cuadra.</li>
+              </ol>
+            </div>
+
+            <!-- Punto de mayor pérdida actual -->
+            <div class="md:col-span-4 panel-compact p-5 space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="ui-micro text-[#A63D33]">2 · Cuello de botella y fuga</span>
+                <span class="epistemic-tag tag-dato">● Dato del caso</span>
+              </div>
+              <h3 class="font-editorial text-2xl text-[#10201F]">Punto de mayor <em>pérdida</em></h3>
+              <p class="text-sm text-[#425856]">
+                <strong>En captación pagada hoy:</strong> la mayor caída ocurre en Meta entre <strong>Lead → Contacto → Agenda</strong>: de 500 leads a $4.000/mes, 225 (45%) jamás son contactados y de los 275 contactados caen 192,5 (70% no agenda) por leads curiosos y respuesta lenta.
+              </p>
+              <p class="text-sm text-[#425856]">
+                <strong>En escalamiento:</strong> Google se estanca en un techo duro de 160 leads ($8.000) <span class="epistemic-tag tag-dato">Dato</span> y la base instalada actual (22 ventas del mes previo + cartera histórica) tiene <strong>0% de activación sistemática</strong> de referidos <span class="epistemic-tag tag-supuesto">◆ Diagnóstico</span>.
+              </p>
+            </div>
+
+            <!-- Meta explícita y Métrica Faro Semanal -->
+            <div class="md:col-span-3 card-smoked-dark p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2.5">
+                <div class="flex items-center justify-between">
+                  <span class="ui-micro text-[#D9C7A6]">3 · Rumbo cuantitativo</span>
+                  <span class="epistemic-tag tag-meta">★ Meta</span>
+                </div>
+                <h3 class="font-editorial text-2xl text-white">Meta y métrica <em class="text-[#D9C7A6]">semanal</em></h3>
+                <div class="pt-1 border-t border-[#EEF2F1]/12">
+                  <span class="ui-micro text-[#D98A2B] block">Meta explícita a 90 días</span>
+                  <p class="text-sm text-[#EEF2F1]/90 mt-0.5">
+                    Cerrar <strong>18 instalaciones referidas</strong> en el trimestre (llegando a <strong>8 ventas/mes</strong> en el Mes 3 = ~25% del volumen total) con <strong>CAC ≤ $300</strong> ($293,33).
+                  </p>
+                </div>
+                <div class="pt-2 border-t border-[#EEF2F1]/12">
+                  <span class="ui-micro text-[#D9C7A6] block">Métrica semanal faro (NSM)</span>
+                  <p class="text-sm text-[#EEF2F1]/90 mt-0.5">
+                    <strong>Solicitudes de visita calificadas por enlace de referido / semana</strong> (meta: <strong>≥ 5/semana</strong> en M3 → 20 visitas/mes → 9 ventas al 45%).
+                  </p>
+                </div>
+              </div>
+              <span class="text-[11px] text-[#EEF2F1]/70">Guardrails: contacto &lt;5 min · cupo libre ≥15%</span>
+            </div>
+          </div>
+
+          <!-- Bloque intermedio: 4. Plan de Canales a 90 Días + 5. Experimento con 50 Clientes -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
+            <!-- Plan de canales a 90 días -->
+            <div class="md:col-span-7 space-y-3">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <h3 class="font-editorial text-2xl text-[#10201F]">4 · Plan sincronizado de canales a <em>90</em> días</h3>
+                <div class="flex gap-1.5">
+                  <span class="epistemic-tag tag-dato">● Reglas del caso</span>
+                  <span class="epistemic-tag tag-meta">★ Metas trimestrales</span>
+                </div>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="solar-table text-xs">
+                  <thead>
+                    <tr>
+                      <th>Horizonte</th>
+                      <th>Mezcla pagada y operativa</th>
+                      <th>Activación canal referidos</th>
+                      <th>Cupo cuadrilla</th>
+                      <th>Meta ventas ref.</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="font-medium text-[#10201F]">Días 1–30 (Mes 1)</td>
+                      <td class="text-left">$4k Google + $4k Meta c/filtro y llamada &lt;5m; ingresa Téc. 1 ($1,8k) <span class="epistemic-tag tag-dato">Dato</span></td>
+                      <td class="text-left">Experimento A/B con 50 clientes activos al corte de recibo</td>
+                      <td>100 visitas</td>
+                      <td><strong>3 ventas</strong> <span class="epistemic-tag tag-meta">Meta</span></td>
+                    </tr>
+                    <tr>
+                      <td class="font-medium text-[#10201F]">Días 31–60 (Mes 2)</td>
+                      <td class="text-left">$5k Google + $4k Meta filtrado; Téc. 1 activo (+50 vis.), ingresa Téc. 2</td>
+                      <td class="text-left">Despliegue de tarjeta WhatsApp al 100% de cartera + kit vecinal en instalación</td>
+                      <td>150 visitas</td>
+                      <td><strong>6 ventas</strong> <span class="epistemic-tag tag-meta">Meta</span></td>
+                    </tr>
+                    <tr>
+                      <td class="font-medium text-[#10201F]">Días 61–90 (Mes 3)</td>
+                      <td class="text-left">$6k Google + $6k Meta filtrado; 4 técnicos activos cuidando piso $5k</td>
+                      <td class="text-left">Recordatorio automático mensual de ahorro + prioridad agenda a referidos ($599/vis.)</td>
+                      <td>200 visitas</td>
+                      <td><strong>9 ventas</strong> <span class="epistemic-tag tag-meta">Meta</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Experimento controlado con 50 clientes -->
+            <div class="md:col-span-5 panel-compact p-5 space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="ui-micro text-[#8A5210]">5 · Validación rápida (4 semanas)</span>
+                <span class="epistemic-tag tag-supuesto">◆ Hipótesis &amp; Meta</span>
+              </div>
+              <h3 class="font-editorial text-2xl text-[#10201F]">Experimento con <em>50</em> clientes</h3>
+              <ul class="text-sm text-[#425856] space-y-2">
+                <li><strong class="text-[#10201F]">Muestra:</strong> 50 hogares ya instalados divididos al azar en <strong>Grupo A · Control (25)</strong> (mensaje estándar pidiendo referidos) vs. <strong>Grupo B · Tratamiento (25)</strong> (vista móvil «Mi ahorro» + tarjeta personalizada WhatsApp enviada 48h tras su recibo de luz con enlace a calculadora y premio bilateral $100 / $60).</li>
+                <li><strong class="text-[#10201F]">Supuesto clave <span class="epistemic-tag tag-supuesto">◆</span>:</strong> mostrar el ahorro real en dólares justo al llegar el recibo eléctrico duplica la tasa de recomendación frente a pedir referidos en frío.</li>
+                <li><strong class="text-[#10201F]">Umbral de éxito en 30 días <span class="epistemic-tag tag-meta">★</span>:</strong> ≥ 32% de familias en Grupo B comparten su enlace (≥ 8 familias) → ≥ 12 vecinos usan la calculadora → ≥ 5 visitas viables → <strong>≥ 2 contratos firmados</strong> (45% cierre) con CAC ≤ $300.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Bloque inferior: 6. Síntesis de Recompensas y Distinción Epistemológica -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-5 pt-4 border-t border-[#10201F]/10 text-xs text-[#425856]">
+            <div class="md:col-span-6 space-y-1">
+              <span class="ui-micro text-[#2F6F73] block">6 · Regla presupuestaria de recompensas verificada</span>
+              <p>
+                <strong>Fórmula <span class="epistemic-tag tag-dato">Dato</span>:</strong> Tope $300,00 − (1 ÷ 0,45 cierre × $60 visita = $133,33) = <strong>$166,67 máximo para premios</strong>. Asignamos <strong>$100 al referidor + $60 dto. al vecino = $160,00</strong> <span class="epistemic-tag tag-supuesto">◆ Diseño</span> (solo pagaderos al firmar contrato y cobrar 50% de anticipo), cerrando en <strong>CAC $293,33</strong> (45% más barato que Google $535,54 y 59% más barato que Meta $718,13).
+              </p>
+            </div>
+            <div class="md:col-span-6 space-y-1">
+              <span class="ui-micro text-[#8A5210] block">7 · Clasificación estricta de cifras</span>
+              <p>
+                <span class="epistemic-tag tag-dato">● Datos del caso</span>: instalación $6.500, recibo ejemplo $110 con 70% ahorro ($77/mes), visita $60, cierre referidos 45%, tope CAC referido $300, cupo 100 visitas, techo Google 160 leads.
+                <span class="epistemic-tag tag-supuesto">◆ Supuestos</span>: reparto $100/$60 al cierre, retención del ahorro del 70% en calculadora vecinal, desfase de 48h post-recibo.
+                <span class="epistemic-tag tag-meta">★ Metas</span>: ≥ 5 solicitudes calificadas/semana, 18 ventas referidas en 90 días y ≥ 32% de compartidos en piloto de 50 clientes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECCIÓN 08 · CONEXIÓN BIDIRECCIONAL CON EXCEL (.XLSX)
+    =========================================================================== -->
+    <section id="referidos" class="py-12 md:py-20 no-print">
+      <div class="max-w-[1380px] mx-auto px-4 sm:px-8 space-y-8">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-end reveal-up">
+          <div class="md:col-span-7">
+            <span class="ui-micro text-[#2F6F73]">06 · Parte 2 · Producto &amp; Crecimiento Orgánico</span>
+            <h2 class="section-headline mt-2">Del ahorro familiar al techo del <em>vecino</em></h2>
+          </div>
+          <div class="md:col-span-5 space-y-2">
+            <p class="text-[#425856]">
+              Recorrido interactivo diseñado primero para celular. Cada acción viaja en vivo desde la familia que ahorra $77 al mes hasta la calculadora de su vecino, las recompensas y el panel operativo de Andrés.
+            </p>
+          </div>
+        </div>
+
+        <!-- Barra de las 5 vistas conectadas (pensada primero para pulgar en celular) -->
+        <div class="space-y-3 reveal-up">
+          <div role="tablist" aria-label=" Cinco vistas conectadas del recorrido de referidos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
+            <button type="button" role="tab" data-ref-step="1" aria-selected="true" class="step-tab-btn px-4 py-2.5 text-left flex items-center justify-between">
+              <span>1. Mi ahorro</span>
+              <span class="ui-micro opacity-75">$77/mes</span>
+            </button>
+            <button type="button" role="tab" data-ref-step="2" aria-selected="false" class="step-tab-btn px-4 py-2.5 text-left flex items-center justify-between">
+              <span>2. Compartir</span>
+              <span class="ui-micro opacity-75">WhatsApp</span>
+            </button>
+            <button type="button" role="tab" data-ref-step="3" aria-selected="false" class="step-tab-btn px-4 py-2.5 text-left flex items-center justify-between">
+              <span>3. Página del vecino</span>
+              <span class="ui-micro opacity-75">Calculadora</span>
+            </button>
+            <button type="button" role="tab" data-ref-step="4" aria-selected="false" class="step-tab-btn px-4 py-2.5 text-left flex items-center justify-between">
+              <span>4. Mis referidos</span>
+              <span class="ui-micro opacity-75">Premios</span>
+            </button>
+            <button type="button" role="tab" data-ref-step="5" aria-selected="false" class="step-tab-btn px-4 py-2.5 text-left flex items-center justify-between sm:col-span-2 lg:col-span-1">
+              <span>5. Panel de Andrés</span>
+              <span class="ui-micro opacity-75">Cupo y ventas</span>
+            </button>
+          </div>
+
+          <!-- Cinta de estado en vivo entre las 5 vistas -->
+          <div class="panel-compact px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs text-[#425856]">
+            <div id="ref-live-trace" class="flex flex-wrap items-center gap-2"></div>
+            <button id="btn-reset-referidos" type="button" class="ui-micro text-[#2F6F73] hover:underline">
+              Reiniciar demo de referidos
+            </button>
+          </div>
+        </div>
+
+        <!-- Retícula 12 columnas: Pantalla móvil interactiva + Tabla oficial de recompensas ($300 máx.) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <!-- Escenario Mobile-First interactivo -->
+          <div class="lg:col-span-6">
+            <div id="ref-journey-stage" class="mobile-viewport-card transition-all duration-300"></div>
+          </div>
+
+          <!-- Diseño económico de la tabla de recompensas y guía de demostración -->
+          <div class="lg:col-span-6 space-y-6 reveal-up">
+            <div class="card-glass p-6 space-y-4">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                  <span class="ui-micro text-[#2F6F73]">Ingeniería económica del programa</span>
+                  <h3 class="font-editorial text-2xl text-[#10201F] mt-0.5">Presupuesto y tabla de <em>recompensas</em></h3>
+                </div>
+                <span class="badge-semaforo badge-verde">● Tope ≤ $300 cumplido</span>
+              </div>
+
+              <p class="text-sm text-[#425856]">
+                Antes de fijar cualquier premio descontamos el costo real de las visitas necesarias para lograr una firma. Con un cierre del <strong>45%</strong> en visitas de referidos, cada venta requiere <strong>2,22 visitas</strong> (`1 ÷ 0,45`) a <strong>$60</strong> cada una (`$133,33`). Sobre el máximo permitido de <strong>$300,00</strong> quedan exactamente <strong>$166,67 disponibles</strong> para incentivos.
+              </p>
+
+              <div class="overflow-x-auto">
+                <table class="solar-table">
+                  <thead>
+                    <tr>
+                      <th>Hito del referido</th>
+                      <th>Condición verificable</th>
+                      <th>Familia que refiere</th>
+                      <th>Vecino invitado</th>
+                      <th>Costo / venta</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="font-medium text-[#10201F]">1. Solicitud en calculadora</td>
+                      <td class="text-left text-xs text-[#425856]">Enlace personal registrado</td>
+                      <td>$0 (registro activo)</td>
+                      <td>Cálculo solar gratuito</td>
+                      <td>$0,00</td>
+                    </tr>
+                    <tr>
+                      <td class="font-medium text-[#10201F]">2. Visita técnica en sitio</td>
+                      <td class="text-left text-xs text-[#425856]">Techo viable · 2,22 vis./venta (45%)</td>
+                      <td>$0 (evita visitas falsas)</td>
+                      <td>Diagnóstico sin costo</td>
+                      <td><strong>$133,33</strong></td>
+                    </tr>
+                    <tr class="bg-[#2F6F73]/10 font-medium">
+                      <td class="text-[#10201F]">3. Firma de contrato</td>
+                      <td class="text-left text-xs text-[#1D4F52]">Contrato $6.500 + 50% anticipo</td>
+                      <td class="text-[#2F6F73]"><strong>+$100,00 bono</strong></td>
+                      <td class="text-[#2F6F73]"><strong>−$60,00 descuento</strong></td>
+                      <td><strong>$160,00</strong></td>
+                    </tr>
+                    <tr>
+                      <td class="font-medium text-[#10201F]"><strong>CAC Total Referido</strong></td>
+                      <td class="text-left text-xs text-[#425856]">Holgura de $6,67 bajo el tope ($300)</td>
+                      <td>$100,00</td>
+                      <td>$60,00</td>
+                      <td><strong class="text-[#1D4F52]">$293,33</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="rounded-2xl bg-[#D9C7A6]/35 border border-[#D9C7A6] p-4 text-xs text-[#10201F] space-y-1">
+                <strong>¿Por qué no premiar en efectivo por visita agendada?</strong> Pagar aunque sea $25 por visita realizada sumaría `2,22 × $25 = $55,56` por venta e incentivaría solicitudes sin intención real, saturando las 100 visitas de la cuadrilla. Premiar al firmar alinea calidad, cuida el cupo técnico y logra un `LTV:CAC` de <strong>5,54x</strong> (`$1.625 ÷ $293,33`).
+              </div>
+            </div>
+
+            <!-- Guía rápida de demostración en vivo de extremo a extremo -->
+            <div class="panel-compact p-5 space-y-2.5">
+              <span class="ui-micro text-[#8A5210]">Guion de demostración en 40 segundos</span>
+              <ol class="text-sm text-[#425856] space-y-1.5 list-decimal list-inside">
+                <li>En <strong>1. Mi ahorro</strong> revisa los $77/mes ahorrados (70% sobre $110) y pulsa <em>Compartir mi ahorro</em>.</li>
+                <li>En <strong>2. Compartir</strong> copia el enlace personal de la Familia Gómez y abre la vista del vecino.</li>
+                <li>En <strong>3. Página del vecino</strong> ajusta el recibo de luz, revisa los años de retorno sobre $6.500 y envía una solicitud (usa <em>Autocompletar demo</em> si estás presentando en vivo).</li>
+                <li>Comprueba cómo el vecino aparece al instante en <strong>4. Mis referidos</strong> y actualiza la demanda frente a capacidad en <strong>5. Panel de Andrés</strong>.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECCIÓN 07 · ENTREGA ADICIONAL: FICHA DE GROWTH DE UNA PÁGINA
+         Distingue explícitamente: Dato del caso vs. Supuesto vs. Meta
+    =========================================================================== -->
+    <section id="growth" class="py-12 md:py-20">
+      <div class="max-w-[1380px] mx-auto px-4 sm:px-8">
+        <div class="card-glass p-6 sm:p-10 space-y-7 reveal-up">
+          <!-- Cabecera de la Ficha de Growth con leyenda epistemológica e impresión a 1 página -->
+          <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b border-[#10201F]/12 pb-5">
+            <div>
+              <span class="ui-micro text-[#8A5210]">07 · Entrega Adicional · Estrategia de Crecimiento de 1 Página</span>
+              <h2 class="section-headline mt-2">Ficha de <em>Growth</em> · Sol de Casa</h2>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="epistemic-tag tag-dato">● Dato del caso</span>
+              <span class="epistemic-tag tag-supuesto">◆ Supuesto</span>
+              <span class="epistemic-tag tag-meta">★ Meta</span>
+              <button id="btn-print-growth" type="button" class="no-print ui-btn ml-1 px-4 py-2 bg-[#10201F] text-[#EEF2F1]">
+                Imprimir ficha (1 pág.)
+              </button>
+            </div>
+          </div>
+
+          <!-- Bloque superior: 1. Ciclo de Referidos + 2. Mayor Pérdida + 3. Meta y Métrica Semanal -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
+            <!-- Ciclo cerrado de referidos -->
+            <div class="md:col-span-5 panel-compact p-5 space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="ui-micro text-[#2F6F73]">1 · Ciclo viral barrial</span>
+                <span class="epistemic-tag tag-supuesto">◆ Diseño del ciclo</span>
+              </div>
+              <h3 class="font-editorial text-2xl text-[#10201F]">El motor de confianza <em>vecinal</em></h3>
+              <ol class="text-sm text-[#425856] space-y-2 list-decimal list-inside">
+                <li><strong class="text-[#10201F]">Disparador mensual real:</strong> 48h después del corte eléctrico, la familia ve su ahorro (`$77/mes` en recibo de `$110`, `-70%` <span class="epistemic-tag tag-dato">Dato</span>).</li>
+                <li><strong class="text-[#10201F]">Moneda social en WhatsApp:</strong> comparte tarjeta con ahorro real + código personal (`−$60` para el vecino).</li>
+                <li><strong class="text-[#10201F]"> Conversión sin fricción:</strong> el vecino calcula retorno sobre `$6.500` <span class="epistemic-tag tag-dato">Dato</span> y pide evaluación sin promesas falsas de agenda.</li>
+                <li><strong class="text-[#10201F]">Cierre de alta intención:</strong> la visita referida cierra al `45%` <span class="epistemic-tag tag-dato">Dato</span> (`2,5x` el cierre actual de Meta `18%`), sumando un nuevo techo solar visible en la misma cuadra.</li>
+              </ol>
+            </div>
+
+            <!-- Punto de mayor pérdida actual -->
+            <div class="md:col-span-4 panel-compact p-5 space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="ui-micro text-[#A63D33]">2 · Cuello de botella y fuga</span>
+                <span class="epistemic-tag tag-dato">● Dato del caso</span>
+              </div>
+              <h3 class="font-editorial text-2xl text-[#10201F]">Punto de mayor <em>pérdida</em></h3>
+              <p class="text-sm text-[#425856]">
+                <strong>En captación pagada hoy:</strong> la mayor caída ocurre en Meta entre <strong>Lead → Contacto → Agenda</strong>: de `500` leads a `$4.000/mes`, `225` (`45%`) jamás son contactados y de los `275` contactados caen `192,5` (`70%` no agenda) por leads curiosos y respuesta lenta.
+              </p>
+              <p class="text-sm text-[#425856]">
+                <strong>En escalamiento:</strong> Google se estanca en un techo duro de `160` leads (`$8.000`) <span class="epistemic-tag tag-dato">Dato</span> y la base instalada actual (`22` ventas del mes previo + cartera histórica) tiene <strong>0% de activación sistemática</strong> de referidos <span class="epistemic-tag tag-supuesto">◆ Diagnóstico</span>.
+              </p>
+            </div>
+
+            <!-- Meta explícita y Métrica Faro Semanal -->
+            <div class="md:col-span-3 card-smoked-dark p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-2.5">
+                <div class="flex items-center justify-between">
+                  <span class="ui-micro text-[#D9C7A6]">3 · Rumbo cuantitativo</span>
+                  <span class="epistemic-tag tag-meta">★ Meta</span>
+                </div>
+                <h3 class="font-editorial text-2xl text-white">Meta y métrica <em class="text-[#D9C7A6]">semanal</em></h3>
+                <div class="pt-1 border-t border-[#EEF2F1]/12">
+                  <span class="ui-micro text-[#D98A2B] block">Meta explícita a 90 días</span>
+                  <p class="text-sm text-[#EEF2F1]/90 mt-0.5">
+                    Cerrar <strong>18 instalaciones referidas</strong> en el trimestre (llegando a <strong>8 ventas/mes</strong> en el Mes 3 = ~25% del volumen total) con <strong>CAC ≤ $300</strong> (`$293,33`).
+                  </p>
+                </div>
+                <div class="pt-2 border-t border-[#EEF2F1]/12">
+                  <span class="ui-micro text-[#D9C7A6] block">Métrica semanal faro (NSM)</span>
+                  <p class="text-sm text-[#EEF2F1]/90 mt-0.5">
+                    <strong>Solicitudes de visita calificadas por enlace de referido / semana</strong> (meta: <strong>≥ 5/semana</strong> en M3 → `20` visitas/mes → `9` ventas al `45%`).
+                  </p>
+                </div>
+              </div>
+              <span class="text-[11px] text-[#EEF2F1]/70">Guardrails: contacto &lt;5 min · cupo libre ≥15%</span>
+            </div>
+          </div>
+
+          <!-- Bloque intermedio: 4. Plan de Canales a 90 Días + 5. Experimento con 50 Clientes -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
+            <!-- Plan de canales a 90 días -->
+            <div class="md:col-span-7 space-y-3">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <h3 class="font-editorial text-2xl text-[#10201F]">4 · Plan sincronizado de canales a <em>90</em> días</h3>
+                <div class="flex gap-1.5">
+                  <span class="epistemic-tag tag-dato">● Reglas del caso</span>
+                  <span class="epistemic-tag tag-meta">★ Metas trimestrales</span>
+                </div>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="solar-table text-xs">
+                  <thead>
+                    <tr>
+                      <th>Horizonte</th>
+                      <th>Mezcla pagada y operativa</th>
+                      <th>Activación canal referidos</th>
+                      <th>Cupo cuadrilla</th>
+                      <th>Meta ventas ref.</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="font-medium text-[#10201F]">Días 1–30 (Mes 1)</td>
+                      <td class="text-left">$4k Google + $4k Meta c/filtro y llamada &lt;5m; ingresa Téc. 1 ($1,8k) <span class="epistemic-tag tag-dato">Dato</span></td>
+                      <td class="text-left">Experimento A/B con 50 clientes activos al corte de recibo</td>
+                      <td>100 visitas</td>
+                      <td><strong>3 ventas</strong> <span class="epistemic-tag tag-meta">Meta</span></td>
+                    </tr>
+                    <tr>
+                      <td class="font-medium text-[#10201F]">Días 31–60 (Mes 2)</td>
+                      <td class="text-left">$5k Google + $4k Meta filtrado; Téc. 1 activo (+50 vis.), ingresa Téc. 2</td>
+                      <td class="text-left">Despliegue de tarjeta WhatsApp al 100% de cartera + kit vecinal en instalación</td>
+                      <td>150 visitas</td>
+                      <td><strong>6 ventas</strong> <span class="epistemic-tag tag-meta">Meta</span></td>
+                    </tr>
+                    <tr>
+                      <td class="font-medium text-[#10201F]">Días 61–90 (Mes 3)</td>
+                      <td class="text-left">$6k Google + $6k Meta filtrado; 4 técnicos activos cuidando piso $5k</td>
+                      <td class="text-left">Recordatorio automático mensual de ahorro + prioridad agenda a referidos ($599/vis.)</td>
+                      <td>200 visitas</td>
+                      <td><strong>9 ventas</strong> <span class="epistemic-tag tag-meta">Meta</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Experimento controlado con 50 clientes -->
+            <div class="md:col-span-5 panel-compact p-5 space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="ui-micro text-[#8A5210]">5 · Validación rápida (4 semanas)</span>
+                <span class="epistemic-tag tag-supuesto">◆ Hipótesis &amp; Meta</span>
+              </div>
+              <h3 class="font-editorial text-2xl text-[#10201F]">Experimento con <em>50</em> clientes</h3>
+              <ul class="text-sm text-[#425856] space-y-2">
+                <li><strong class="text-[#10201F]">Muestra:</strong> 50 hogares ya instalados divididos al azar en <strong>Grupo A · Control (25)</strong> (mensaje estándar pidiendo referidos) vs. <strong>Grupo B · Tratamiento (25)</strong> (vista móvil «Mi ahorro» + tarjeta personalizada WhatsApp enviada 48h tras su recibo de luz con enlace a calculadora y premio bilateral `$100 / $60`).</li>
+                <li><strong class="text-[#10201F]">Supuesto clave <span class="epistemic-tag tag-supuesto">◆</span>:</strong> mostrar el ahorro real en dólares justo al llegar el recibo eléctrico duplica la tasa de recomendación frente a pedir referidos en frío.</li>
+                <li><strong class="text-[#10201F]">Umbral de éxito en 30 días <span class="epistemic-tag tag-meta">★</span>:</strong> `≥ 32%` de familias en Grupo B comparten su enlace (`≥ 8` familias) → `≥ 12` vecinos usan la calculadora → `≥ 5` visitas viables → <strong>≥ 2 contratos firmados</strong> (`45%` cierre) con `CAC ≤ $300`.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Bloque inferior: 6. Síntesis de Recompensas y Distinción Epistemológica -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-5 pt-4 border-t border-[#10201F]/10 text-xs text-[#425856]">
+            <div class="md:col-span-6 space-y-1">
+              <span class="ui-micro text-[#2F6F73] block">6 · Regla presupuestaria de recompensas verificada</span>
+              <p>
+                <strong>Fórmula <span class="epistemic-tag tag-dato">Dato</span>:</strong> Tope `$300,00` − (`1 ÷ 0,45 cierre` × `$60 visita` = `$133,33`) = <strong>`$166,67` máximo para premios</strong>. Asignamos <strong>`$100` al referidor + `$60` dto. al vecino = `$160,00`</strong> <span class="epistemic-tag tag-supuesto">◆ Diseño</span> (solo pagaderos al firmar contrato y cobrar 50% de anticipo), cerrando en <strong>CAC `$293,33`</strong> (`45%` más barato que Google `$535,54` y `59%` más barato que Meta `$718,13`).
+              </p>
+            </div>
+            <div class="md:col-span-6 space-y-1">
+              <span class="ui-micro text-[#8A5210] block">7 · Clasificación estricta de cifras</span>
+              <p>
+                <span class="epistemic-tag tag-dato">● Datos del caso</span>: instalación `$6.500`, recibo ejemplo `$110` con `70%` ahorro (`$77/mes`), visita `$60`, cierre referidos `45%`, tope CAC referido `$300`, cupo `100` visitas, techo Google `160` leads.
+                <span class="epistemic-tag tag-supuesto">◆ Supuestos</span>: reparto `$100/$60` al cierre, retención del ahorro del `70%` en calculadora vecinal, desfase de 48h post-recibo.
+                <span class="epistemic-tag tag-meta">★ Metas</span>: `≥ 5` solicitudes calificadas/semana, `18` ventas referidas en 90 días y `≥ 32%` de compartidos en piloto de 50 clientes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECCIÓN 08 · CONEXIÓN BIDIRECCIONAL CON EXCEL (.XLSX)
+    =========================================================================== -->
+    <section id="excel" class="py-12 md:py-20 no-print">
+      <div class="max-w-[1380px] mx-auto px-4 sm:px-8 space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center reveal-up">
+          <div class="md:col-span-6 space-y-3">
+            <span class="ui-micro text-[#2F6F73]">08 · Integración Hoja de Cálculo ↔ Web</span>
+            <h2 class="section-headline">Sincronización con <em>Excel</em></h2>
+            <p class="text-[#425856]">
+              Arrastra tu archivo <span class="ui-label px-1.5 py-0.5 rounded bg-[#E3EAE8] text-[#10201F]">Sol_de_Casa_Completo.xlsx</span> para actualizar todos los supuestos y auditar automáticamente que cada celda de la hoja <em>Resultados</em> coincida con diferencia menor al 1%.
+            </p>
+            <div class="flex flex-wrap gap-3 pt-2">
+              <button type="button" data-export-xlsx class="ui-btn px-5 py-3 bg-[#2F6F73] text-white">
+                Exportar libro .xlsx actualizado
+              </button>
+              <a href="../../entregables/Sol_de_Casa_Completo.xlsx" download class="ui-btn px-5 py-3 bg-[#E3EAE8] border border-[#10201F]/15 text-[#10201F]">
+                Descargar plantilla maestra (.xlsx)
+              </a>
+            </div>
+          </div>
+
+          <div class="md:col-span-6 reveal-up">
+            <label
+              id="excel-dropzone"
+              for="excel-file-input"
+              class="card-glass card-glass-hover p-8 sm:p-10 flex flex-col items-center justify-center text-center cursor-pointer border-dashed border-2 border-[#2F6F73]/35"
+            >
+              <span class="w-12 h-12 rounded-2xl bg-[#2F6F73]/12 text-[#2F6F73] flex items-center justify-center mb-3">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+                  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                  <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z" />
+                  <path d="M9 15l3-3 3 3M12 12v6" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </span>
+              <span class="font-editorial text-2xl text-[#10201F]">Suelta aquí tu libro <em>.xlsx</em></span>
+              <span class="text-sm text-[#425856] mt-1">o toca para seleccionar desde tu equipo (lectura local instantánea)</span>
+              <input id="excel-file-input" type="file" accept=".xlsx,.xls" class="sr-only" />
+            </label>
+          </div>
+        </div>
+
+        <div id="excel-error-box"></div>
+        <div id="excel-audit-output"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Pie de página editorial con verificador activo de carga tipográfica -->
+  <footer class="border-t border-[#10201F]/12 bg-[#E3EAE8]/70 py-8 no-print">
+    <div class="max-w-[1380px] mx-auto px-4 sm:px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div class="space-y-1">
+        <span class="font-editorial text-xl text-[#10201F]">Sol de <em>Casa</em></span>
+        <p class="text-xs text-[#425856]">
+          Dirección visual inspirada en Saltmarsh, Tessel y Pulsehaus · Energía solar residencial con rigor financiero.
+        </p>
+      </div>
+      <div class="flex flex-wrap items-center gap-3">
+        <span id="font-status-indicator" class="ui-micro px-3 py-1.5 rounded-full bg-[#EEF2F1] border border-[#10201F]/12 text-[#2F6F73]">
+          Verificando tipografías...
+        </span>
+        <a href="#portada" class="ui-btn px-3.5 py-2 bg-[#EEF2F1] border border-[#10201F]/15 text-[#10201F]">
+          Volver arriba ↑
+        </a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
