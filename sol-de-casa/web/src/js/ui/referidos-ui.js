@@ -26,7 +26,30 @@
     ultimaConfirmacionVecino: null,
     referidos: R.REFERIDOS_INICIALES.map((x) => ({ ...x })),
     telemetria: { ...R.TELEMETRIA_BASE },
+    backendStatus: 'probando', // 'conectado' | 'offline' | 'probando'
+    backendUrl: window.SOL_API_URL || (window.location.port === '3001' ? '/api' : 'http://localhost:3001/api'),
   }
+
+  // Comprobar disponibilidad del servidor Express y MySQL
+  async function verificarConexionBackend() {
+    try {
+      const res = await fetch(`${state.backendUrl}/health`, {
+        method: 'GET',
+        headers: { Accept: 'application/json' },
+        signal: AbortSignal.timeout ? AbortSignal.timeout(1800) : undefined,
+      })
+      if (res.ok) {
+        const data = await res.json()
+        state.backendStatus = data.database && data.database.conectada ? 'conectado_db' : 'conectado_api'
+      } else {
+        state.backendStatus = 'offline'
+      }
+    } catch (_) {
+      state.backendStatus = 'offline'
+    }
+    updateLiveStatusRibbon()
+  }
+  verificarConexionBackend()
 
   function motionPaused() {
     return (
@@ -573,14 +596,29 @@
   function updateLiveStatusRibbon() {
     const el = document.getElementById('ref-live-trace')
     if (!el) return
+
+    let badgeBackend = ''
+    if (state.backendStatus === 'conectado_db') {
+      badgeBackend = `<span class="badge-semaforo badge-verde" title="Servidor Node/Express y base de datos MySQL conectados">● Backend + MySQL activo</span>`
+    } else if (state.backendStatus === 'conectado_api') {
+      badgeBackend = `<span class="badge-semaforo badge-amarillo" title="API Express activa (Base de datos en espera)">● API Express activa</span>`
+    } else {
+      badgeBackend = `<span class="badge-semaforo badge-gris" title="Modo autónomo interactivo con datos simulados">● Prototipo autónomo</span>`
+    }
+
     el.innerHTML = `
-      <span>Referidor activo: <strong class="text-[#10201F]">${state.familia.nombre}</strong></span>
-      <span class="hidden sm:inline">·</span>
-      <span>Tarjetas compartidas: <strong class="text-[#2F6F73]">${state.telemetria.tarjetasCompartidas}</strong></span>
-      <span class="hidden sm:inline">·</span>
-      <span>Solicitudes de vecinos: <strong class="text-[#8A5210]">${state.telemetria.solicitudesVisita}</strong></span>
-      <span class="hidden sm:inline">·</span>
-      <span>Ventas referidas: <strong class="text-[#2F6F73]">${state.telemetria.ventasFirmadas}</strong></span>
+      <div class="flex flex-wrap items-center justify-between gap-2 w-full">
+        <div class="flex flex-wrap items-center gap-2">
+          <span>Referidor activo: <strong class="text-[#10201F]">${state.familia.nombre}</strong></span>
+          <span class="hidden sm:inline">·</span>
+          <span>Tarjetas compartidas: <strong class="text-[#2F6F73]">${state.telemetria.tarjetasCompartidas}</strong></span>
+          <span class="hidden sm:inline">·</span>
+          <span>Solicitudes de vecinos: <strong class="text-[#8A5210]">${state.telemetria.solicitudesVisita}</strong></span>
+          <span class="hidden sm:inline">·</span>
+          <span>Ventas referidas: <strong class="text-[#2F6F73]">${state.telemetria.ventasFirmadas}</strong></span>
+        </div>
+        <div>${badgeBackend}</div>
+      </div>
     `
   }
 
@@ -677,7 +715,7 @@
 
     const formVec = stage.querySelector('#form-solicitud-vecino')
     if (formVec) {
-      formVec.addEventListener('submit', (ev) => {
+      formVec.addEventListener('submit', async (ev) => {
         ev.preventDefault()
         const nombre = stage.querySelector('#inp-vecino-nombre')?.value.trim() || ''
         const contacto = stage.querySelector('#inp-vecino-contacto')?.value.trim() || ''
@@ -697,7 +735,34 @@
         state.telemetria.solicitudesVisita += 1
 
         const calc = R.calcularAhorroVecino({ reciboMensual: state.vecinoRecibo })
-        const folio = `REF-${200 + state.referidos.length + 1}`
+        let folio = `REF-${200 + state.referidos.length + 1}`
+
+        // Intento de persistencia real en el backend Express + MySQL
+        try {
+          const res = await fetch(`${state.backendUrl}/publico/solicitudes`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              codigoReferido: 'GOMEZ70SOL',
+              nombreVecino: nombre,
+              telefono: contacto,
+              reciboActualUsd: state.vecinoRecibo,
+              horarioPreferencia: franja,
+              consentimientoContacto: true,
+              esSimulada: true,
+            }),
+            signal: AbortSignal.timeout ? AbortSignal.timeout(2000) : undefined,
+          })
+          if (res.ok) {
+            const data = await res.json()
+            if (data.data?.solicitudId) {
+              folio = `MYSQL-${data.data.solicitudId}`
+            }
+          }
+        } catch (_) {
+          // Si el backend no está disponible en este momento, se continúa con el folio simulado sin interrumpir la experiencia
+        }
+
         state.ultimaConfirmacionVecino = {
           folio,
           nombre,
