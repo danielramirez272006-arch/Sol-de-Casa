@@ -1,0 +1,489 @@
+=== PÁGINA 1 ===
+«Más leads siempre
+es mejor…
+¿verdad?»
+ANDRÉS VILLALOBOS, SOL DE CASA
+›››
+CASO C · LEAD GEN DE SERVICIOS
+Sol de
+Casa
+Paneles solares para casas, vendidos con contactos que después
+atiende un equipo de ventas (lead gen)
+SESIÓN 1 · PARTE 1 MATERIAL PARA EL EQUIPO
+Caso ficticio con fines educativos. Todas las cifras son mensuales y
+en dólares, salvo que se diga otra cosa. Las reglas, los niveles y la
+rúbrica están al final de este documento.EN ESTE DOCUMENTO
+La historia 2
+Los datos 3
+Lo que tienen para resolverlo 6
+Lo que Andrés necesita saber 7
+Los tres niveles 8
+Glosario 10
+Cómo funciona el reto 11
+Roles y prompts para la IA 12CSESIÓN1·PARTE
+1·CASOC·
+Creado por FC Studio - Isidro Fernández C. CASO C · SOL DE CASA 1 / 12
+=== PÁGINA 2 ===
+PARTE 1 · SESIÓN 1 · LA HISTORIA
+La agencia quiere pasar
+todo el presupuesto a Meta
+Andrés Villalobos fue electricista durante 12 años. Hace
+cuatro instaló paneles solares en la casa de su mamá, y
+cuando los vecinos vieron que el recibo de luz de ella bajaba
+a un tercio, empezaron a pedirle lo mismo. Hoy Sol de Casa
+lleva 420 casas instaladas y tiene 4,9 estrellas en Google con
+210 reseñas. Trabajan con él dos asesoras de venta, Paola y
+Kevin, dos técnicos que hacen las visitas y una cuadrilla de
+instalación subcontratada.
+El negocio deja plata, pero la caja anda justa, porque el
+proveedor cobra los equipos el mismo día en que el cliente
+firma. Andrés tiene $12.000 en el banco, y hace dos meses
+la planilla salió con un día de atraso. Él no quiere que eso
+vuelva a pasar.WHATSAPP, ANDRÉS Y SOFÍA, SU CONTADORA
+SSofía (contadora)
+HOY
+Mensaje
+LA VENTA FUNCIONA EN CINCO PASOS
+Un lead es una persona que dejó sus datos para que la llamen. Esta es la propuesta de la
+agencia Leadly:
+leadly.
+«Andrés: en Meta el lead cuesta $8 y en Google $40. Meta es 5 veces
+más eficiente. P asemos los $4.000 de Google a Meta: con los $8.000
+en Meta tendríamos 1.000 leads al mes, casi el doble que hoy. Más
+leads = más ventas.» $8$40
+Meta, por lead Google, por lead
+←
+en línea
+Sofi, la agencia dice que con Meta tenemos el
+doble de leads por la misma plata 6:05 p. m.
+Pero P aola dice que los de Meta no contestan
+o ni se acuerdan de haber dejado los datos
+6:06 p. m.
+¿A quién le creo? 6:06 p. m.
+No sé de anuncios, pero si vas a cambiar algo,
+que no nos deje sin caja otra vez 6:20 p. m.
+1
+El cliente deja sus datos
+en un formulario2
+Una asesora lo llama3
+Si le interesa, se agenda
+una visita técnica4
+El técnico mide el techo,
+revisa el recibo y arma la
+propuesta5
+El cliente firma, o no
+PROPUESTA PARA SOL DE CASA
+Creado por FC Studio - Isidro Fernández C. CASO C · SOL DE CASA 2 / 12
+=== PÁGINA 3 ===
+PARTE 1 · SESIÓN 1 · LA HISTORIA
+ANDRÉS LES PIDE UNA RESPUESTA ANTES DEL LUNES, CON UNA DUDA
+«Más leads siempre es mejor… ¿verdad?»
+1Lo que deja cada instalaciónLOS DATOS
+CONCEPTO VALOR
+Precio promedio de una instalación $6.500
+Cómo paga el cliente 50 % al firmar y 50 % cuando se termina la instalación, al mes siguiente
+Equipos (paneles, inversor, estructura) 55 % del precio. Se le pagan al proveedo r el mes en que el cliente firma
+Instalación (cuadrilla y materiales) 17 % del precio. Se paga el mes siguiente, al instalar
+Margen bruto 28 % (100 % − 55 % − 17 %)
+Comisión de la asesora que cierra 3 % del precio, el mes de la firma. Se paga en todas las ventas, vengan de anuncios o
+no, así que va en la contribución y no en el CAC
+EL PRECIO DE $6.500, REPARTIDO
+55 %
+EQUIPOS17 %
+INSTALACIÓN28 %
+MARGEN BRUTO
+2Las visitas técnicas
+$60 POR VISITA
+Cada visita que se hace cuesta $60
+en transporte, viáticos y bono por
+visita, se cierre la venta o no. Los
+sueldos base de los dos técnicos
+están en los costos fijos.100 VISITAS AL MES
+Entre los 2 técnicos pueden hacer
+como máximo 100 visitas al mes. Esa
+es la capacidad.$1.800 AL MES
+Un técnico más cuesta $1.800 al mes
+y suma 50 visitas al mes de
+capacidad a partir del mes siguiente a
+contratarlo, porque el primer mes se
+capacita.
+Creado por FC Studio - Isidro Fernández C. CASO C · SOL DE CASA 3 / 12
+=== PÁGINA 4 ===
+3Los anuncios de septiembre, el mes pasado
+Captura de los paneles de anuncios:
+Paneles de anuncios Septiembr e Conv ersión: lead
+Canal Inversión Clics CPC Leads CPLPorcentaje de clics
+que deja sus dat os
+M Meta
+formulario dentro del anuncio$4.000 4.000 $1,00 500 $8 12,5 %
+G Google
+búsqueda «paneles solares precio»$4.000 1.600 $2,50 100 $40 6,25 %
+Lo que dice el CRM (el sistema donde las asesoras registran cada lead) sobre el embudo de
+cada canal:
+META GOOGLE
+Porcentaje de leads que se logra contactar 55 % 85 %
+Porcentaje de contactados que agendan visita 30 % 55 %
+Porcentaje de visitas agendadas que se hacen (el cliente está
+en la casa)70 % 85 %
+Porcentaje de visitas que terminan en venta 18 % 30 %
+Leads con teléfono inválido 18 % 3 %
+Las asesoras tardan en promedio 31 horas en llamar a un lead nuevo. Llaman en horario de oficina, de lunes a viernes.
+El mes pasado se firmaron 22 instalaciones, que se instalan y cobran su segunda mitad este mes.
+4Una oferta que llegó del proveedor
+$3.000
+BATERÍA DE RESPALDOUna batería de respaldo para los cortes de luz: precio al cliente $3.000, margen bruto 20 %,
+y la asesora cobra su 3 % también sobre la batería. En una prueba se les ofreció en la visita
+a 20 clientes, y 3 la agregaron.
+Creado por FC Studio - Isidro Fernández C. CASO C · SOL DE CASA 4 / 12
+=== PÁGINA 5 ===
+5Historial: leads según la inversión
+INVERSIÓN MENSUAL LEADS DE META LEADS DE GOOGLE
+$2.000 280 55
+$4.000 500 100
+$6.000 680 135
+$8.000 840 160
+$10.000 960 No hay más búsqueda s: Google no da más de 160 leads
+Los datos salen de prueba s de los últimos 12 meses. Arriba de $8.000, Google no consigue
+más leads porque no hay más gente buscando.
+LEADS SEGÚN LA INVERSIÓN, POR CANAL
+02505007501000
+$0 $2k $4k $6k $8k $10k
+Inversión mensualLeads
+280280500500680680840840960960
+5555100100135135160160
+tope de 160
+Meta Google
+6Otros datos
+2.300 SEGUIDORES
+Instagram tiene 2.300 seguidores. El competidor SolarMax
+cotiza la misma instalación en $7.200.70 %
+El cliente promedio ahorra el 70 % de su recibo de luz.
+7Datos de cajaPARA EL NIVEL 3
+DATO VALOR
+Plata en el banco hoy $12.000
+Piso de seguridad (Sofía no acepta
+menos)$5.000
+Costos fijos mensuales $18.000: sueldos base de las 2 asesoras y los 2 técn icos, sueldo de Andrés, oficina y
+bodega, camioneta, CRM y programas
+Ventas del mes 0 (las 22 de septiembre) Se instalan y cobran su segunda mitad en el mes 1
+Creado por FC Studio - Isidro Fernández C. CASO C · SOL DE CASA 5 / 12
+=== PÁGINA 6 ===
+PARTE 1 · SESIÓN 1
+Lo que tienen para resolverlo
+Todo lo que necesitan para los tres niveles está en las siete secciones de arriba. La tabla dice
+qué datos usa cada cuenta y en qué sección están.
+PARA CALCULAR USAN SECCIÓN
+Contribución de una venta, antes de marketing Precio por el margen bruto, menos la comisión 1
+Embudo de cada canal: leads, contactados,
+agendados, visitas y ventasLeads (inversión dividida entre CPL) y las 4 tasas del CRM 3
+CAC de anuncios de cada canal Inversión dividida entre ventas 3
+CAC real de cada canal Inversión más el costo de las visitas, dividido entre ventas 23
+LTV:CAC de cada canal Contribución de una venta dividida entre el CAC real. Como el
+cliente compra una sola vez, el LTV es una venta123
+Payback en caja de un cliente En qué mes entra y en qué mes sale cada pago1
+Cuánto se usa la capacidad de visitas Visitas de los dos canales frente a las 100 posibles23
+La propuesta de la agencia Su supuesto ($8 por lead) y el historial real ($8.000 trajeron
+840 leads)La historia y 5
+Sus dos cambios (tiempo de respuesta, filtro,
+batería, técnico)Visitas, embudo y la oferta del proveedor 234
+Simulador de 24 meses (nivel 3) Todo lo anterior y los datos de caja12357
+En Sol de Casa la plata no entra y sale en el mismo mes. El mes de la firma Andrés cobra la mitad y paga los equipos y la comisión. El mes
+siguiente cobra la otra mitad y paga la instalación. Para el payback en caja, empiecen en menos el CAC y sumen mes a mes lo que entra
+menos lo que sale de un cliente.
+SUPUESTOS PERMITIDOS
+Estos son los supuestos permitidos. Si usan alguno, escríbanlo en la hoja.
+1. En la Sesión 1, el LTV de un cliente es una sola venta. No hay recompra, y el plan de mantenimiento y los referidos quedan para la Sesión
+2.
+2. Todo el embudo de un lead (contacto, agenda, visita y firma) pasa en el mismo mes.
+3. Las tasas del embudo de cada canal no cambian con la inversión.
+4. Si se piden más visitas de las que caben en la capacidad, se hacen solo hasta llenarla, primero las de Google (que cierran más) y
+después las de Meta. El resto se pierde.
+5. Entre dos puntos del historial pueden usar interpolación lineal. Por ejemplo, si con $1.000 llegaran 20 leads y con $3.000 llegaran 40, con
+$2.000, que queda a mitad de camino, llegarían 30.
+6. Para calcular la propuesta «como la cuenta la agencia» pueden usar su CPL de $8 constante, pero tienen que compararla con el historial.
+7. Si eligen el cambio de tiempo de respuesta y filtro, pueden suponer lo siguiente. Contestar en menos de 5 minutos y agregar dos
+preguntas al formulario («¿Es dueño de la casa?» y «¿Su recibo de luz pasa de $80?») baja un 20 % los leads de Meta en cualquier nivel
+de inversión: son menos leads, pero mejores. Las tasas de Meta quedarían en 80 % de contacto, 40 % de agenda, 75 % de visitas hechas
+y 22 % de cierre. Es un supuesto sacado de casos parecidos, así que márquenlo como tal.
+8. Si necesitan un dato que no está aquí, pueden suponerlo, siempre que quede escrito como supuesto y justificado.
+Creado por FC Studio - Isidro Fernández C. CASO C · SOL DE CASA 6 / 12
+=== PÁGINA 7 ===
+PARTE 1 · SESIÓN 1 · EL RETO
+Lo que Andrés necesita saber
+Andrés quiere saber qué hacer con la propuesta de la agencia y cómo repartir el
+presupuesto del mes que viene. Estas preguntas los llevan a la respuesta:
+1¿Cuánto deja una venta? Calculen la contribución de una instalación, antes de marketing.
+2Armen el embudo completo de cada canal y marquen en qué paso se cae más gente.
+3¿Qué canal es más barato de verdad? Calculen el CAC de anuncios y el CAC real (piensen qué más cuesta
+conseguir un cliente, además de los anuncios) y compárenlos con el CPL. ¿Cuántas visitas hacen falta para
+una venta en cada canal?
+4Comparen el LTV:CAC de los dos canales para saber si los dos dejan plata. Después miren la caja: si los
+equipos se pagan el día que el cliente firma, ¿en qué mes se recupera un cliente?
+5¿Qué pasaría con la propuesta de la agencia? Háganla dos veces, como la cuenta la agencia ($8 por lead) y
+con el historial. Revisen la capacidad de visitas y digan cuántas ventas habría frente a hoy.
+6Calculen cuánto vale una visita en cada canal, para decidir a qué leads conviene dárselas cuando las 100
+visitas del mes ya están llenas.
+7Propongan dos cambios para mejorar el resultado y calculen cuánto mueve cada uno los números. Pueden
+salir de esta lista o ser propios: el tiempo de respuesta, filtrar mejor los leads, la batería, un técnico más.
+Creado por FC Studio - Isidro Fernández C. CASO C · SOL DE CASA 7 / 12
+=== PÁGINA 8 ===
+PARTE 1 · SESIÓN 1 · EL RETO
+Los tres niveles de Sol de Casa
+NIVEL 1TODOS TIENEN QUE LLEGAR · RÚBRICA DE 100 PUNTOS
+La calculadora de Andr és
+DIFICULTAD: UNA DE TRES. LA TERMINAN TODOS LOS EQUIPOS ANTES DEL MINUTO 85.
+Qué construyen:
+1. Una calculadora en Google Sheets con una pestaña de supuestos (celdas editables, pintadas de otro color) y una de resultados:
+contribución por venta, embudo de cada canal, CAC de anuncios, CAC real, LTV:CAC de cada canal, visitas por venta, uso de la
+capacidad y valor de una visita.
+2. Tres escenarios lado a lado. El de hoy, con $4.000 en Meta y $4.000 en Google. El de la agencia, con $8.000 en Meta y $0 en Google.
+Y el de ustedes , con sus dos cambios.
+3. Un gráfico que elijan entre dos: el embudo de cada canal lado a lado, para ver dónde se cae la gente, o el CAC real separado en
+anuncios y visitas. Cualquiera de los dos lleva la línea de capacidad de 100 visitas.
+4. Una reco mendación de una página para Andrés: aceptar la propuesta, rechazarla o proponer otra cosa, con los dos cambios y su
+efecto en números.
+5. La secci ón «En qué se equ ivocó o nos confundió la IA».
+El nivel 1 está completo cuando, al cambiar una celda de supuestos (el porcentaje de contacto de Meta, por ejemplo), todo se recalcula
+solo. También tiene que haber una fila verificada a mano con la cuenta escrita, la lista de supuestos y una recomendación que nombre la
+trampa del caso con un número.
+DEL REGLAMENTO GENERAL DEL RETO
+Si se les va el tiempo, el orden es este: primero el escenario de hoy completo, después el de la agencia o el dueño, y por último el de
+ustedes , que puede llevar solo los números que cambian. La curva de caja puede tener una sola línea, la de hoy.
+NIVEL 2
+El tablero de Sol de Casa
+DIFICULTAD: DOS DE TRES. PARA LOS EQUIPOS QUE TERMINAN EL NIVEL 1 CON TIEMPO.
+Una página web interactiva, hech a con la IA en HTML y JavaScript o en la herramienta que prefieran, con el modelo completo de Sol de
+Casa. Lleva controles para la inversión en Meta y en Google (con el historial), las 4 tasas del embudo de cada canal, el costo por visita, la
+capacidad de visitas (o los técn icos extra), el precio, el margen bruto, la comisión y el porcentaje de clientes que agrega la batería.
+Para llegar al nivel 2, el tablero tiene que:
+1. mostrar en vivo, por canal y en total, los leads, las visitas, las ventas, el CPL, el CAC de anuncios, el CAC real, el LTV:CAC, las visitas
+usadas frente a la capacidad y el valor de una visita
+2. tener por lo menos tres gráficos: el embudo de cada canal lado a lado, el CPL frente al CAC real de cada canal, y las visitas pedidas
+frente a la capacidad, con la línea de 100
+3. marcar los umbrales: un semáforo de LTV:CAC y una alerta cuando las visitas pasan la capacidad
+4. dejar la trampa a la vista en un solo gráfico que diga algo como «el lead de Meta es 5 veces más barato, pero el cliente cuesta X %
+más»
+5. coincidir con su Sheets cuando tiene cargados los datos del caso (menos de 1 % de diferencia) y tener un botón para volver a esos
+datos
+DEL REGLAMENTO GENERAL DEL RETO
+la página abre con un link o un archivo, sin instalar nada
+cada número lleva su nombre y su unidad (nada de «Variable 3»)+10
+PUNTOSBONUS·NIVEL
+2
+·BONUS·NIVEL2
+·
+Creado por FC Studio - Isidro Fernández C. CASO C · SOL DE CASA 8 / 12
+=== PÁGINA 9 ===
+ASÍ FUNCIONA EL MODELO
+Cada mes eligen la inversión en Meta (de $0 a $10.000) y en Google
+(de $0 a $8.000). Los leads salen del historial de la sección 5, con
+interpolación lineal. Con $0 de inversión llegan 0 leads de anuncios;
+entre $0 y el primer punto del historial usen una recta desde cero.
+Las visitas pedidas de cada canal son los leads por el porcentaje de
+contacto, por el de agenda y por el de visitas hechas. Las visitas que
+de verdad se hacen llegan hasta la capacidad, primero las de Google y
+después las de Meta.
+La capacidad es de 100 visitas más 50 por cada técnico extra, desde el
+mes siguiente a contratarlo (máximo 2 técnicos extra). El técnico se
+paga desde el mes en que se contrata.
+Las ventas del mes son las visitas hechas de cada canal por su
+porcentaje de cierre.
+Las entradas del mes son el 50 % de $6.500 por las ventas del mes,
+más el 50 % de $6.500 por las ventas del mes anterior.
+Las salidas del mes son el 55 % de equipos y el 3 % de comisión sobre
+$6.500 por las ventas del mes, el 17 % de instalación sobre $6.500 por
+las ventas del mes anterior, $60 por cada visita hecha, la inversión en
+Meta y en Google, los $18.000 fijos y $1.800 por cada técnico extra.
+La caja al final del mes es la del mes anterior más las entradas menos
+las salidas. Arranca en $12.000, y el mes 0 tuvo 22 ventas.REVISIÓN DEL MES 1
+Antes de correr los 24 meses, hagan a mano el mes
+1 del plan actual ($4.000 en Meta y $4.000 en
+Google, sin técnicos extra), con cada cuenta escrita
+(leads, visitas, ventas, entradas, salidas y caja final),
+y compárenlo con lo que da su hoja de cálculo. Si
+algo no cuadra, revisen el modelo antes de seguir.
+LAS REGLAS DEL JUEGO
+La caja nunca puede bajar de $5.000.
+Desde el mes 19, la inversión total (Meta + Google)
+no puede bajar de un mes al siguiente.
+Pueden usar inversiones fijas o un camino, y activar
+sus cambios del nivel 1 desde el mes que decidan
+(por ejemplo, el tiempo de respuesta, con el
+supuesto 7), con el supuesto escrito.
+Gana el plan que termina con más caja en el mes 24
+sin romper ninguna regla, y si hay empate, el que
+hizo más instalaciones en total.
+PARA LLEGAR AL NIVEL 3 NECESITAN
+1. una fila por mes durante 24 meses, con columnas de inversión por canal, leads, visitas pedidas, capacidad, visitas hechas, ventas,
+entradas, salidas, caja final y una alerta cuando la caja baja de $5.000
+2. el mes 1 del plan actual ($4.000 en Meta y $4.000 en Google, sin técnicos extra) con todas las cuentas a la vista y verificado a mano con
+su hoja de cálculo, para que el facilitador lo compare con su modelo
+3. una tabla que compare por lo menos cuatro planes: el actual, la propuesta de la agencia y dos propios (por lo menos uno con un técnico
+extra), con la caja mínima (y en qué mes), la caja del mes 24 y las instalaciones totales
+4. un gráfico de la caja mes a mes con la línea del piso y otro de las visitas pedidas frente a la capacidad
+5. un pitch de 2 minutos ante un inversionista. Andrés está pensando en pedirle un crédito al banco, así que imaginen que le presentan a la
+persona del banco cuánto invertir en cada canal, cuándo contratar, cuál es el riesgo y qué tendría que pasar para crecer más
+DEL REGLAMENTO GENERAL DEL RETO
+los clientes nuevos según la inversión salen del historial del caso, con interpolación lineal (una recta entre dos datos conocidos). Si
+prefieren ajustar una curva, tiene que pasar por los puntos del caso, incluido el cero, y la tienen que explicar
+el facilitador corre su plan en el modelo de referencia y el resultado se reproduce con un margen de 3 %NIVEL 3
+El simulador de caja de Sol de Casa
+DIFICULTAD: TRES DE TRES. MUY POCOS EQUIPOS LO VAN A TERMINAR.
+Si llegan hasta aquí, cuenta lo que logren, aunque no cierren los 24
+meses. El simulador contesta cuánto invertir en cada canal, y cuándo
+contratar técn icos, para que Sol de Casa termine los dos años con la
+mayor cantidad de plata posible sin queda rse sin caja.+15
+Y +5 AL
+MEJOR PLANBONUS·NIVEL
+3
+·BONUS·NIVEL3
+·
+Creado por FC Studio - Isidro Fernández C. CASO C · SOL DE CASA 9 / 12
+=== PÁGINA 10 ===
+PARTE 1 · SESIÓN 1
+Glosario en palabras simples
+Qué quiere decir cada término en este caso.
+LEAD GEN
+Un modelo en el que el marketing consigue datos de contacto y
+después un equipo de ventas convierte esos contactos en clientes
+LEAD
+Una persona que dejó sus datos en un formulario para que la llamen
+CPL
+Costo por lead: la inversión dividida entre los leads
+CPC
+Costo por clic
+FUNNEL O EMBUDO
+Los pasos que van del lead a la venta, cada uno con el porcentaje que
+pasa al siguiente
+TASAS DE CONTACTO, AGENDA, VISITA Y CIERRE
+El porcentaje de personas que pasa de un paso del embudo al
+siguiente
+CONTRIBUCIÓN POR VENTA
+Lo que queda de una venta después de pagar equipos, instalación y
+comisión, antes de pagar marketing
+CAC DE ANUNCIOS
+Solo la inversión en anuncios, dividida entre las ventas
+CAC REAL
+Los anuncios más todo lo que cuesta convertir el lead en cliente (aquí,
+las visitas), dividido entre las ventasLTV:CAC
+Cuántas veces devuelve un cliente lo que costó conseguirlo. Cuando
+se compra una sola vez, el LTV es la contribución de esa venta
+CAPACIDAD
+El máximo de visitas que el equipo puede hacer en un mes
+VALOR DE UNA VISITA
+Lo que deja en promedio una visita: el porcentaje de cierre por la
+contribución, menos el costo de la visita
+TIEMPO DE RESPUESTA
+Las horas que pasan entre que el lead deja sus datos y alguien lo llama.
+Mientras más rápido, más gente contesta
+PAYBACK EN CAJA
+El tiempo que tarda un cliente en devolver lo que costó conseguirlo,
+contando cuándo entra y sale cada pago
+LEADS EXTRA AL SUBIR LA INVERSIÓN
+Cada $2.000 más traen menos leads que los $2.000 anteriores, y en
+Google la búsqueda se acaba en 160 leads
+INTERPOLACIÓN LINEAL
+Estimar un valor entre dos datos conocidos con una línea recta
+PISO DE CAJA
+La plata mínima que el negocio no quiere dejar de tener en el banco
+COSTOS FIJOS
+Lo que se paga igual venda mucho o poco: alquiler, sueldos,
+programas
+Creado por FC Studio - Isidro Fernández C. CASO C · SOL DE CASA 10 / 12
+=== PÁGINA 11 ===
+REGLAMENTO DEL RETO · IGUAL PARA TODOS LOS EQUIPOS
+Cómo funciona el reto
+Sesión 1: ¿cuánto puede pagar un negocio por conseguir un cliente?
+En todos los casos hay una trampa: un número que parece bueno y que deja de serlo cuando se hace la cuenta completa. La IA casi
+siempre cae en ella si nadie le pregunta bien, y encontrarla es lo que más pesa en la nota.
+LAS DOS HORAS
+MINUTO QUÉ HACEN
+0 A 15 Entienden el caso sin IA. Lo leen completo, subrayan los datos, anotan sus preguntas y los supuestos que van a necesitar,
+y escriben dónde creen que está la trampa. La IA queda cerrada estos 15 minutos.
+15 A 65 Arman la calculadora en Google Sheets con ayuda de la IA y verifican una fila a mano.
+65 A 85 Escenarios, curva y recomendación de una página, con la sección «En qué se equivocó la IA». El nivel 1 se cierra aquí: al
+minuto 85 tiene que estar completo.
+85 A 95 Preparan la presentación: 3 minutos, una decisión y los números que la sostienen.
+95 A 120 Presentan un equipo por caso y los equipos que llegaron al nivel 3, con 3 minutos cada uno y 2 de preguntas. El resto
+entrega por escrito.
+Si terminan el nivel 1 antes del minuto 85, le avisan al facilitador, que lo revisa en 2 minutos. Si
+está completo, pasan al nivel 2, y después al 3. Todos los equipos juegan el nivel 1. El 2 y el 3
+se abren cuando el facilitador revisa el nivel anterior y lo da por terminado, así que no se puede
+saltar ninguno.
+REGLAS PARA USAR LA IA
+1. La IA calcula y ustedes deciden. La recomendación final se
+defiende sin mirar la pantalla.
+2. Verifiquen una fila a mano. Elijan un número del modelo, por
+ejemplo el CAC real, recalcúlenlo con la calculadora del celular y
+escriban la cuenta en la hoja. Si no coincide, hay un error en
+algún lado.3. Cada supuesto va escrito. El caso trae una lista de supuestos
+permitidos. Si usan otro, o si la IA trae un dato que el caso no da
+(un «promedio de la industria», una tasa de conversión), lo
+marcan como supuesto y dicen de dónde sale.
+4. Busquen la trampa. Cada caso tiene un dato que engaña, y la IA
+suele caer en él si no le preguntan bien.
+5. La sección «En qué se equivocó o nos confundió la IA» es
+obligatoria. Lleva por lo menos un ejemplo concreto: qué dijo la
+IA, por qué estaba mal y cómo lo corrigieron.
+RÚBRICA (100 PUNTOS MÁS BONUS)
+CRITERIO PUNTOS QUÉ SE MIRA
+Rigor numérico 25 Fórmulas correctas, supuestos escritos, una fila verificada a mano
+Criterio de negocio 30 Encontraron la trampa, la recomendación sale de los números y reconocen los riesgos
+Uso de la IA 15 Corrigieron a la IA, anotaron sus errores y no aceptaron datos inventados
+Claridad 20 Una decisión, defendida en 3 minutos, que el dueño del negocio entendería
+Visual 10 El gráfico cuenta la historia sin que haga falta explicarlo
+Bonus nivel 2 +10 Cumple lo que pide el nivel y la trampa se entiende con solo mirar el tablero
+Bonus nivel 3 +15, y +5 al mejor
+plan de cada casoCumple lo que pide el nivel, incluida la revisión del mes 1. Los 5 extra van al mejor plan
+de cada caso que respete las reglas
+Creado por FC Studio - Isidro Fernández C. CASO C · SOL DE CASA 11 / 12
+=== PÁGINA 12 ===
+REGLAMENTO DEL RETO · IGUAL PARA TODOS LOS EQUIPOS
+Roles del equipo y prompts para arrancar
+LOS EQUIPOS SON DE 3 O 4 PERSONAS
+ROL QUÉ HACE
+Modelador/a Arma la hoja de cálculo (o el tablero) con la IA y revisa que cada fórmula apunte a las celdas de supuestos.
+Escéptico/a Verifica a mano, le pregunta a la IA de dónde sale cada número, lleva la lista de errores de la IA y busca la trampa.
+Estratega Piensa la decisión (escalar, arreglar o pausar) y los dos cambios, y escribe la recomendación.
+Presentador/a Arma y da la presentación de 3 minutos, y el pitch del nivel 3 si llegan.
+En los equ ipos de 3, la persona estratega también presenta. Todos tienen que poder explicar
+los números si el facilitador les pregunta.
+PROMPTS PARA ARRANCAR CON LA IA
+Copien, peguen y adapten. Siempre denle a la IA el caso completo, o al menos la parte que
+neces itan.
+PARA ENTENDER UN CONCEPTO ANTES DE CALCULAR
+«Le paso un caso de negocio. No calcule nada todavía.
+Explíqueme con un ejemplo sencillo qué es [el margen de
+contribución / el CAC real / el payback] y qué datos del caso
+necesito para calcularlo.»PARA QUE MUESTRE SU TRABAJO
+«Calcule [el CAC real] paso a paso. Escriba la fórmula, qué dato
+del caso usa en cada paso y en qué sección está. Si le falta un
+dato, dígame cuál y no lo invente.»
+PARA LISTAR LOS SUPUESTOS
+«Antes de seguir, haga una lista de todos los supuestos que está
+usando. Marque cuáles vienen del caso y cuáles los puso usted.»PARA ARMAR LA HOJA
+«Arme una hoja de Google Sheets con una pestaña "Supuestos"
+(solo datos de entrada, cada uno en su celda) y una pestaña
+"Resultados" donde todo se calcule con fórmulas que apunten a
+"Supuestos". Deme las fórmulas exactas, celda por celda.»
+PARA BUSCAR LA TRAMPA
+«Haga de abogado del diablo. ¿Qué número de este caso puede
+estar engañando al dueño? ¿Qué métrica de la plataforma de
+anuncios podría no coincidir con lo que pasa en el negocio?»PARA REVISAR UN RESULTADO RARO
+«Me dio [X]. Verifíquelo con otro método y dígame si coincide. Si
+no coincide, ¿cuál está bien y por qué?»
+PARA EL TABLERO DEL NIVEL 2
+«Haga un solo archivo HTML con JavaScript, sin librerías que
+haya que instalar (puede usar Chart.js desde un CDN). Quiero
+controles deslizantes para [lista de datos], resultados que se
+actualicen en vivo y estos gráficos: [lista]. Use exactamente
+estas fórmulas: [pegar las de su Sheets].»PARA EL SIMULADOR DEL NIVEL 3
+«Construya una tabla de 24 meses. Cada mes llega un grupo de
+clientes nuevos según esta tabla de inversión, con interpolación
+lineal y con el punto de $0 de inversión y 0 clientes: [pegar]. Use
+estas reglas: [pegar las reglas del caso]. Primero muéstreme solo
+el mes 1 con todas las cuentas, para compararlo con mi hoja de
+cálculo.»
+Desconfíen cuando la IA da un «promedio de la industria» sin fuente, mezcla ventas con margen, usa un LTV sin tope de meses o
+entrega un resultado redondo sin mostrar la cuenta. En cualquiera de esos casos, pídanle la cuenta y verifíquenla.
+Creado por FC Studio - Isidro Fernández C. CASO C · SOL DE CASA 12 / 12

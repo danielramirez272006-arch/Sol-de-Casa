@@ -51,7 +51,25 @@ Antes de definir premios descontamos el costo técnico de las visitas necesarias
 
 ---
 
-## 5. Plan de Canales a 90 Días
+## 5. Conversión de Capacidad y Factor de Letreros en Obra
+
+- **Capacidad de 1 técnico adicional [DATO]:** `50` visitas mensuales adicionales.
+- **Rendimiento a tasa de cierre de referidos (`45%`) [DATO]:**
+  $$50 \text{ visitas} \times 45\% = 22,5 \text{ instalaciones firmadas / mes}$$
+- **Solicitudes de visita requeridas [SUPUESTO]:**
+  Con una tasa de asistencia a visita del `75%` en vecinos referidos (superior al `70%` de Meta gracias a la confianza del recomendador), se requieren:
+  $$\frac{50 \text{ visitas}}{0,75} = 66,7 \approx 67 \text{ solicitudes de vecinos / mes}$$
+- **Factor de Letreros en Obra y Familias que Comparten [SUPUESTO]:**
+  - **Periodo de exposición del letrero:** Se fija en **30 días continuos** (desde el inicio del montaje en el Mes 1 hasta la entrega de obra y primer recibo con ahorro en el Mes 2).
+  - **Eficacia de letrero + recomendación directa:** Cada instalación terminada exhibe un letrero exterior con QR (*«Esta casa genera su propia energía con Sol de Casa. Escanea y calcula tu ahorro»*).
+  - **Tasa de conversión:** Se asume que 1 de cada 3 instalaciones (`33%`) genera 2 solicitudes de vecinos por la visibilidad del letrero en su cuadra (`0,67` solicitudes/obra).
+  - Para cubrir las `67` solicitudes mensuales del técnico, se requiere una base activa de:
+    $$\frac{67 \text{ solicitudes}}{0,67 \text{ solicitudes / familia}} \approx 100 \text{ familias compartiendo activamente su experiencia}$$
+    Esta masa crítica se alcanza al cierre del Mes 2 (acumulando las `22` ventas previas + `25` del Mes 1 + `33` del Mes 2).
+
+---
+
+## 6. Plan de Canales a 90 Días
 
 | Horizonte | Canales pagados y cuadrilla | Despliegue del motor de referidos | Capacidad instalada | Ventas referidas |
 |---|---|---|---:|---:|
@@ -61,7 +79,7 @@ Antes de definir premios descontamos el costo técnico de las visitas necesarias
 
 ---
 
-## 6. Experimento Controlado con 50 Clientes (Duración: 4 Semanas)
+## 7. Experimento Controlado con 50 Clientes (Duración: 4 Semanas)
 
 - **Población [DATO + SUPUESTO]:** `50` familias con sistema instalado y al menos un recibo eléctrico posterior a la puesta en marcha.
 - **Diseño aleatorio A/B:**

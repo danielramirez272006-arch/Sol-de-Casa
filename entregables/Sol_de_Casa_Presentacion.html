@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presentación Ejecutiva · Sol de Casa (3 Minutos)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display:ital@0;1&family=Inter:wght@500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            mineral: '#EEF2F1',
+            panel: '#E3EAE8',
+            ink: '#10201F',
+            petrol: '#2F6F73',
+            sand: '#D9C7A6',
+            amber: '#D98A2B',
+            danger: '#A63D33'
+          },
+          fontFamily: {
+            serif: ['"DM Serif Display"', 'Georgia', 'serif'],
+            sans: ['"DM Sans"', 'sans-serif'],
+            ui: ['"Inter"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #10201F; color: #EEF2F1; font-family: 'DM Sans', sans-serif; }
+    .slide { display: none; min-height: 82vh; }
+    .slide.active { display: flex; flex-direction: column; justify-content: space-between; }
+    .card-glass { background: rgba(227, 234, 232, 0.08); border: 1px solid rgba(238, 242, 241, 0.15); border-radius: 16px; }
+  </style>
+</head>
+<body class="p-4 sm:p-8 flex flex-col justify-between min-h-screen">
+  <header class="flex items-center justify-between pb-4 border-b border-[#EEF2F1]/15 max-w-6xl mx-auto w-full">
+    <div class="flex items-center gap-3">
+      <span class="w-7 h-7 rounded-lg bg-[#2F6F73] text-[#EEF2F1] flex items-center justify-center font-bold text-sm">S</span>
+      <span class="font-serif text-xl tracking-tight">Sol de <em>Casa</em></span>
+      <span class="text-xs px-2.5 py-0.5 rounded-full bg-[#D98A2B]/20 text-[#D9C7A6] border border-[#D98A2B]/30 font-ui">Presentación de 3 Minutos</span>
+    </div>
+    <div class="flex items-center gap-2 font-ui text-sm">
+      <span id="slide-num" class="text-[#D9C7A6] font-semibold">1 / 5</span>
+      <span class="text-xs text-[#EEF2F1]/60">· Tiempo objetivo: 180s</span>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto w-full my-auto py-6">
+    <!-- SLIDE 1 -->
+    <div class="slide active space-y-6" data-step="1">
+      <div class="space-y-2">
+        <span class="text-xs font-ui text-[#D9C7A6] uppercase tracking-wider">Minuto 0:00 – 0:45 · El Problema y la Trampa</span>
+        <h1 class="font-serif text-4xl sm:text-6xl text-white leading-tight">
+          «Más leads siempre es mejor… <em class="text-[#D98A2B] not-italic">¿verdad?</em>»
+        </h1>
+        <p class="text-lg text-[#EEF2F1]/80 max-w-3xl">
+          La agencia Leadly propone mover todo el presupuesto ($8.000) a Meta porque el lead cuesta $8 frente a $40 de Google. Es un espejismo que destruiría la rentabilidad.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+        <div class="card-glass p-5 border-l-4 border-l-[#D98A2B]">
+          <span class="text-xs font-ui text-[#EEF2F1]/60">CPL Aparente</span>
+          <div class="font-serif text-3xl text-white mt-1">$8 <span class="text-sm font-sans text-[#EEF2F1]/60">vs. $40</span></div>
+          <span class="text-xs text-[#D9C7A6] mt-1 block">Meta parece 5 veces más barato</span>
+        </div>
+        <div class="card-glass p-5 border-l-4 border-l-[#A63D33]">
+          <span class="text-xs font-ui text-[#EEF2F1]/60">CAC Real (Anuncios + Visitas $60)</span>
+          <div class="font-serif text-3xl text-[#A63D33] mt-1">$718 <span class="text-sm font-sans text-[#EEF2F1]/60">vs. $535</span></div>
+          <span class="text-xs text-[#EEF2F1]/80 mt-1 block">Meta cuesta 34,1% MÁS por cliente</span>
+        </div>
+        <div class="card-glass p-5 border-l-4 border-l-[#2F6F73]">
+          <span class="text-xs font-ui text-[#EEF2F1]/60">Impacto con la Agencia ($8k Meta)</span>
+          <div class="font-serif text-3xl text-white mt-1">-$3.443 <span class="text-sm font-sans text-[#EEF2F1]/60">/mes</span></div>
+          <span class="text-xs text-[#A63D33] mt-1 block">Pasa de ganar +$4.415 a pérdidas netas</span>
+        </div>
+      </div>
+
+      <div class="text-xs text-[#D9C7A6]/80 bg-[#D9C7A6]/10 p-3.5 rounded-xl border border-[#D9C7A6]/20">
+        <strong>Nota del orador (45s):</strong> «Andrés, si le haces caso a la agencia y apagas Google, tus ventas caen de 22 a 17 al mes y tu caja se vacía en 4 meses. Meta exige 5,56 visitas técnicas para cerrar una venta contra 3,33 en Google. El lead es barato; el cliente cerrado es carísimo.»
+      </div>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="slide space-y-6" data-step="2">
+      <div class="space-y-2">
+        <span class="text-xs font-ui text-[#2F6F73] uppercase tracking-wider">Minuto 0:45 – 1:30 · La Decisión y los Dos Cambios</span>
+        <h2 class="font-serif text-4xl sm:text-5xl text-white leading-tight">
+          La Solución: <em class="text-[#2F6F73] not-italic">Filtro de Calidad</em> + Batería Residencial
+        </h2>
+        <p class="text-lg text-[#EEF2F1]/80 max-w-3xl">
+          Mantener $4.000 en Google y $4.000 en Meta, pero reparando la fuga comercial de Meta con llamada en &lt;5 min y filtro de precalificación.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2">
+        <div class="card-glass p-6 space-y-3">
+          <span class="text-xs font-ui px-2.5 py-1 rounded-full bg-[#2F6F73]/20 text-[#2F6F73] border border-[#2F6F73]/40">Cambio 1 · Filtro Comercial</span>
+          <h3 class="font-serif text-2xl text-white">Eliminar curiosos en Meta</h3>
+          <p class="text-sm text-[#EEF2F1]/80 leading-relaxed">
+            Aunque los leads bajan un 20% (de 500 a 400), el contacto sube al 80%, la agenda al 40% y el cierre al 22%.
+          </p>
+          <div class="pt-2 border-t border-[#EEF2F1]/10 text-sm text-[#D9C7A6]">
+            Utilidad mensual salta de <strong>+$4.415</strong> a <strong>+$8.916</strong> (+102%).
+          </div>
+        </div>
+
+        <div class="card-glass p-6 space-y-3">
+          <span class="text-xs font-ui px-2.5 py-1 rounded-full bg-[#D98A2B]/20 text-[#D9C7A6] border border-[#D98A2B]/40">Cambio 2 · Venta Cruzada</span>
+          <h3 class="font-serif text-2xl text-white">Batería de Respaldo ($3.000)</h3>
+          <p class="text-sm text-[#EEF2F1]/80 leading-relaxed">
+            Se ofrece en sitio. Con solo un 15% de adopción (3 de cada 20 clientes), aporta +$510 netos adicionales por batería.
+          </p>
+          <div class="pt-2 border-t border-[#EEF2F1]/10 text-sm text-[#2F6F73]">
+            Utilidad final combinada alcanza <strong>+$10.842 / mes</strong> (+146%).
+          </div>
+        </div>
+      </div>
+
+      <div class="text-xs text-[#D9C7A6]/80 bg-[#D9C7A6]/10 p-3.5 rounded-xl border border-[#D9C7A6]/20">
+        <strong>Nota del orador (45s):</strong> «No apagamos canales: arreglamos la tubería. Filtramos los leads curiosos y añadimos la batería. Ganamos más del doble cada mes sin gastar un dólar más en publicidad.»
+      </div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="slide space-y-6" data-step="3">
+      <div class="space-y-2">
+        <span class="text-xs font-ui text-[#D98A2B] uppercase tracking-wider">Minuto 1:30 – 2:15 · El Motor de Crecimiento Orgánico</span>
+        <h2 class="font-serif text-4xl sm:text-5xl text-white leading-tight">
+          Parte 2: Ciclo de Referidos <em class="text-[#D98A2B] not-italic">Mobile-First</em>
+        </h2>
+        <p class="text-lg text-[#EEF2F1]/80 max-w-3xl">
+          Google satura en 160 leads locales. Para escalar sin inflar pauta, convertimos a las 420 casas instaladas en promotores activos en su propia cuadra.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 pt-2 text-center font-ui text-sm">
+        <div class="card-glass p-4">
+          <span class="text-xs text-[#EEF2F1]/60 block mb-1">1. Disparador</span>
+          <strong class="text-white text-base block font-serif">Mi ahorro</strong>
+          <span class="text-xs text-[#2F6F73]">Ahorra $77/mes (70%)</span>
+        </div>
+        <div class="card-glass p-4">
+          <span class="text-xs text-[#EEF2F1]/60 block mb-1">2. Compartir</span>
+          <strong class="text-white text-base block font-serif">WhatsApp</strong>
+          <span class="text-xs text-[#D9C7A6]">Tarjeta y enlace único</span>
+        </div>
+        <div class="card-glass p-4">
+          <span class="text-xs text-[#EEF2F1]/60 block mb-1">3. Vecino</span>
+          <strong class="text-white text-base block font-serif">Calculadora</strong>
+          <span class="text-xs text-[#2F6F73]">Retorno en 7 años</span>
+        </div>
+        <div class="card-glass p-4 border border-[#2F6F73]/40 bg-[#2F6F73]/10">
+          <span class="text-xs text-[#EEF2F1]/60 block mb-1">4. Recompensa</span>
+          <strong class="text-white text-base block font-serif">Cierre 45%</strong>
+          <span class="text-xs text-[#D98A2B]">CAC $293 ≤ $300</span>
+        </div>
+      </div>
+
+      <div class="card-glass p-4 text-xs text-[#EEF2F1]/90 flex flex-wrap items-center justify-between gap-4">
+        <span><strong>Presupuesto blindado:</strong> $300 tope − $133,33 visitas = $166,67 disponible para premios.</span>
+        <span class="text-[#D9C7A6]"><strong>Reparto al firmar:</strong> $100 familia + $60 descuento vecino = $160 costo premios.</span>
+        <span class="text-[#2F6F73]"><strong>CAC Total:</strong> $293,33 (Holgura $6,67).</span>
+      </div>
+
+      <div class="text-xs text-[#D9C7A6]/80 bg-[#D9C7A6]/10 p-3.5 rounded-xl border border-[#D9C7A6]/20">
+        <strong>Nota del orador (45s):</strong> «Aquí mostramos en vivo la app en el celular: la familia ve sus $77 ahorrados, manda la tarjeta por WhatsApp, el vecino calcula su techo sobre $6.500 y pide visita. La visita cierra al 45% y el CAC es de solo $293, la mitad que Meta.»
+      </div>
+    </div>
+
+    <!-- SLIDE 4 -->
+    <div class="slide space-y-6" data-step="4">
+      <div class="space-y-2">
+        <span class="text-xs font-ui text-[#2F6F73] uppercase tracking-wider">Minuto 2:15 – 2:45 · El Experimento y la Métrica Semanal</span>
+        <h2 class="font-serif text-4xl sm:text-5xl text-white leading-tight">
+          Validación: Experimento con <em class="text-[#2F6F73] not-italic">50 Clientes</em>
+        </h2>
+        <p class="text-lg text-[#EEF2F1]/80 max-w-3xl">
+          No escalamos a ciegas: probamos el loop con 50 hogares activos durante 4 semanas post-recibo eléctrico.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+        <div class="card-glass p-5 space-y-2">
+          <span class="text-xs font-ui text-[#D9C7A6]">Línea Base vs. Prueba A/B</span>
+          <strong class="block font-serif text-xl text-white">Grupo A (25) vs. B (25)</strong>
+          <p class="text-xs text-[#EEF2F1]/75">
+            A recibe mensaje genérico. B recibe tarjeta interactiva con su ahorro real 48h tras el recibo.
+          </p>
+        </div>
+        <div class="card-glass p-5 space-y-2">
+          <span class="text-xs font-ui text-[#D9C7A6]">Métrica Semanal Faro (NSM)</span>
+          <strong class="block font-serif text-xl text-[#2F6F73]">≥ 5 Solicitudes / sem.</strong>
+          <p class="text-xs text-[#EEF2F1]/75">
+            Vecinos calificados que piden visita técnica por recomendación personal.
+          </p>
+        </div>
+        <div class="card-glass p-5 space-y-2">
+          <span class="text-xs font-ui text-[#D9C7A6]">Umbral de Éxito en 30 Días</span>
+          <strong class="block font-serif text-xl text-[#D98A2B]">≥ 2 Ventas Firmadas</strong>
+          <p class="text-xs text-[#EEF2F1]/75">
+            ≥32% comparten (8 familias) → 12 calculan → 5 visitas → 2 ventas con CAC ≤ $300.
+          </p>
+        </div>
+      </div>
+
+      <div class="text-xs text-[#D9C7A6]/80 bg-[#D9C7A6]/10 p-3.5 rounded-xl border border-[#D9C7A6]/20">
+        <strong>Nota del orador (30s):</strong> «Nuestra métrica semanal faro son solicitudes calificadas de vecinos por semana. Si en 30 días el piloto de 50 hogares no logra 2 contratos firmados con CAC menor a $300, el experimento no pasa a escala.»
+      </div>
+    </div>
+
+    <!-- SLIDE 5 -->
+    <div class="slide space-y-6" data-step="5">
+      <div class="space-y-2">
+        <span class="text-xs font-ui text-[#A63D33] uppercase tracking-wider">Minuto 2:45 – 3:00 · Contingencia y Plan de Cierre</span>
+        <h2 class="font-serif text-4xl sm:text-5xl text-white leading-tight">
+          Plan de Contingencia: <em class="text-[#A63D33] not-italic">¿Qué hacemos si falla?</em>
+        </h2>
+        <p class="text-lg text-[#EEF2F1]/80 max-w-3xl">
+          Riesgo acotado y decisiones ejecutivas inmediatas si las métricas no alcanzan el umbral.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2">
+        <div class="card-glass p-6 space-y-3">
+          <span class="text-xs font-ui text-[#A63D33] uppercase tracking-wider">Falla 1: Baja tasa de compartir (&lt; 20%)</span>
+          <h3 class="font-serif text-2xl text-white">Ajustar incentivo bilateral</h3>
+          <p class="text-sm text-[#EEF2F1]/80 leading-relaxed">
+            Si la familia no comparte, recalibramos a $120 para el referidor y $40 para el vecino (manteniendo $160 en premios), o entregamos kit de bienvenida físico en la instalación.
+          </p>
+        </div>
+
+        <div class="card-glass p-6 space-y-3">
+          <span class="text-xs font-ui text-[#D98A2B] uppercase tracking-wider">Falla 2: Cuello de botella en visitas</span>
+          <h3 class="font-serif text-2xl text-white">Prioridad estricta y técnicos</h3>
+          <p class="text-sm text-[#EEF2F1]/80 leading-relaxed">
+            Si las visitas superan el cupo de 100, se asignan primero a referidos ($599/visita) y Google ($450/visita), postergando Meta ($314/visita) hasta que el nuevo técnico termine su mes de capacitación.
+          </p>
+        </div>
+      </div>
+
+      <div class="text-xs text-[#D9C7A6]/80 bg-[#D9C7A6]/10 p-3.5 rounded-xl border border-[#D9C7A6]/20">
+        <strong>Cierre (15s):</strong> «En conclusión: no quemamos dinero en Meta. Arreglamos la conversión, activamos la confianza de los vecinos con economía controlada y protegemos la caja de Sofía en cada paso. Gracias.»
+      </div>
+    </div>
+  </main>
+
+  <footer class="flex flex-wrap items-center justify-between pt-4 border-t border-[#EEF2F1]/15 max-w-6xl mx-auto w-full gap-3 font-ui text-sm">
+    <div class="flex items-center gap-2">
+      <button id="btn-prev" type="button" class="px-4 py-2 rounded-xl bg-[#EEF2F1]/10 hover:bg-[#EEF2F1]/20 text-[#EEF2F1] transition-colors">
+        ← Anterior
+      </button>
+      <button id="btn-next" type="button" class="px-5 py-2 rounded-xl bg-[#2F6F73] hover:bg-[#2F6F73]/80 text-white font-semibold transition-colors">
+        Siguiente →
+      </button>
+    </div>
+    <div class="flex items-center gap-2 text-xs text-[#EEF2F1]/60">
+      <span>Usa las flechas del teclado o los botones para navegar</span>
+      <a href="./Sol_de_Casa_tablero.html" class="ml-2 text-[#D9C7A6] underline hover:text-white">Volver al Tablero</a>
+    </div>
+  </footer>
+
+  <script>
+    let cur = 1;
+    const total = 5;
+    const slides = document.querySelectorAll('.slide');
+    const lbl = document.getElementById('slide-num');
+
+    function update() {
+      slides.forEach((s, idx) => {
+        s.classList.toggle('active', idx + 1 === cur);
+      });
+      if (lbl) lbl.textContent = cur + ' / ' + total;
+    }
+
+    document.getElementById('btn-prev').onclick = () => { if (cur > 1) { cur--; update(); } };
+    document.getElementById('btn-next').onclick = () => { if (cur < total) { cur++; update(); } };
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'Space') { if (cur < total) { cur++; update(); } }
+      if (e.key === 'ArrowLeft') { if (cur > 1) { cur--; update(); } }
+    });
+  </script>
+</body>
+</html>
